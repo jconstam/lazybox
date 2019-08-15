@@ -8,7 +8,7 @@ steps:
   displayName: 'Set Environment to use Python 3.6'
   inputs:
     versionSpec: 3.6
-- script: 'sudo apt install lcov -y'
+- script: 'sudo apt-get install lcov -y'
   displayName: 'Install Ubuntu Packages'
 - script: |
    python -m pip install --upgrade pip 
