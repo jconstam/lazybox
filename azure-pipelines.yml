@@ -28,6 +28,6 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: build/test/unittests/lazybox_unittests_coverage.xml
-- script: 'make -j run'
-  displayName: 'Build and Run Main'
+- script: 'make -j'
+  displayName: 'Build Main'
   timeoutInMinutes: 360
