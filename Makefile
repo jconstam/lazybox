@@ -36,7 +36,7 @@ test_verbose: build_tests
 .PHONY: build_tests
 build_tests:
 	mkdir -p ${OUTPUT_TEST_PATH}
-	cd ${OUTPUT_TEST_PATH} && cmake ${TEST_PATH} -DPROJECT_NAME=${PROJ_NAME} && $(MAKE) $(MAKEFLAGS)
+	cd ${OUTPUT_TEST_PATH} && cmake ${TEST_PATH} -DPROJECT_NAME=${PROJ_NAME} -DBUILD_PATH=${BUILD_PATH} -DINSTALL_PATH=${INSTALL_PATH} && $(MAKE) $(MAKEFLAGS)
 
 .PHONY: clean
 clean:

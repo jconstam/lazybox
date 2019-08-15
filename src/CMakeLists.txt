@@ -17,11 +17,9 @@ include_directories(
     )
 
 add_executable( ${PROJECT_NAME} ${SOURCES} )
-set( SYMLINK_DIR symlinks )
 add_custom_command( 
     TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND mkdir -p symlinks
-    COMMAND ln -f -s ${PROJECT_NAME} ${SYMLINK_DIR}/echo
+    COMMAND ln -f -s ${PROJECT_NAME} echo
     )
 
 message( "OUTPUT: ${CMAKE_EXECUTABLE_OUTPUT_PATH}")
@@ -31,6 +29,6 @@ install(
     DESTINATION ${INSTALL_PATH}
     )
 install( 
-    DIRECTORY ${BUILD_PATH}/${PROJECT_NAME}/symlinks/
+    DIRECTORY ${BUILD_PATH}/${PROJECT_NAME}/echo
     DESTINATION ${INSTALL_PATH}
     )

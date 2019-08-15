@@ -14,4 +14,4 @@ install:
 
 script:
   - make -j install INSTALL_PATH=$(pwd)/install
-  - make -j test
+  - make -j test INSTALL_PATH=$(pwd)/install
