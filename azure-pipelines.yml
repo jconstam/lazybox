@@ -16,7 +16,7 @@ steps:
    python -m pip install --upgrade pip 
    pip install -r requirements.txt
   displayName: 'Install Python Dependencies'
-- script: 'make -j test
+- script: 'make -j test'
   displayName: 'Build and Run Tests'
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
