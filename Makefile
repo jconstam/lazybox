@@ -16,7 +16,7 @@ OUTPUT_TEST_PATH=${BUILD_PATH}/test
 .PHONY: build
 build:
 	mkdir -p ${OUTPUT_PATH}
-	cd ${OUTPUT_PATH} && cmake ${SOURCE_PATH} -DPROJECT_NAME=${PROJ_NAME} -DINSTALL_PATH=${INSTALL_PATH} && $(MAKE) $(MAKEFLAGS)
+	cd ${OUTPUT_PATH} && cmake ${SOURCE_PATH} -DPROJECT_NAME=${PROJ_NAME} -DBUILD_PATH=${BUILD_PATH} -DINSTALL_PATH=${INSTALL_PATH} && $(MAKE) $(MAKEFLAGS)
 
 .PHONY: install
 install: build
@@ -41,11 +41,3 @@ build_tests:
 .PHONY: clean
 clean:
 	rm -rf ${BUILD_PATH}
-
-.PHONY: clean_install
-clean_install:
-ifeq (${INSTALL_PATH},${DEFAULT_INSTALL_PATH})
-	rm /usr/local/bin/${PROJ_NAME}
-else
-	rm -rf ${INSTALL_PATH}
-endif

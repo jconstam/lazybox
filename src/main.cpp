@@ -6,7 +6,16 @@ using namespace std;
 
 int main( int argc, char* argv[] )
 {
-    cout << "Hello World." << endl;
+    cout << "COUNT: " << argc << " \"";
+    for( int i = 0; i < argc; i++ )
+    {
+        cout << argv[ i ];
+        if( i < argc - 1 )
+        {
+            cout << " ";
+        }
+    }
+    cout << "\"" << endl;
 
     run_echo( argc, argv );
 
