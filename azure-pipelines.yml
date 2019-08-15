@@ -8,6 +8,8 @@ steps:
   displayName: 'Set Environment to use Python 3.6'
   inputs:
     versionSpec: 3.6
+- script: 'make -j install INSTALL_PATH=install'
+  displayName: 'Build Main'
 - script: 'sudo apt-get install lcov -y'
   displayName: 'Install Ubuntu Packages'
 - script: |
@@ -28,6 +30,3 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: build/test/unittests/lazybox_unittests_coverage.xml
-- script: 'make -j'
-  displayName: 'Build Main'
-  timeoutInMinutes: 360

@@ -13,5 +13,6 @@ install:
   - pip install --user -r requirements.txt
 
 script:
-  - make -j test
   - make -j
+  - make -j install INSTALL_PATH=install
+  - make -j test

@@ -17,3 +17,8 @@ include_directories(
     )
     
 add_executable( ${PROJECT_NAME} ${SOURCES} )
+
+install( 
+    TARGETS ${PROJECT_NAME}
+    DESTINATION ${INSTALL_PATH}
+    )

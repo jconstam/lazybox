@@ -7,6 +7,8 @@ SOURCE_PATH=${ROOT_PATH}/src
 INCLUDE_PATH=${ROOT_PATH}/include
 TEST_PATH=${ROOT_PATH}/test
 BUILD_PATH=${ROOT_PATH}/build
+DEFAULT_INSTALL_PATH=bin
+INSTALL_PATH?=${DEFAULT_INSTALL_PATH}
 
 OUTPUT_PATH=${BUILD_PATH}/${PROJ_NAME}
 OUTPUT_TEST_PATH=${BUILD_PATH}/test
@@ -14,7 +16,14 @@ OUTPUT_TEST_PATH=${BUILD_PATH}/test
 .PHONY: build
 build:
 	mkdir -p ${OUTPUT_PATH}
-	cd ${OUTPUT_PATH} && cmake ${SOURCE_PATH} -DPROJECT_NAME=${PROJ_NAME} && $(MAKE) $(MAKEFLAGS)
+	cd ${OUTPUT_PATH} && cmake ${SOURCE_PATH} -DPROJECT_NAME=${PROJ_NAME} -DINSTALL_PATH=${INSTALL_PATH} && $(MAKE) $(MAKEFLAGS)
+
+.PHONY: install
+install: build
+ifneq (${INSTALL_PATH},${DEFAULT_INSTALL_PATH})
+	mkdir -p ${INSTALL_PATH}
+endif
+	cd ${OUTPUT_PATH} && $(MAKE) install 
 
 .PHONY: test
 test: build_tests
@@ -32,3 +41,11 @@ build_tests:
 .PHONY: clean
 clean:
 	rm -rf ${BUILD_PATH}
+
+.PHONY: clean_install
+clean_install:
+ifeq (${INSTALL_PATH},${DEFAULT_INSTALL_PATH})
+	rm /usr/local/bin/${PROJ_NAME}
+else
+	rm -rf ${INSTALL_PATH}
+endif
