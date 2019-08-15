@@ -1,10 +1,6 @@
 cmake_minimum_required( VERSION 3.5 )
 
 set( PROJECT_NAME "lazybox" )
-if( ${INSTALL_PATH} STREQUAL "bin" )
-    set( INSTALL_PATH "" )
-    message( "INSTALL_PATH = ${INSTALL_PATH}" )
-endif( )
 
 enable_testing( )
 

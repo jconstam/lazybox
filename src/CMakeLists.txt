@@ -7,6 +7,7 @@ project( ${PROJECT_NAME} )
 
 set( SOURCES
     ${PROJECT_SOURCE_DIR}/main.cpp
+    ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
     
     ${PROJECT_SOURCE_DIR}/echo.cpp
 )
@@ -29,6 +30,6 @@ install(
     DESTINATION ${INSTALL_PATH}
     )
 install( 
-    DIRECTORY ${BUILD_PATH}/${PROJECT_NAME}/echo
+    FILES ${BUILD_PATH}/${PROJECT_NAME}/echo
     DESTINATION ${INSTALL_PATH}
     )

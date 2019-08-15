@@ -8,7 +8,7 @@ steps:
   displayName: 'Set Environment to use Python 3.6'
   inputs:
     versionSpec: 3.6
-- script: 'make -j install INSTALL_PATH=$(pwd)/install'
+- script: 'make -j'
   displayName: 'Build Main'
 - script: 'sudo apt-get install lcov -y'
   displayName: 'Install Ubuntu Packages'
@@ -16,7 +16,7 @@ steps:
    python -m pip install --upgrade pip 
    pip install -r requirements.txt
   displayName: 'Install Python Dependencies'
-- script: 'make -j test INSTALL_PATH=$(pwd)/install'
+- script: 'make -j test
   displayName: 'Build and Run Tests'
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'

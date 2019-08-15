@@ -17,6 +17,7 @@ add_subdirectory( ${CMAKE_CURRENT_BINARY_DIR}/googletest-src ${CMAKE_CURRENT_BIN
 
 set( UNITTEST_SOURCES
   ${SOURCES_ROOT}/echo.cpp
+  ${SOURCES_ROOT}/cmdRegistry.cpp
 
   ${UNITTEST_ROOT}/echo_test.cpp
 )
