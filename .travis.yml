@@ -1,0 +1,17 @@
+language: cpp
+compiler: gcc
+dist: xenial
+
+addons:
+  apt:
+    packages:
+      cmake
+      python-pip
+      lcov
+
+install:
+  - pip install --user -r requirements.txt
+
+script:
+  - make -j test
+  - make -j
