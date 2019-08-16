@@ -6,11 +6,11 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror" )
 project( ${PROJECT_NAME} )
 
 set( SOURCES
-    ${PROJECT_SOURCE_DIR}/main.cpp
-    ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
-    
     ${PROJECT_SOURCE_DIR}/commands/date.cpp
     ${PROJECT_SOURCE_DIR}/commands/echo.cpp
+    
+    ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
+    ${PROJECT_SOURCE_DIR}/main.cpp
 )
 
 include_directories( 
@@ -24,8 +24,6 @@ add_custom_command(
     COMMAND ln -f -s ${PROJECT_NAME} echo
     COMMAND ln -f -s ${PROJECT_NAME} date
     )
-
-message( "OUTPUT: ${CMAKE_EXECUTABLE_OUTPUT_PATH}")
 
 install( 
     TARGETS ${PROJECT_NAME}
