@@ -26,8 +26,6 @@ set( UNITTEST_SOURCES
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fno-inline -O0" )
 
-message( "PROJECT NAME 2: ${PROJECT_NAME}")
-
 set( UNITTEST_PROJECT_NAME "${PROJECT_NAME}_unittests" )
 include_directories( ${UNITTEST_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
 add_executable( ${UNITTEST_PROJECT_NAME} ${UNITTEST_SOURCES} )
