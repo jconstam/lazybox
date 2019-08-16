@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "echo.hpp"
+#include "commands.hpp"
 
 using namespace std;
 

@@ -9,7 +9,8 @@ set( SOURCES
     ${PROJECT_SOURCE_DIR}/main.cpp
     ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
     
-    ${PROJECT_SOURCE_DIR}/echo.cpp
+    ${PROJECT_SOURCE_DIR}/commands/date.cpp
+    ${PROJECT_SOURCE_DIR}/commands/echo.cpp
 )
 
 include_directories( 
@@ -21,6 +22,7 @@ add_executable( ${PROJECT_NAME} ${SOURCES} )
 add_custom_command( 
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ln -f -s ${PROJECT_NAME} echo
+    COMMAND ln -f -s ${PROJECT_NAME} date
     )
 
 message( "OUTPUT: ${CMAKE_EXECUTABLE_OUTPUT_PATH}")
@@ -30,6 +32,8 @@ install(
     DESTINATION ${INSTALL_PATH}
     )
 install( 
-    FILES ${BUILD_PATH}/${PROJECT_NAME}/echo
+    FILES 
+        ${BUILD_PATH}/${PROJECT_NAME}/echo 
+        ${BUILD_PATH}/${PROJECT_NAME}/date
     DESTINATION ${INSTALL_PATH}
     )

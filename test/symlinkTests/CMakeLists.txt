@@ -14,3 +14,9 @@ add_test( echo_sym_one ${OUTPUT_PATH}/echo this is a lot of parameters and some 
 set_tests_properties( echo_sym_one PROPERTIES PASS_REGULAR_EXPRESSION "this is a lot of parameters and some are numbers 1 2 3" )
 add_test( echo_sym_many ${OUTPUT_PATH}/lazybox echo this is a lot of parameters and some are numbers 1 2 3 )
 set_tests_properties( echo_sym_many PROPERTIES PASS_REGULAR_EXPRESSION "this is a lot of parameters and some are numbers 1 2 3" )
+
+add_test( date_dummy ${OUTPUT_PATH}/lazybox date )
+set_tests_properties( date_dummy PROPERTIES PASS_REGULAR_EXPRESSION "" )
+
+add_test( date_sym_dummy ${OUTPUT_PATH}/date )
+set_tests_properties( date_sym_dummy PROPERTIES PASS_REGULAR_EXPRESSION "" )

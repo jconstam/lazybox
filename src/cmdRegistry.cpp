@@ -4,9 +4,12 @@
 
 using namespace std;
 
+#include "commands.hpp"
+
 static const std::map<std::string, CmdFunc> m_commands = 
 {
-    { "echo", run_echo }
+    { "echo", run_echo },
+    { "date", run_date }
 };
 
 int CommandRegistry::runCommand( int argc, char* argv[] )
