@@ -4,6 +4,24 @@
 #include <string>
 #include <vector>
 
+class LazyBoxCommand
+{
+    public:
+        LazyBoxCommand( std::string fileContents );
+
+        bool isValid( );
+
+        std::string getName( );
+        std::string getDescrip( );
+        std::string getFunction( );
+    private:
+        std::string m_name;
+        std::string m_descrip;
+        std::string m_function;
+
+        void parseField( std::string fileContents, std::string marker, std::string& fieldData );
+};
+
 class CmdFileScanner
 {
     public:
@@ -11,22 +29,10 @@ class CmdFileScanner
 
         bool scanForFiles( std::string path );
         bool parseFiles( );
+        void writeCmdIncludeFile( std::string includeFilePath );
     private:
         std::vector<std::string> m_fileList;
-};
-
-class LazyBoxCommand
-{
-    public:
-        LazyBoxCommand( );
-
-        void setName( std::string name );
-        void setDescrip( std::string descrip );
-        void setFunction( std::string function );
-    private:
-        std::string m_name;
-        std::string m_descrip;
-        std::string m_function;
+        std::vector<LazyBoxCommand> m_cmdList;
 };
 
 #endif

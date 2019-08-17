@@ -1,4 +1,6 @@
 #include <iostream>
+#include <experimental/filesystem>
+
 #include <getopt.h>
 
 #include "CmdFileScanner.hpp"
@@ -7,7 +9,8 @@ using namespace std;
 
 typedef struct
 {
-	const char* cmdFilePath;
+	string cmdFilePath;
+	string cmdIncludeFile;
 } BOXER_PARAMS;
 
 static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
@@ -15,12 +18,16 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
     int opt = 0;
 	while( opt != -1 )  
     {  
-		opt = getopt( argc, argv, "c:" );
+		opt = getopt( argc, argv, "c:i:" );
         switch( opt )  
         {  
             case 'c': 
 				params->cmdFilePath = optarg;
 				cout << "Using Command File Path \"" << params->cmdFilePath << "\"" << endl;
+				break;
+			case 'i':
+				params->cmdIncludeFile = experimental::filesystem::absolute( optarg );
+				cout << "Using Command Include File \"" << params->cmdIncludeFile << "\"" << endl;
 				break;
 			case -1:
 				break;
@@ -31,21 +38,14 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
         }  
     }
 
-	if( params->cmdFilePath == nullptr )
+	if( params->cmdFilePath == "" )
 	{
 		cout << "Command File Path not specified (use -c)" << endl;
 		return false;
 	}
-	
-	CmdFileScanner scanner;
-	if( ! scanner.scanForFiles( params->cmdFilePath ) )
+	if( params->cmdIncludeFile == "" )
 	{
-		cout << "Could not locate any files in path \"" << params->cmdFilePath << "\"." << endl;
-		return false;
-	}
-	else if( ! scanner.parseFiles( ) )
-	{
-		cout << "None of the files in path \"" << params->cmdFilePath << "\" are valid command files." << endl;
+		cout << "Command Include Files not specified (use -i)" << endl;
 		return false;
 	}
 
@@ -54,12 +54,26 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 
 int main( int argc, char* argv[] )
 {
-	BOXER_PARAMS params = { 0 };
+	BOXER_PARAMS params = { "", "" };
 	if( ! parseParams( argc, argv, &( params ) ) )
 	{
 		cout << "Could not parse command line arguments" << endl;
 		return -1;
 	}
+	
+	CmdFileScanner scanner;
+	if( ! scanner.scanForFiles( params.cmdFilePath ) )
+	{
+		cout << "Could not locate any files in path \"" << params.cmdFilePath << "\"." << endl;
+		return false;
+	}
+	else if( ! scanner.parseFiles( ) )
+	{
+		cout << "Error parsing files in path \"" << params.cmdFilePath << "\"" << endl;
+		return false;
+	}
+
+	scanner.writeCmdIncludeFile( params.cmdIncludeFile );
 
 	return 0;
 }

@@ -1,7 +1,7 @@
 /*
     LAZYBOX_COMMAND
     @name echo
-    @descrip Echos a string back
+    @descrip Echos a string back  
     @function run_echo
  */
 

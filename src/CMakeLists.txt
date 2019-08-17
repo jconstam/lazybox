@@ -44,7 +44,9 @@ add_executable( ${BOXER_PROJECT_NAME} ${BOXER_SOURCES} )
 target_link_libraries( ${BOXER_PROJECT_NAME} stdc++fs )
 add_custom_target( RUN_${BOXER_PROJECT_NAME}
     WORKING_DIRECTORY ${BUILD_PATH}
-    COMMAND ${BOXER_PROJECT_NAME} -c "${COMMAND_SOURCE_DIR}"
+    COMMAND ${BOXER_PROJECT_NAME} 
+        -c "${COMMAND_SOURCE_DIR}" 
+        -i "${PROJECT_SOURCE_DIR}/../include/commands.hpp"
 )
 add_dependencies( RUN_${BOXER_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
 

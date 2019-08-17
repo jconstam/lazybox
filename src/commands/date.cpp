@@ -1,3 +1,10 @@
+/*
+    LAZYBOX_COMMAND
+    @name date
+    @descrip Gets date/time information
+    @function run_date
+ */
+
 #include <iostream>
 #include <ctime>
 
