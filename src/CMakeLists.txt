@@ -1,18 +1,17 @@
 cmake_minimum_required( VERSION 3.5 )
 
-set( CMAKE_VERBOSE_MAKEFILE True )
-
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror" )
 
 project( ${MAIN_PROJECT_NAME} )
 project( ${BOXER_PROJECT_NAME} )
 
+set( COMMAND_SOURCE_DIR ${PROJECT_SOURCE_DIR}/commands )
 set( BOXER_SOURCE_DIR ${PROJECT_SOURCE_DIR}/boxer )
 
 set( SOURCES
-    ${PROJECT_SOURCE_DIR}/commands/date.cpp
-    ${PROJECT_SOURCE_DIR}/commands/echo.cpp
+    ${COMMAND_SOURCE_DIR}/date.cpp
+    ${COMMAND_SOURCE_DIR}/echo.cpp
     
     ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
     ${PROJECT_SOURCE_DIR}/main.cpp
@@ -43,7 +42,7 @@ add_custom_command(
 add_executable( ${BOXER_PROJECT_NAME} ${BOXER_SOURCES} )
 add_custom_target( RUN_${BOXER_PROJECT_NAME}
     WORKING_DIRECTORY ${BUILD_PATH}
-    COMMAND ${BOXER_PROJECT_NAME}
+    COMMAND ${BOXER_PROJECT_NAME} -c "${COMMAND_SOURCE_DIR}"
 )
 add_dependencies( RUN_${BOXER_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
 
