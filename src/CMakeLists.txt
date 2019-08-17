@@ -19,6 +19,7 @@ set( SOURCES
 
 set( BOXER_SOURCES
     ${BOXER_SOURCE_DIR}/main.cpp
+    ${BOXER_SOURCE_DIR}/CmdFileScanner.cpp
 )
 
 include_directories( 
@@ -40,6 +41,7 @@ add_custom_command(
 )
 
 add_executable( ${BOXER_PROJECT_NAME} ${BOXER_SOURCES} )
+target_link_libraries( ${BOXER_PROJECT_NAME} stdc++fs )
 add_custom_target( RUN_${BOXER_PROJECT_NAME}
     WORKING_DIRECTORY ${BUILD_PATH}
     COMMAND ${BOXER_PROJECT_NAME} -c "${COMMAND_SOURCE_DIR}"
