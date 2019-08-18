@@ -1,5 +1,7 @@
 #include "CmdFileScanner.hpp"
 
+#include <ctime>
+#include <chrono>
 #include <cwctype>
 #include <fstream>
 #include <iostream>
@@ -48,10 +50,14 @@ bool CmdFileScanner::parseFiles( )
 
             LazyBoxCommand command( fileContents );
 
-            found = command.isValid( );
-            if( found )
+            if( command.isValid( ) )
             {
-                m_cmdList.push_back( command );
+                map<string,LazyBoxCommand>::iterator it = m_commands.find( command.getName( ) );
+                if( it == m_commands.end( ) )
+                {
+                    found = true;
+                    m_commands[ command.getName( ) ] = command;
+                }
             }
         }
     }
@@ -59,16 +65,22 @@ bool CmdFileScanner::parseFiles( )
     return found;
 }
 
-void CmdFileScanner::writeCmdIncludeFile( std::string includeFilePath )
+void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
 {
     ofstream fileStream;
+
+    cout << "Writing to Command Include File \"" << includeFilePath << "\"" << endl;
+
     fileStream.open( includeFilePath );
 
-    fileStream << "#ifndef COMMANDS_HPP__" << endl << "#define COMMANDS_HPP__" << endl << endl;
+    time_t time = chrono::system_clock::to_time_t( chrono::system_clock::now() );
 
-    for( LazyBoxCommand &command : m_cmdList )
+    fileStream << "// This file was automatically generated on " << ctime( &time ) << endl;
+    fileStream << "#ifndef COMMANDS_HPP__" << endl << "#define COMMANDS_HPP__" << endl << endl;
+    
+    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
     {
-        fileStream << "int " << command.getFunction( ) << "( int argc, char* argv[ ] );" << endl;
+        fileStream << "int " << it->second.getFunction( ) << "( int argc, char* argv[ ] );" << endl;
     }
 
     fileStream << endl << "#endif" << endl;

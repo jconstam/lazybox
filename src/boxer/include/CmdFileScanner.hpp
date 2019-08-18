@@ -1,13 +1,14 @@
 #ifndef CMD_FILE_SCANNER_HPP__
 #define CMD_FILE_SCANNER_HPP__
 
+#include <map>
 #include <string>
 #include <vector>
 
 class LazyBoxCommand
 {
     public:
-        LazyBoxCommand( std::string fileContents );
+        LazyBoxCommand( std::string fileContents = "" );
 
         bool isValid( );
 
@@ -32,7 +33,7 @@ class CmdFileScanner
         void writeCmdIncludeFile( std::string includeFilePath );
     private:
         std::vector<std::string> m_fileList;
-        std::vector<LazyBoxCommand> m_cmdList;
+        std::map<std::string, LazyBoxCommand> m_commands;
 };
 
 #endif
