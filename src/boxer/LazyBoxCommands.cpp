@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include <sys/stat.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -14,8 +15,8 @@ static const string NAME_MARKER = "@name";
 static const string DESCRIP_MARKER = "@descrip";
 static const string FUNCTION_MARKER = "@function";
 static const string TEST_MARKER = "@test";
-static const string TESTPARAM_MARKER = "@testparam";
-static const string TESTOUTPUT_MARKER = "@testoutput";
+static const string TESTPARAM_MARKER = "@t_param";
+static const string TESTOUTPUT_MARKER = "@t_output";
 
 LazyBoxCommand::LazyBoxCommand( string fileContents )
 {
@@ -26,6 +27,37 @@ LazyBoxCommand::LazyBoxCommand( string fileContents )
     parseField( fileContents, NAME_MARKER, m_name );
     parseField( fileContents, DESCRIP_MARKER, m_descrip );
     parseField( fileContents, FUNCTION_MARKER, m_function );
+
+    size_t location = 0;
+    while( location != string::npos )
+    {
+        string testName;
+        location = parseField( fileContents, TEST_MARKER, testName, location );
+        if( location != string::npos )
+        {
+            map<string,LazyBoxCommandTest>::iterator it = m_tests.find( testName );
+            if( it == m_tests.end( ) )
+            {
+                cout << m_name << " - " << testName << endl;
+                LazyBoxCommandTest test( testName );
+                m_tests[ testName ] = test;
+            }
+
+            location += TEST_MARKER.length( );
+        }
+    }
+/*
+    location = 0;
+    while( location != string::npos )
+    {
+        string testParam;
+        location = parseField( fileContents, TESTPARAM_MARKER, testParam, location );
+        if( location != string::npos )
+        {
+
+        }
+    }
+    */
 }
 
 bool LazyBoxCommand::isValid( )
@@ -61,9 +93,9 @@ string LazyBoxCommand::getFunction( )
     return m_function;
 }
 
-void LazyBoxCommand::parseField( string fileContents, string marker, string& fieldData )
+size_t LazyBoxCommand::parseField( string fileContents, string marker, string& fieldData, int pos )
 {
-    size_t markerLocation = fileContents.find( marker );
+    size_t markerLocation = fileContents.find( marker, pos );
     if( markerLocation != string::npos )
     {
         size_t endOfLine = fileContents.find( "\n", markerLocation );
@@ -79,11 +111,13 @@ void LazyBoxCommand::parseField( string fileContents, string marker, string& fie
             fieldData = fieldData.substr( 0, fieldData.length( ) - 1 );
         }
     }
+
+    return markerLocation;
 }
 
-LazyBoxCommandTest::LazyBoxCommandTest( )
+LazyBoxCommandTest::LazyBoxCommandTest( string name )
 {
-    m_name = "";
+    m_name = name;
     m_parameters = "";
     m_output = "";
 }
@@ -101,10 +135,6 @@ string LazyBoxCommandTest::getOutput( )
     return m_output;
 }
 
-void LazyBoxCommandTest::setName( string name )
-{
-    m_name = name;
-}
 void LazyBoxCommandTest::setParameters( string parameters )
 {
     m_parameters = parameters;
