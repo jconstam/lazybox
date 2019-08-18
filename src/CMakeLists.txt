@@ -22,6 +22,7 @@ set( SOURCES
 set( BOXER_SOURCES
     ${BOXER_SOURCE_DIR}/main.cpp
     ${BOXER_SOURCE_DIR}/CmdFileScanner.cpp
+    ${BOXER_SOURCE_DIR}/LazyBoxCommands.cpp
 )
 
 include_directories( 
