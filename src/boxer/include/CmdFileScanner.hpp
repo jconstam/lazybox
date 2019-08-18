@@ -31,6 +31,7 @@ class CmdFileScanner
         bool scanForFiles( std::string path );
         bool parseFiles( );
         void writeCmdIncludeFile( std::string includeFilePath );
+        void writeCmdListfile( std::string listFilePath );
     private:
         std::vector<std::string> m_fileList;
         std::map<std::string, LazyBoxCommand> m_commands;

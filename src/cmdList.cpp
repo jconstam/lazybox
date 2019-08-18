@@ -1,7 +1,9 @@
+// This file was automatically generated on Sun Aug 18 15:52:21 2019
+
 #include "cmdList.hpp"
 
-const std::map<std::string, CmdFunc> commandList = 
+const std::map<std::string, CmdFunc> commandList =
 {
-    { "echo", run_echo },
-    { "date", run_date }
+	{ "date", run_date },
+	{ "echo", run_echo },
 };

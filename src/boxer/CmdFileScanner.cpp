@@ -88,6 +88,31 @@ void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
     fileStream.close( );
 }
 
+void CmdFileScanner::writeCmdListfile( string listFilePath )
+{
+    ofstream fileStream;
+
+    cout << "Writing to Command List File \"" << listFilePath << "\"" << endl;
+
+    fileStream.open( listFilePath );
+
+    time_t time = chrono::system_clock::to_time_t( chrono::system_clock::now() );
+
+    fileStream << "// This file was automatically generated on " << ctime( &time ) << endl;
+    fileStream << "#include \"cmdList.hpp\"" << endl << endl;
+    fileStream << "const std::map<std::string, CmdFunc> commandList =" << endl;
+    fileStream << "{" << endl;
+    
+    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
+    {
+        fileStream << "\t{ \"" << it->second.getName( ) << "\", " << it->second.getFunction( ) << " }," << endl;
+    }
+
+    fileStream << "};" << endl;
+
+    fileStream.close( );
+}
+
 LazyBoxCommand::LazyBoxCommand( string fileContents )
 {
     m_name = "";

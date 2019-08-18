@@ -11,6 +11,7 @@ typedef struct
 {
 	string cmdFilePath;
 	string cmdIncludeFile;
+	string cmdListFile;
 } BOXER_PARAMS;
 
 static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
@@ -18,7 +19,7 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
     int opt = 0;
 	while( opt != -1 )  
     {  
-		opt = getopt( argc, argv, "c:i:" );
+		opt = getopt( argc, argv, "c:i:l:" );
         switch( opt )  
         {  
             case 'c': 
@@ -28,6 +29,10 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 			case 'i':
 				params->cmdIncludeFile = experimental::filesystem::absolute( optarg );
 				cout << "Using Command Include File \"" << params->cmdIncludeFile << "\"" << endl;
+				break;
+			case 'l':
+				params->cmdListFile = experimental::filesystem::absolute( optarg );
+				cout << "Using Command List File \"" << params->cmdListFile << "\"" << endl;
 				break;
 			case -1:
 				break;
@@ -45,7 +50,12 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 	}
 	if( params->cmdIncludeFile == "" )
 	{
-		cout << "Command Include Files not specified (use -i)" << endl;
+		cout << "Command Include File not specified (use -i)" << endl;
+		return false;
+	}
+	if( params->cmdListFile == "" )
+	{
+		cout << "Command List File not specified (use -l)" << endl;
 		return false;
 	}
 
@@ -74,6 +84,7 @@ int main( int argc, char* argv[] )
 	}
 
 	scanner.writeCmdIncludeFile( params.cmdIncludeFile );
+	scanner.writeCmdListfile( params.cmdListFile );
 
 	return 0;
 }

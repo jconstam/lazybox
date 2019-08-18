@@ -48,6 +48,7 @@ add_custom_target( RUN_${BOXER_PROJECT_NAME}
     COMMAND ${BOXER_PROJECT_NAME} 
         -c "${COMMAND_SOURCE_DIR}" 
         -i "${PROJECT_SOURCE_DIR}/../include/commands.hpp"
+        -l "${PROJECT_SOURCE_DIR}/cmdList.cpp"
 )
 add_dependencies( RUN_${BOXER_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
 
