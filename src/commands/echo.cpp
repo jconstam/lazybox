@@ -3,6 +3,10 @@
     @name echo
     @descrip Echos a string back  
     @function run_echo
+
+    @test nothing
+    @testparam nothing ""
+    @testoutput nothing "" 
  */
 
 #include <iostream>

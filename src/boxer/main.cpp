@@ -13,6 +13,7 @@ typedef struct
 	string cmdIncludeFile;
 	string cmdListFile;
 	string symlinkScriptFile;
+	string testCMakeFile;
 } BOXER_PARAMS;
 
 static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
@@ -20,7 +21,7 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
     int opt = 0;
 	while( opt != -1 )  
     {  
-		opt = getopt( argc, argv, "c:i:l:s:" );
+		opt = getopt( argc, argv, "c:i:l:s:t:" );
         switch( opt )  
         {  
             case 'c': 
@@ -38,6 +39,10 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 			case 's':
 				params->symlinkScriptFile = experimental::filesystem::absolute( optarg );
 				cout << "Using Symlink Script File \"" << params->symlinkScriptFile << "\"" << endl;
+				break;
+			case 't':
+				params->testCMakeFile = experimental::filesystem::absolute( optarg );
+				cout << "Using CMake Test File \"" << params->testCMakeFile << "\"" << endl;
 				break;
 			case -1:
 				break;
@@ -68,13 +73,18 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 		cout << "Symlink Script File not specified (use -s)" << endl;
 		return false;
 	}
+	if( params->testCMakeFile == "" )
+	{
+		cout << "CMake Test File not specified (use -t)" << endl;
+		return false;
+	}
 
 	return true;
 }
 
 int main( int argc, char* argv[] )
 {
-	BOXER_PARAMS params = { "", "", "", "" };
+	BOXER_PARAMS params = { "", "", "", "", "" };
 	if( ! parseParams( argc, argv, &( params ) ) )
 	{
 		cout << "Could not parse command line arguments" << endl;
@@ -96,6 +106,7 @@ int main( int argc, char* argv[] )
 	scanner.writeCmdIncludeFile( params.cmdIncludeFile );
 	scanner.writeCmdListfile( params.cmdListFile );
 	scanner.writeSymlinkScriptfile( params.symlinkScriptFile );
+	scanner.writeCMakeTestfile( params.testCMakeFile );
 
 	return 0;
 }

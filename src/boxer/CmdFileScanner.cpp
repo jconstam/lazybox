@@ -14,6 +14,9 @@ static const string LAZYBOX_MARKER = "LAZYBOX_COMMAND";
 static const string NAME_MARKER = "@name";
 static const string DESCRIP_MARKER = "@descrip";
 static const string FUNCTION_MARKER = "@function";
+static const string TEST_MARKER = "@test";
+static const string TESTPARAM_MARKER = "@testparam";
+static const string TESTOUTPUT_MARKER = "@testoutput";
 
 CmdFileScanner::CmdFileScanner( )
 {
@@ -134,6 +137,17 @@ void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
 
     chmod( scriptFilePath.c_str( ), S_IRWXU );
 }
+void CmdFileScanner::writeCMakeTestfile( string testFilePath )
+{
+    ofstream fileStream;
+
+    cout << "Writing to CMake Test file \"" << testFilePath << "\"" << endl;
+
+    fileStream.open( testFilePath );
+    addFileTimestamp( fileStream, false );
+
+    fileStream.close( );
+}
 
 void CmdFileScanner::addFileTimestamp( ofstream& fileStream, bool cStyle )
 {
@@ -213,4 +227,37 @@ void LazyBoxCommand::parseField( string fileContents, string marker, string& fie
             fieldData = fieldData.substr( 0, fieldData.length( ) - 1 );
         }
     }
+}
+
+LazyBoxCommandTest::LazyBoxCommandTest( )
+{
+    m_name = "";
+    m_parameters = "";
+    m_output = "";
+}
+
+string LazyBoxCommandTest::getName( )
+{
+    return m_name;
+}
+string LazyBoxCommandTest::getParameters( )
+{
+    return m_parameters;
+}
+string LazyBoxCommandTest::getOutput( )
+{
+    return m_output;
+}
+
+void LazyBoxCommandTest::setName( string name )
+{
+    m_name = name;
+}
+void LazyBoxCommandTest::setParameters( string parameters )
+{
+    m_parameters = parameters;
+}
+void LazyBoxCommandTest::setOutput( string output )
+{
+    m_output = output;
 }

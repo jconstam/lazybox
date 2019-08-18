@@ -51,6 +51,7 @@ add_custom_target( RUN_${BOXER_PROJECT_NAME}
         -i "${PROJECT_SOURCE_DIR}/../include/commands.hpp"
         -l "${PROJECT_SOURCE_DIR}/cmdList.cpp"
         -s "${SCRIPT_DIR}/genSymLinks.sh"
+        -t "${PROJECT_SOURCE_DIR}/../test/symlinkTests/CMakeLists.txt"
 )
 add_dependencies( RUN_${BOXER_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
 
