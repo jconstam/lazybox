@@ -3,10 +3,10 @@
 #include <ctime>
 #include <chrono>
 #include <cwctype>
-#include <fstream>
 #include <iostream>
-#include <streambuf>
 #include <experimental/filesystem>
+
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -72,10 +72,8 @@ void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
     cout << "Writing to Command Include File \"" << includeFilePath << "\"" << endl;
 
     fileStream.open( includeFilePath );
+    addFileTimestamp( fileStream );
 
-    time_t time = chrono::system_clock::to_time_t( chrono::system_clock::now() );
-
-    fileStream << "// This file was automatically generated on " << ctime( &time ) << endl;
     fileStream << "#ifndef COMMANDS_HPP__" << endl << "#define COMMANDS_HPP__" << endl << endl;
     
     for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
@@ -95,10 +93,8 @@ void CmdFileScanner::writeCmdListfile( string listFilePath )
     cout << "Writing to Command List File \"" << listFilePath << "\"" << endl;
 
     fileStream.open( listFilePath );
+    addFileTimestamp( fileStream );
 
-    time_t time = chrono::system_clock::to_time_t( chrono::system_clock::now() );
-
-    fileStream << "// This file was automatically generated on " << ctime( &time ) << endl;
     fileStream << "#include \"cmdList.hpp\"" << endl << endl;
     fileStream << "const std::map<std::string, CmdFunc> commandList =" << endl;
     fileStream << "{" << endl;
@@ -111,6 +107,48 @@ void CmdFileScanner::writeCmdListfile( string listFilePath )
     fileStream << "};" << endl;
 
     fileStream.close( );
+}
+
+void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
+{
+    ofstream fileStream;
+
+    cout << "Writing to Symlink Script File \"" << scriptFilePath << "\"" << endl;
+
+    fileStream.open( scriptFilePath );
+    addFileTimestamp( fileStream, false );
+
+    fileStream << "#!/bin/bash" << endl << endl;
+    fileStream << "if [ \"$#\" -ne \"1\" ]; then" << endl;
+    fileStream << "\techo \"Usage: $0 <Main Binary>\"" << endl;
+    fileStream << "\texit -1" << endl;
+    fileStream << "fi" << endl << endl;
+    fileStream << "MAIN_PROJECT_NAME=$1" << endl << endl;
+
+    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
+    {
+        fileStream << "ln -f -s ${MAIN_PROJECT_NAME} " << it->second.getName( ) << endl;
+    }
+
+    fileStream.close( );
+
+    chmod( scriptFilePath.c_str( ), S_IRWXU );
+}
+
+void CmdFileScanner::addFileTimestamp( ofstream& fileStream, bool cStyle )
+{
+    time_t time = chrono::system_clock::to_time_t( chrono::system_clock::now() );
+
+    if( cStyle )
+    {
+        fileStream << "//";
+    }
+    else
+    {
+        fileStream << "#";
+    }
+
+    fileStream << " This file was automatically generated on " << ctime( &time ) << endl;
 }
 
 LazyBoxCommand::LazyBoxCommand( string fileContents )
