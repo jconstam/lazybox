@@ -6,8 +6,6 @@
 
 #include "cmdRegistry.hpp"
 
-typedef int ( *CmdFunc )( int, char** );
-
 class CommandRegistry
 {
     public:

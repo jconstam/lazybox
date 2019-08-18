@@ -1,16 +1,9 @@
 #include <iostream>
 
 #include "cmdRegistry.hpp"
+#include "cmdList.hpp"
 
 using namespace std;
-
-#include "commands.hpp"
-
-static const std::map<std::string, CmdFunc> m_commands = 
-{
-    { "echo", run_echo },
-    { "date", run_date }
-};
 
 int CommandRegistry::runCommand( int argc, char* argv[] )
 {
@@ -34,9 +27,9 @@ int CommandRegistry::runCommand( int argc, char* argv[] )
             return runCommand( argc - 1, &( argv[ 1 ] ) );
         }
     }
-    else if( m_commands.find( command ) != m_commands.end( ) )
+    else if( commandList.find( command ) != commandList.end( ) )
     {
-        return m_commands.at( command )( argc - 1, &( argv[ 1 ] ) );
+        return commandList.at( command )( argc - 1, &( argv[ 1 ] ) );
     }
     else
     {

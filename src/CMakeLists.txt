@@ -13,6 +13,7 @@ set( SOURCES
     ${COMMAND_SOURCE_DIR}/date.cpp
     ${COMMAND_SOURCE_DIR}/echo.cpp
     
+    ${PROJECT_SOURCE_DIR}/cmdList.cpp
     ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
     ${PROJECT_SOURCE_DIR}/main.cpp
 )
