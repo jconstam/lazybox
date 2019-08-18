@@ -8,6 +8,7 @@ project( ${BOXER_PROJECT_NAME} )
 
 set( COMMAND_SOURCE_DIR ${PROJECT_SOURCE_DIR}/commands )
 set( BOXER_SOURCE_DIR ${PROJECT_SOURCE_DIR}/boxer )
+set( SCRIPT_DIR ${PROJECT_SOURCE_DIR}/../script )
 
 set( SOURCES
     ${COMMAND_SOURCE_DIR}/date.cpp
@@ -37,8 +38,8 @@ add_executable( ${MAIN_PROJECT_NAME} ${SOURCES} )
 add_dependencies( ${MAIN_PROJECT_NAME} RUN_${BOXER_PROJECT_NAME} )
 add_custom_command( 
     TARGET ${MAIN_PROJECT_NAME} POST_BUILD
-    COMMAND ln -f -s ${MAIN_PROJECT_NAME} echo
-    COMMAND ln -f -s ${MAIN_PROJECT_NAME} date
+    WORKING_DIRECTORY ${BUILD_PATH}/${MAIN_PROJECT_NAME}
+    COMMAND ${SCRIPT_DIR}/genSymLinks.sh ${MAIN_PROJECT_NAME}
 )
 
 add_executable( ${BOXER_PROJECT_NAME} ${BOXER_SOURCES} )
