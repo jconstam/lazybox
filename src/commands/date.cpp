@@ -3,6 +3,10 @@
     @name date
     @descrip Gets date/time information
     @function run_date
+
+    @test dummy
+    @t_param dummy
+    @t_output dummy 2019
  */
 
 #include <iostream>

@@ -11,6 +11,10 @@
     @test one
     @t_param one testing
     @t_output one testing
+
+    @test many
+    @t_param many this is a lot of parameters and some are numbers 1 2 3
+    @t_output many this is a lot of parameters and some are numbers 1 2 3
  */
 
 #include <iostream>

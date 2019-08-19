@@ -2,6 +2,7 @@
 #define LAZY_BOX_COMMANDS_HPP__
 
 #include <map>
+#include <vector>
 #include <string>
 
 class LazyBoxCommandTest
@@ -31,6 +32,7 @@ class LazyBoxCommand
         std::string getName( );
         std::string getDescrip( );
         std::string getFunction( );
+        std::vector<LazyBoxCommandTest> getTests( );
     private:
         std::string m_name;
         std::string m_descrip;
@@ -38,6 +40,9 @@ class LazyBoxCommand
         std::map<std::string,LazyBoxCommandTest> m_tests;
 
         size_t parseField( std::string fileContents, std::string marker, std::string& fieldData, int pos = 0 );
+        size_t parseDoubleField( std::string fileContents, std::string marker, std::string& fieldName, std::string& fieldData, int pos = 0 );
+
+        std::string trimString( std::string data );
 };
 
 #endif

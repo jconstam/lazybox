@@ -41,34 +41,34 @@ LazyBoxCommand::LazyBoxCommand( string fileContents )
                 LazyBoxCommandTest test( testName );
                 m_tests[ testName ] = test;
             }
-
-            location += TEST_MARKER.length( );
         }
     }
 
     location = 0;
     while( location != string::npos )
     {
-        string testParam;
-        location = parseField( fileContents, TESTPARAM_MARKER, testParam, location );
-        if( location != string::npos )
+        string name;
+        string data;
+        location = parseDoubleField( fileContents, TESTOUTPUT_MARKER, name, data, location );
+
+        map<string,LazyBoxCommandTest>::iterator it = m_tests.find( name );
+        if( it != m_tests.end( ) )
         {
-            int start = location + TESTPARAM_MARKER.length( );
-            while( iswspace( fileContents[ start ] ) )
-            {
-                start++;
-            }
-            int nextNewLine = fileContents.find( "\n", start );
-            int nextSpace = fileContents.find( " ", start );
+            m_tests[ name ].setOutput( data );
+        }
+    }
 
-            if( nextSpace < nextNewLine )
-            {
-                string testName = fileContents.substr( start, nextSpace - start );
-                string params = fileContents.substr( nextSpace, nextNewLine - nextSpace );
+    location = 0;
+    while( location != string::npos )
+    {
+        string name;
+        string data;
+        location = parseDoubleField( fileContents, TESTPARAM_MARKER, name, data, location );
 
-                cout << "TEST: \"" << testName << "\" - PARAMS: \"" << params << "\""<< endl;
-            }
-            location = nextNewLine + 1;
+        map<string,LazyBoxCommandTest>::iterator it = m_tests.find( name );
+        if( it != m_tests.end( ) )
+        {
+            m_tests[ name ].setParameters( data );
         }
     }
 }
@@ -105,6 +105,16 @@ string LazyBoxCommand::getFunction( )
 {
     return m_function;
 }
+vector<LazyBoxCommandTest> LazyBoxCommand::getTests( )
+{
+    vector<LazyBoxCommandTest> tests;
+    for( map<string, LazyBoxCommandTest>::iterator it = m_tests.begin(); it != m_tests.end(); it++ )
+    {
+        tests.push_back( it->second );
+    }
+
+    return tests;
+}
 
 size_t LazyBoxCommand::parseField( string fileContents, string marker, string& fieldData, int pos )
 {
@@ -114,18 +124,54 @@ size_t LazyBoxCommand::parseField( string fileContents, string marker, string& f
         size_t endOfLine = fileContents.find( "\n", markerLocation );
         size_t dataStart = markerLocation + marker.length( );
 
-        fieldData = fileContents.substr( dataStart, endOfLine - dataStart );
-        while( iswspace( fieldData[ 0 ] ) )
-        {
-            fieldData = fieldData.substr( 1 );
-        }
-        while( iswspace( fieldData[ fieldData.length( ) - 1 ] ) )
-        {
-            fieldData = fieldData.substr( 0, fieldData.length( ) - 1 );
-        }
+        fieldData = trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
+
+        markerLocation += marker.length( );
     }
 
     return markerLocation;
+}
+
+size_t LazyBoxCommand::parseDoubleField( string fileContents, string marker, string& fieldName, string& fieldData, int pos )
+{
+    size_t markerLocation = fileContents.find( marker, pos );
+    if( markerLocation != string::npos )
+    {
+        size_t endOfLine = fileContents.find( "\n", markerLocation );
+        size_t dataStart = markerLocation + marker.length( );
+        
+        string fullLine = trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
+        
+        size_t firstSpace = fullLine.find( " " );
+        if( firstSpace != string::npos )
+        {
+            fieldName = fullLine.substr( 0, firstSpace );
+            fieldData = fullLine.substr( firstSpace + 1 );
+        }  
+        else
+        {
+            fieldName = fullLine;
+            fieldData = "";
+        }
+
+        markerLocation += marker.length( );
+    }
+
+    return markerLocation;
+}
+
+string LazyBoxCommand::trimString( string data )
+{
+    while( ( data.length( ) > 0 ) && ( iswspace( data[ 0 ] ) ) )
+    {
+        data = data.substr( 1 );
+    }
+    while( ( data.length( ) > 0 ) && ( iswspace( data[ data.length( ) - 1 ] ) ) )
+    {
+        data = data.substr( 0, data.length( ) - 1 );
+    }
+
+    return data;
 }
 
 LazyBoxCommandTest::LazyBoxCommandTest( string name )
