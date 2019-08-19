@@ -4,7 +4,7 @@
 
 using namespace std;
 
-TEST( EchoTest, DummyTest )
+TEST( DateTest, DummyTest )
 {
     EXPECT_EQ( 0, 0 );
 }

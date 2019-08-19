@@ -12,7 +12,7 @@ set( SCRIPT_DIR ${PROJECT_SOURCE_DIR}/../script )
 
 set( SOURCES
     ${COMMAND_SOURCE_DIR}/date.cpp
-    ${COMMAND_SOURCE_DIR}/echo.cpp
+    ${COMMAND_SOURCE_DIR}/echo.c
     
     ${PROJECT_SOURCE_DIR}/cmdList.cpp
     ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp

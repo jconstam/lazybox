@@ -19,10 +19,10 @@ set( UNITTEST_SOURCES
   ${SOURCES_ROOT}/cmdList.cpp
   ${SOURCES_ROOT}/cmdRegistry.cpp
 
-  ${SOURCES_ROOT}/commands/echo.cpp
   ${SOURCES_ROOT}/commands/date.cpp
+  ${SOURCES_ROOT}/commands/echo.c
 
-  ${UNITTEST_ROOT}/commands/echo_test.cpp
+  ${UNITTEST_ROOT}/commands/date_test.cpp
 )
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fno-inline -O0" )

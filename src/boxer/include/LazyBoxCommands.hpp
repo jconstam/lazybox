@@ -25,15 +25,17 @@ class LazyBoxCommandTest
 class LazyBoxCommand
 {
     public:
-        LazyBoxCommand( std::string fileContents = "" );
+        LazyBoxCommand( bool isCPP = true, std::string fileContents = "" );
 
         bool isValid( );
 
+        bool getIsCPP( );
         std::string getName( );
         std::string getDescrip( );
         std::string getFunction( );
         std::vector<LazyBoxCommandTest> getTests( );
     private:
+        bool m_isCPP;
         std::string m_name;
         std::string m_descrip;
         std::string m_function;

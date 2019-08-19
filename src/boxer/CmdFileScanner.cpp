@@ -38,6 +38,8 @@ bool CmdFileScanner::parseFiles( )
     bool found = false;
     for( const string file : m_fileList )
     {
+        bool isCPP = file.substr( file.length( ) - 3 ) == "cpp";
+
         ifstream fileStream( file );
         string fileContents;
         
@@ -51,7 +53,7 @@ bool CmdFileScanner::parseFiles( )
         {
             cout << "Command File \"" << file << "\" is a valid command!" << endl;
 
-            LazyBoxCommand command( fileContents );
+            LazyBoxCommand command( isCPP, fileContents );
 
             if( command.isValid( ) )
             {
@@ -81,6 +83,10 @@ void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
     
     for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
     {
+        if( ! it->second.getIsCPP( ) )
+        {
+            fileStream << "extern \"C\" ";
+        }
         fileStream << "int " << it->second.getFunction( ) << "( int argc, char* argv[ ] );" << endl;
     }
 

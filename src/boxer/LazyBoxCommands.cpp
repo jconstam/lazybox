@@ -18,8 +18,9 @@ static const string TEST_MARKER = "@test";
 static const string TESTPARAM_MARKER = "@t_param";
 static const string TESTOUTPUT_MARKER = "@t_output";
 
-LazyBoxCommand::LazyBoxCommand( string fileContents )
+LazyBoxCommand::LazyBoxCommand( bool isCPP, string fileContents )
 {
+    m_isCPP = isCPP;
     m_name = "";
     m_descrip = "";
     m_function = "";
@@ -93,6 +94,10 @@ bool LazyBoxCommand::isValid( )
     }
 }
 
+bool LazyBoxCommand::getIsCPP( )
+{
+    return m_isCPP;
+}
 string LazyBoxCommand::getName( )
 {
     return m_name;

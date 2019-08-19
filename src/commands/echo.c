@@ -17,22 +17,20 @@
     @t_output many this is a lot of parameters and some are numbers 1 2 3
  */
 
-#include <iostream>
-
-using namespace std;
+#include <stdio.h>
 
 int run_echo( int argc, char* argv[ ] )
 {
     for( int i = 0; i < argc; i++ )
     {
-        cout << argv[ i ];
+        printf( "%s", argv[ i ] );
         if( i < argc - 1 )
         {
-            cout << " ";
+            printf( " " );
         }
     }
 
-    cout << endl;
+    printf( "\n" );
 
     return 0;
 }
