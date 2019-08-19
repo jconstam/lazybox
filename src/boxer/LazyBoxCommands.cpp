@@ -38,7 +38,6 @@ LazyBoxCommand::LazyBoxCommand( string fileContents )
             map<string,LazyBoxCommandTest>::iterator it = m_tests.find( testName );
             if( it == m_tests.end( ) )
             {
-                cout << m_name << " - " << testName << endl;
                 LazyBoxCommandTest test( testName );
                 m_tests[ testName ] = test;
             }
@@ -46,7 +45,7 @@ LazyBoxCommand::LazyBoxCommand( string fileContents )
             location += TEST_MARKER.length( );
         }
     }
-/*
+
     location = 0;
     while( location != string::npos )
     {
@@ -54,10 +53,24 @@ LazyBoxCommand::LazyBoxCommand( string fileContents )
         location = parseField( fileContents, TESTPARAM_MARKER, testParam, location );
         if( location != string::npos )
         {
+            int start = location + TESTPARAM_MARKER.length( );
+            while( iswspace( fileContents[ start ] ) )
+            {
+                start++;
+            }
+            int nextNewLine = fileContents.find( "\n", start );
+            int nextSpace = fileContents.find( " ", start );
 
+            if( nextSpace < nextNewLine )
+            {
+                string testName = fileContents.substr( start, nextSpace - start );
+                string params = fileContents.substr( nextSpace, nextNewLine - nextSpace );
+
+                cout << "TEST: \"" << testName << "\" - PARAMS: \"" << params << "\""<< endl;
+            }
+            location = nextNewLine + 1;
         }
     }
-    */
 }
 
 bool LazyBoxCommand::isValid( )

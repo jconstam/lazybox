@@ -5,12 +5,12 @@
     @function run_echo
 
     @test nothing
-    @t_param nothing ""
-    @t_output nothing "" 
+    @t_param nothing
+    @t_output nothing
 
     @test one
-    @t_param one "testing"
-    @t_output one "testing" 
+    @t_param one testing
+    @t_output one testing
  */
 
 #include <iostream>
