@@ -45,7 +45,7 @@ test_verbose: build_tests
 .PHONY: build_tests
 build_tests: build
 	mkdir -p ${OUTPUT_PATH_MAIN_TEST}
-	cd ${OUTPUT_PATH_MAIN_TEST} && cmake ${TEST_PATH} -DPROJECT_NAME=${PROJ_NAME} -DOUTPUT_PATH=${OUTPUT_PATH_MAIN} && $(MAKE) $(MAKEFLAGS)
+	cd ${OUTPUT_PATH_MAIN_TEST} && cmake ${TEST_PATH} -DPROJECT_NAME=${PROJ_NAME} -DOUTPUT_PATH=${OUTPUT_PATH_MAIN} -Wno-dev && $(MAKE) $(MAKEFLAGS)
 
 .PHONY: clean
 clean:
