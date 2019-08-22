@@ -8,6 +8,16 @@ steps:
   displayName: 'Set Environment to use Python 3.6'
   inputs:
     versionSpec: 3.6
+- task: |
+    sudo apt-get remove --purge --auto-remove cmake
+    mkdir temp
+    cd temp/
+    wget https://github.com/Kitware/CMake/releases/download/v3.15.2/cmake-3.15.2.tar.gz
+    tar xzvf cmake-3.15.2.tar.gz
+    cd cmake-3.15.2/
+    ./bootstrap
+    sudo make -j install
+  displayName: 'Fetch and Build Custom CMake'
 - script: 'make -j'
   displayName: 'Build Main'
 - script: 'sudo apt-get install lcov -y'
