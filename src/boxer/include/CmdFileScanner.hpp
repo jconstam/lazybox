@@ -24,7 +24,7 @@ class CmdFileScanner
         std::map<std::string, LazyBoxCommand> m_commands;
 
         void writeTestToCmakeTestFile( std::ofstream& fileStream, LazyBoxCommand command, LazyBoxCommandTest test );
-        void addFileTimestamp( std::ofstream& fileStream, bool cStyle = true );
+        void addFileHeader( std::ofstream& fileStream, bool cStyle = true );
 };
 
 #endif

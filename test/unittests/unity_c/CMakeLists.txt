@@ -17,8 +17,13 @@ set( UNITTEST_UNITY_SOURCES
   ${UNITTEST_UNITY_ROOT}/main.c
 )
 
-set( UNITTEST_UNITY_PROJECT_NAME "${PROJECT_NAME}_unittests_unity_c" )
-include_directories( ${UNITTEST_UNITY_PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/unity-src/src )
+set( UNITTEST_UNITY_PROJECT_NAME 
+	"${PROJECT_NAME}_unittests_unity_c"
+)
+include_directories( ${UNITTEST_UNITY_PROJECT_NAME}
+	${CMAKE_CURRENT_BINARY_DIR}/unity-src/src
+	${SOURCES_INCLUDE}
+)
 add_executable( ${UNITTEST_UNITY_PROJECT_NAME} ${UNITTEST_UNITY_SOURCES} )
 
 add_test( ${UNITTEST_UNITY_PROJECT_NAME} 

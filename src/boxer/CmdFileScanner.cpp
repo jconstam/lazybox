@@ -77,7 +77,7 @@ void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
     cout << "Writing to Command Include File \"" << includeFilePath << "\"" << endl;
 
     fileStream.open( includeFilePath );
-    addFileTimestamp( fileStream );
+    addFileHeader( fileStream );
 
     fileStream << "#ifndef COMMANDS_HPP__" << endl << "#define COMMANDS_HPP__" << endl << endl;
     
@@ -102,7 +102,7 @@ void CmdFileScanner::writeCmdListfile( string listFilePath )
     cout << "Writing to Command List File \"" << listFilePath << "\"" << endl;
 
     fileStream.open( listFilePath );
-    addFileTimestamp( fileStream );
+    addFileHeader( fileStream );
 
     fileStream << "#include \"cmdList.hpp\"" << endl << endl;
     fileStream << "const std::map<std::string, CmdFunc> commandList =" << endl;
@@ -125,7 +125,7 @@ void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
     cout << "Writing to Symlink Script File \"" << scriptFilePath << "\"" << endl;
 
     fileStream.open( scriptFilePath );
-    addFileTimestamp( fileStream, false );
+    addFileHeader( fileStream, false );
 
     fileStream << "#!/bin/bash" << endl << endl;
     fileStream << "if [ \"$#\" -ne \"1\" ]; then" << endl;
@@ -150,7 +150,7 @@ void CmdFileScanner::writeCMakeTestfile( string testFilePath )
     cout << "Writing to CMake Test file \"" << testFilePath << "\"" << endl;
 
     fileStream.open( testFilePath );
-    addFileTimestamp( fileStream, false );
+    addFileHeader( fileStream, false );
 
     fileStream << "add_test( lazybox ${OUTPUT_PATH}/lazybox )" << endl;
     fileStream << "set_tests_properties( lazybox PROPERTIES PASS_REGULAR_EXPRESSION \"LazyBox - BusyBox\'s less portable, less functional cousin.\" )" << endl;
@@ -190,10 +190,8 @@ void CmdFileScanner::writeTestToCmakeTestFile( ofstream& fileStream, LazyBoxComm
     fileStream << endl;
 }
 
-void CmdFileScanner::addFileTimestamp( ofstream& fileStream, bool cStyle )
+void CmdFileScanner::addFileHeader( ofstream& fileStream, bool cStyle )
 {
-    time_t time = chrono::system_clock::to_time_t( chrono::system_clock::now() );
-
     if( cStyle )
     {
         fileStream << "//";
@@ -203,5 +201,5 @@ void CmdFileScanner::addFileTimestamp( ofstream& fileStream, bool cStyle )
         fileStream << "#";
     }
 
-    fileStream << " This file was automatically generated on " << ctime( &time ) << endl;
+    fileStream << " This file was automatically generated.  Do not modify." << endl << endl;
 }

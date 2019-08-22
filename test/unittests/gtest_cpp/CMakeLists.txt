@@ -27,8 +27,12 @@ set( UNITTEST_GTEST_SOURCES
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fno-inline -O0" )
 
-set( UNITTEST_GTEST_PROJECT_NAME "${PROJECT_NAME}_unittests_gtest_cpp" )
-include_directories( ${UNITTEST_GTEST_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
+set( UNITTEST_GTEST_PROJECT_NAME
+  "${PROJECT_NAME}_unittests_gtest_cpp"
+)
+include_directories( ${UNITTEST_GTEST_PROJECT_NAME}
+  ${SOURCES_INCLUDE}
+)
 add_executable( ${UNITTEST_GTEST_PROJECT_NAME} ${UNITTEST_GTEST_SOURCES} )
 target_link_libraries( ${UNITTEST_GTEST_PROJECT_NAME} gtest_main )
 
