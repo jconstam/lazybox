@@ -13,6 +13,7 @@ addons:
 
 install:
   - pip install --user -r requirements.txt
+  - bash script/installCMake.sh
 
 script:
   - make -j
