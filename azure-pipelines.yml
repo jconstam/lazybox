@@ -8,7 +8,7 @@ steps:
   displayName: 'Set Environment to use Python 3.6'
   inputs:
     versionSpec: 3.6
-- task: |
+- script: |
     sudo apt-get remove --purge --auto-remove cmake
     mkdir temp
     cd temp/
