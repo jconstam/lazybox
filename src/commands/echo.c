@@ -19,9 +19,31 @@
 
 #include <stdio.h>
 
+#include "parseArgs.h"
+
+#define PARAM_COUNT     ( 1U )
+
+typedef struct
+{
+    bool noNewline;
+} ECHO_PARAMS;
+
+static const ARG_DATA argInfo[ PARAM_COUNT ] =
+{
+    { 'n', false, ARG_DATA_TYPE_BOOL, offsetof( ECHO_PARAMS, noNewline ) }
+};
+
 int run_echo( int argc, char* argv[ ] )
 {
-    for( int i = 0; i < argc; i++ )
+    int startIndex;
+    ECHO_PARAMS params = { false };
+
+    if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
+    {
+        return -1;
+    }
+
+    for( int i = startIndex; i < argc; i++ )
     {
         printf( "%s", argv[ i ] );
         if( i < argc - 1 )
@@ -30,7 +52,10 @@ int run_echo( int argc, char* argv[ ] )
         }
     }
 
-    printf( "\n" );
+    if( !params.noNewline )
+    {
+        printf( "\n" );
+    }
 
     return 0;
 }

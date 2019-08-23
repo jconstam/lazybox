@@ -29,7 +29,7 @@ int CommandRegistry::runCommand( int argc, char* argv[] )
     }
     else if( commandList.find( command ) != commandList.end( ) )
     {
-        return commandList.at( command )( argc - 1, &( argv[ 1 ] ) );
+        return commandList.at( command )( argc, &( argv[ 0 ] ) );
     }
     else
     {
