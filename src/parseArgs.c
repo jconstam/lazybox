@@ -25,9 +25,11 @@ bool parseArgs( const ARG_DATA* config, const size_t configSize, void* data, int
 		}
 	}
 
+	opterr = 0;
+
     int opt = 0;
-	while( opt != -1 )  
-    {  
+	while( opt != -1 )
+    {
 		opt = getopt( argc, argv, optString );
 		if( opt == '?' )
 		{
@@ -48,13 +50,21 @@ bool parseArgs( const ARG_DATA* config, const size_t configSize, void* data, int
 					switch( config[ configIndex ].type )
 					{
 						case( ARG_DATA_TYPE_BOOL ):
-							*( ( bool* ) ( data + config[ configIndex ].offset ) ) = true;
+							{
+								*( ( bool* ) ( data + config[ configIndex ].offset ) ) = true;
+							}
 							break;
 						case( ARG_DATA_TYPE_INT ):
-							memcpy( data + config[ configIndex].offset, optarg, sizeof( int ) );
+							{
+								int value = atoi( optarg );
+								memcpy( data + config[ configIndex].offset, &( value ), sizeof( int ) );
+							}
 							break;
 						case( ARG_DATA_TYPE_STRING ):
-							memcpy( data + config[ configIndex].offset, optarg, sizeof( char* ) );
+							{
+								char** string = ( char** )( ( ( char* ) data ) + config[ configIndex ].offset );
+								*string = optarg;
+							}
 							break;
 					}
 					

@@ -12,20 +12,28 @@ endif()
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fno-inline -O0" )
 
 set( UNITTEST_UNITY_SOURCES
-  ${CMAKE_CURRENT_BINARY_DIR}/unity-src/src/unity.c
+	${CMAKE_CURRENT_BINARY_DIR}/unity-src/src/unity.c
 
-  ${UNITTEST_UNITY_ROOT}/main.c
+	${UNITTEST_UNITY_ROOT}/main.c
 )
-
-set( UNITTEST_UNITY_PROJECT_NAME 
-	"${PROJECT_NAME}_unittests_unity_c"
-)
-include_directories( ${UNITTEST_UNITY_PROJECT_NAME}
+set( UNITTEST_UNITY_INCLUDES 
 	${CMAKE_CURRENT_BINARY_DIR}/unity-src/src
 	${SOURCES_INCLUDE}
 )
-add_executable( ${UNITTEST_UNITY_PROJECT_NAME} ${UNITTEST_UNITY_SOURCES} )
+set( UNITTEST_UNITY_PROJECT_NAME 
+	"${PROJECT_NAME}_unittests_unity_c"
+)
 
-add_test( ${UNITTEST_UNITY_PROJECT_NAME} 
-          ${UNITTEST_UNITY_PROJECT_NAME}
+include_directories( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
+	${UNITTEST_UNITY_INCLUDES}
+)
+add_executable( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs 
+	${UNITTEST_UNITY_SOURCES}
+
+	${SOURCES_ROOT}/parseArgs.c
+	${UNITTEST_UNITY_ROOT}/parseArgs_tests.c
+)
+
+add_test( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
+          ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
           )

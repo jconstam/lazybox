@@ -1,25 +1,14 @@
 #include "unity.h"
 
-void test_check( void )
-{
-	TEST_ASSERT( 0 == 0 );
-}
-
-void setUp( void )
-{
-
-}
-
-void tearDown( void )
-{
-
-}
+extern void DO_ALL_TESTS( void );
 
 int main( void )
 {
 	UNITY_BEGIN( );
-
-	RUN_TEST( test_check );
+	if( TEST_PROTECT( ) )
+	{
+		DO_ALL_TESTS( );
+	}
 
 	return UNITY_END( );
 }
