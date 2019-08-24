@@ -29,28 +29,37 @@
 
 #include "parseArgs.h"
 
-#define PARAM_COUNT     ( 1U )
+#define PARAM_COUNT     ( 3U )
 
 typedef struct
 {
     bool noNewline;
+    bool interpEscapes;
+    bool dontInterpEscapes;
 } ECHO_PARAMS;
 
 static const ARG_DATA argInfo[ PARAM_COUNT ] =
 {
-    { 'n', false, ARG_DATA_TYPE_BOOL, offsetof( ECHO_PARAMS, noNewline ) }
+    { 'n', false, ARG_DATA_TYPE_BOOL, offsetof( ECHO_PARAMS, noNewline ) },
+    { 'e', false, ARG_DATA_TYPE_BOOL, offsetof( ECHO_PARAMS, interpEscapes ) },
+    { 'E', false, ARG_DATA_TYPE_BOOL, offsetof( ECHO_PARAMS, dontInterpEscapes ) }
 };
 
 int run_echo( int argc, char* argv[ ] )
 {
     int startIndex;
-    ECHO_PARAMS params = { false };
+    ECHO_PARAMS params = { false, false, false };
 
     if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
     {
         return -1;
     }
 
+    if( params.dontInterpEscapes )
+    {
+        params.interpEscapes = false;
+    }
+    
     for( int i = startIndex; i < argc; i++ )
     {
         printf( "%s", argv[ i ] );
