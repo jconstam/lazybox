@@ -10,7 +10,7 @@ steps:
     versionSpec: 3.6
 - script: 'make -j'
   displayName: 'Build Main'
-- script: 'sudo apt-get install lcov -y'
+- script: 'sudo apt-get install python-pip cmake lcov -y'
   displayName: 'Install Ubuntu Packages'
 - script: |
    python -m pip install --upgrade pip 
@@ -23,10 +23,10 @@ steps:
   condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: 'build/test/unittests/lazybox_unittests_results.xml'
+    testResultsFiles: 'build/test/unittests/gtest_cpp/lazybox_unittests_results.xml'
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish Test Coverage'
   condition: succeededOrFailed()
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: build/test/unittests/lazybox_unittests_coverage.xml
+    summaryFileLocation: build/test/unittests/gtest_cpp/lazybox_unittests_coverage.xml
