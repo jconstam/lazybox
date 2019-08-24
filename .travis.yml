@@ -7,7 +7,6 @@ python:
 addons:
   apt:
     packages:
-      cmake
       python-pip
       lcov
 
