@@ -1,4 +1,4 @@
-#!/bin/bash/python3
+#!/usr/bin/python3
 
 import sys
 import subprocess
@@ -30,6 +30,8 @@ print( "ACTUAL:   \"" + actualOutput + "\"" )
 print( "EXPECTED: \"" + expectedOutput + "\"" )
 
 if actualOutput == expectedOutput:
+	print( "GOOD" )
 	sys.exit( 0 )
 else:
+	print( "BAD" )
 	sys.exit( 1 )

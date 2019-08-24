@@ -173,9 +173,9 @@ void CmdFileScanner::writeTestToCmakeTestFile( ofstream& fileStream, LazyBoxComm
     string testName = command.getName( ) + "_" + test.getName( );
     string testNameSL = command.getName( ) + "_" + test.getName( ) + "_symlink";
 
-    fileStream << "add_test( " << testName << " python3 ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
+    fileStream << "add_test( " << testName << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
     fileStream << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
-    fileStream << "add_test( " << testNameSL << " python3 ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
+    fileStream << "add_test( " << testNameSL << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
     fileStream << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
     fileStream << endl;
 }
