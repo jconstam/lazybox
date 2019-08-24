@@ -26,6 +26,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 
 #include "parseArgs.h"
 
@@ -60,10 +61,21 @@ int run_echo( int argc, char* argv[ ] )
         params.interpEscapes = false;
     }
     
-    for( int i = startIndex; i < argc; i++ )
+    for( int argidx = startIndex; argidx < argc; argidx++ )
     {
-        printf( "%s", argv[ i ] );
-        if( i < argc - 1 )
+        int length = strlen( argv[ argidx ] );
+        for( int charIdx = 0; charIdx < length; charIdx++ )
+        {
+            switch( argv[ argidx ][ charIdx ] )
+            {
+                case( '\\' ):
+                    break;
+                default:
+                    printf( "%c", argv[ argidx ][ charIdx ] );
+                    break;
+            }
+        }
+        if( argidx < argc - 1 )
         {
             printf( " " );
         }
