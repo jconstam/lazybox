@@ -6,15 +6,23 @@
 
     @test nothing
     @t_param nothing
-    @t_output nothing
+    @t_output nothing \n
 
     @test one
     @t_param one testing
-    @t_output one testing
+    @t_output one testing\n
 
     @test many
     @t_param many this is a lot of parameters and some are numbers 1 2 3
-    @t_output many this is a lot of parameters and some are numbers 1 2 3
+    @t_output many this is a lot of parameters and some are numbers 1 2 3\n
+
+    @test one_nonewline
+    @t_param one_nonewline -n testing
+    @t_output one_nonewline testing
+
+    @test many_nonewline
+    @t_param many_nonewline -n this is a lot of parameters and some are numbers 1 2 3
+    @t_output many_nonewline this is a lot of parameters and some are numbers 1 2 3
  */
 
 #include <stdio.h>

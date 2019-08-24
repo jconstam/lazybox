@@ -7,6 +7,7 @@ enable_testing( )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror" )
 
+set( SCRIPT_PATH ${PROJECT_SOURCE_DIR}/../script )
 set( SOURCES_ROOT ${PROJECT_SOURCE_DIR}/../src )
 set( SOURCES_INCLUDE ${PROJECT_SOURCE_DIR}/../include )
 set( UNITTEST_GTEST_ROOT ${PROJECT_SOURCE_DIR}/unittests/gtest_cpp )

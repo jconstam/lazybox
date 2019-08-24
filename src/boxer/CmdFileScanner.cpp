@@ -173,20 +173,10 @@ void CmdFileScanner::writeTestToCmakeTestFile( ofstream& fileStream, LazyBoxComm
     string testName = command.getName( ) + "_" + test.getName( );
     string testNameSL = command.getName( ) + "_" + test.getName( ) + "_symlink";
 
-    fileStream << "add_test( " << testName << " ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
-    if( test.getParameters( ) != "" )
-    {
-        fileStream << test.getParameters( ) << " ";
-    }
-    fileStream << ")" << endl;
-    fileStream << "set_tests_properties( " << testName << " PROPERTIES PASS_REGULAR_EXPRESSION \"" << test.getOutput( ) << "\" )" << endl;
-    fileStream << "add_test( " << testNameSL << " ${OUTPUT_PATH}/" << command.getName( ) << " ";
-    if( test.getParameters( ) != "" )
-    {
-        fileStream << test.getParameters( ) << " ";
-    }
-    fileStream << ")" << endl;
-    fileStream << "set_tests_properties( " << testNameSL << " PROPERTIES PASS_REGULAR_EXPRESSION \"" << test.getOutput( ) << "\" )" << endl;
+    fileStream << "add_test( " << testName << " python3 ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
+    fileStream << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
+    fileStream << "add_test( " << testNameSL << " python3 ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
+    fileStream << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
     fileStream << endl;
 }
 
