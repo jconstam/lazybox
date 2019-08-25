@@ -5,7 +5,7 @@ import subprocess
 
 first = True
 inCommand = True
-splitter = "CMD_OUTPUT_SPLITTER"
+splitter = 'CMD_OUTPUT_SPLITTER'
 
 command = [ ]
 output = [ ]
@@ -20,18 +20,20 @@ for arg in sys.argv:
 	else:
 		output.append( arg )
 
+print( 'COMMAND: "' + ' '.join( command ) + '"' );
+
 out = subprocess.Popen( command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT )
 stdout,stderr = out.communicate( )
 
 actualOutput = stdout.decode( 'utf-8' )
 expectedOutput = bytes( ' '.join( output ), 'utf-8' ).decode( 'unicode_escape' )
 
-print( "ACTUAL:   \"" + actualOutput + "\"" )
-print( "EXPECTED: \"" + expectedOutput + "\"" )
+print( 'ACTUAL:   "' + actualOutput + '"' )
+print( 'EXPECTED: "' + expectedOutput + '"' )
 
 if actualOutput == expectedOutput:
-	print( "GOOD" )
+	print( 'GOOD' )
 	sys.exit( 0 )
 else:
-	print( "BAD" )
+	print( 'BAD' )
 	sys.exit( 1 )

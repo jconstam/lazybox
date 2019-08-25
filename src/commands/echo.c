@@ -9,20 +9,44 @@
     @t_output nothing \n
 
     @test one
-    @t_param one testing
-    @t_output one testing\n
+    @t_param one "testing"
+    @t_output one "testing\n"
 
     @test many
-    @t_param many this is a lot of parameters and some are numbers 1 2 3
-    @t_output many this is a lot of parameters and some are numbers 1 2 3\n
+    @t_param many "this is a lot of parameters and some are numbers 1 2 3"
+    @t_output many "this is a lot of parameters and some are numbers 1 2 3\n"
 
-    @test one_nonewline
-    @t_param one_nonewline -n testing
-    @t_output one_nonewline testing
+    @test nonewline_one
+    @t_param nonewline_one -n testing
+    @t_output nonewline_one testing
 
-    @test many_nonewline
-    @t_param many_nonewline -n this is a lot of parameters and some are numbers 1 2 3
-    @t_output many_nonewline this is a lot of parameters and some are numbers 1 2 3
+    @test nonewline_many
+    @t_param nonewline_many -n this is a lot of parameters and some are numbers 1 2 3
+    @t_output nonewline_many this is a lot of parameters and some are numbers 1 2 3
+
+    @test escape_newline1
+    @t_param escape_newline1 -e testing\n
+    @t_output escape_newline1 testing\n\n
+
+    @test escape_newline2
+    @t_param escape_newline2 -e -n testing\n
+    @t_output escape_newline2 testing\n
+
+    @test escape_newline3
+    @t_param escape_newline3 -e testing\n\n\ntesting\ntesting
+    @t_output escape_newline3 testing\n\n\ntesting\ntesting\n
+
+    @test escape_newline4
+    @t_param escape_newline4 testing\\n
+    @t_output escape_newline4 testing\\n\n
+
+    @test escape_tab1
+    @t_param escape_tab1 -e testing\ttesting
+    @t_output escape_tab1 testing\ttesting\n
+
+    @test escape_tab2
+    @t_param escape_tab2 -e testing\t\t\ttesting
+    @t_output escape_tab2 testing\t\t\ttesting\n
  */
 
 #include <stdio.h>
@@ -45,6 +69,26 @@ static const ARG_DATA argInfo[ PARAM_COUNT ] =
     { 'e', false, ARG_DATA_TYPE_BOOL, offsetof( ECHO_PARAMS, interpEscapes ) },
     { 'E', false, ARG_DATA_TYPE_BOOL, offsetof( ECHO_PARAMS, dontInterpEscapes ) }
 };
+
+static void handleEscape( bool interpEscapes, char escape )
+{
+    if( !interpEscapes )
+    {
+        printf( "\\%c", escape );
+    }
+    else
+    {
+        switch( escape )
+        {
+            case( 'n' ):
+                printf( "\n" );
+                break;
+            case( 't' ):
+                printf( "\t" );
+                break;
+        }
+    }
+}
 
 int run_echo( int argc, char* argv[ ] )
 {
@@ -69,6 +113,15 @@ int run_echo( int argc, char* argv[ ] )
             switch( argv[ argidx ][ charIdx ] )
             {
                 case( '\\' ):
+                    if( charIdx < length - 1 )
+                    {
+                        handleEscape( params.interpEscapes, argv[ argidx ][ charIdx + 1 ] );
+                        charIdx++;
+                    }
+                    else
+                    {
+                        printf( "\\" );
+                    }
                     break;
                 default:
                     printf( "%c", argv[ argidx ][ charIdx ] );
