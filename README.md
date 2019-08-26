@@ -1,4 +1,4 @@
-R Lazybox
+# Lazybox
 Lazybox is [Busybox](busybox.com)'s less-portable, less-functional cousin.
 
 Really, this is just a pet project to play around with system programming in C/C++ in Linux.
@@ -40,44 +40,44 @@ TO BE COMPLETED
 |cal|Display a calendar|Easy|Not Started|
 |cat|Concatenate file(s) and print them to standard out.|Easy|Not Started|
 |catv|Concatenate file(s) and print them to standard out.  Display nonprinting characters.|Easy|Not Started|
-|chat| | | |
-|chattr| | | |
-|chgrp| | | |
-|chmod| | | |
-|chown| | | |
-|chpasswd| | | |
-|chpst| | | |
-|chroot| | | |
-|chrt| | | |
-|chvt| | | |
-|cksum| | | |
-|clear| | | |
-|cmp| | | |
-|comm| | | |
-|cp| | | |
-|cpio| | | |
+|chat|Useful for interacting with a modem connected to stdin/stdout. A script consists of one or more "expect-send" pairs of strings, each pair is a pair of arguments.|Hard|Not Started|
+|chattr|Change file attributes on an ext2 fs|Medium|Not Started|
+|chgrp|Change the group membership of one or more files to a specified group.|Easy|Not Started|
+|chmod|Change the mode of one or more files.|Easy|Not Started|
+|chown|Change the owner and/or group of one or more file.|Easy|Not Started|
+|chpasswd|Change a user's password in /etc/passwd.|Easy|Not Started|
+|chpst|Change the process state and run a program.|Medium|Not Started|
+|chroot|Run a program with specified root directory.|Easy|Not started|
+|chrt|Manipulate real-time attributes of a process.|Easy|Not Started|
+|chvt|Change the foreground virtual terminal to /dev/ttyN.|Medium|Not Started|
+|cksum|Calculate the CRC32 checksums of one or more files.|Easy|Not Started|
+|clear|Clear screen|Easy|Not Started|
+|cmp|Compare a file with another file or standard input.|Easy|Not Started|
+|comm|Compare a file with another file or standard input.|Easy|Not Started|
+|cp|Copies one or more files|Easy|Not Started|
+|cpio|Extract or list files from a cpio archive or create a cpio archive.|Easy|Not Started|
 |crond| | | |
 |crontab| | | |
-|cryptpw| | | |
-|cut| | | |
-|date| | | |
-|dc| | | |
-|dd| | | |
-|deallocvt| | | |
-|delgroup| | | |
-|deluser| | | |
+|cryptpw|Crypt a password.|Easy|Not Started|
+|cut|Prints selected fields from each input file to standard output.|Easy|Not Started|
+|date|Display time or set time|Easy|In Progress|
+|dc|Tiny RPN calculator.|Easy|Not Started|
+|dd|Copy a file with converting and formatting.|Medium|Not Started|
+|deallocvt|Decallocate unused virtual terminal /dev/ttyN.|Medium|Not Started|
+|delgroup|Delete a group or remove a user from a group.|Easy|Not Started|
+|deluser|Delete a user from the system.|Easy|Not Started|
 |depmod| | | |
-|devmem| | | |
-|df| | | |
-|dhcprelay| | | |
-|diff| | | |
-|dirname| | | |
-|dmesg| | | |
-|dnsd| | | |
+|devmem|Read/write from physical address|Medium|Not Started|
+|df|Print filesystem usage statistics|Easy|Not Started|
+|dhcprelay|Relay DHCP requests between clients and server.|Medium|Not Started|
+|diff|Compare files line by line and output the differences between them.|Medium|NotStarted|
+|dirname|Strip non-directory suffix from filename.|Easy|Not Started|
+|dmesg|Print or control the kernel ring buffer.|Easy|Not Started|
+|dnsd|Small static DNS server daemon|Hard|Not Started|
 |dnsdomainname| | | |
-|dos2unix| | | |
-|dpkg| | | |
-|du| | | |
+|dos2unix|Convert file in-place from DOS to Unix format. Can also use standard in/out.|Easy|Not Started|
+|dpkg|Install, remove, and manage Debian packages.|Hard|Not Started|
+|du|Summarize disk space used for each file and/or directory.|Medium|Not Started|
 |dumpkmap| | | |
 |dumpleases| | | |
 |echo|Print a string|Easy|In-Progress|
