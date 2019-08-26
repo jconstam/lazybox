@@ -1,4 +1,4 @@
-# Lazybox
+R Lazybox
 Lazybox is [Busybox](busybox.com)'s less-portable, less-functional cousin.
 
 Really, this is just a pet project to play around with system programming in C/C++ in Linux.
@@ -14,32 +14,32 @@ In order to test Lazybox, there are 3 components:
 
 ## Code Generation
 There are several files which are automatically generated as a part of the build process.
-<TBD>
+TO BE COMPLETED
 
 # Modules
 |Command|Description|Difficulty|Status|
 |-------|-----------|----------|------|
 |[| | | |
 |[[| | | |
-|acpid| | | |
-|addgroup| | | |
-|adduser| | | |
-|adjtimex| | | |
-|ar| | | |
-|arp| | | |
-|arping| | | |
+|acpid|Listen to ACPI events and spawn specific helpers on event arrival|Medium|Not Started|
+|addgroup|Add a group or add a user to a group|Easy|Not Started|
+|adduser|Add a user|Easy|Not Started|
+|adjtimex|Read and optionally set system timebase parameters.|Easy|Not Started|
+|ar|Extract or list files from an ar archive.|Easy|Not Started|
+|arp|Manipulate ARP cache|Medium|Not Started|
+|arping|Send ARP requests/replies|Easy|Not Started|
 |ash| | | |
 |awk| | | |
-|basename| | | |
-|beep| | | |
-|blkid| | | |
-|brctl| | | |
-|bunzip2| | | |
-|bzcat| | | |
-|bzip2| | | |
-|cal| | | |
-|cat| | | |
-|catv| | | |
+|basename|Strip directory path and .suffix from file name.|Easy|Not Started|
+|beep|Sound the system beep.|Easy|Not Started|
+|blkid|Print UUIDs of all filesystems|Easy|Not Started|
+|brctl|Manage Ethernet bridges|Medium|Not Started|
+|bunzip2|Uncompress file (or standard input)|Easy|Not Started|
+|bzcat|Uncompress to stdout|Easy|Not Started|
+|bzip2|Compress file(s) (or standard input) with bzip2 algorithm.|Easy|Not Started|
+|cal|Display a calendar|Easy|Not Started|
+|cat|Concatenate file(s) and print them to standard out.|Easy|Not Started|
+|catv|Concatenate file(s) and print them to standard out.  Display nonprinting characters.|Easy|Not Started|
 |chat| | | |
 |chattr| | | |
 |chgrp| | | |
