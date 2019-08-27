@@ -66,6 +66,8 @@ bool parseArgs( const ARG_DATA* config, const size_t configSize, void* data, int
 								*string = optarg;
 							}
 							break;
+						default:
+							break;
 					}
 					
 					break;

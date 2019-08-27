@@ -205,7 +205,7 @@ void CmdFileScanner::writeFileIfChanged( string filePath, string contents )
         string oldContent = readEntireFile( filePath );
         if( contents == oldContent )
         {
-            cout << "Current and new content of \"" << filePath << "\" are the same." << endl;
+            cout << "\tCurrent and new content of \"" << filePath << "\" are the same." << endl;
             newContent = false;
         }
     }
