@@ -97,7 +97,7 @@ int run_echo( int argc, char* argv[ ] )
 
     if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
     {
-        return -1;
+        return 1;
     }
 
     if( params.dontInterpEscapes )

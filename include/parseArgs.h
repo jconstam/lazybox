@@ -22,6 +22,9 @@ typedef struct
 	int offset;
 } ARG_DATA;
 
+#ifdef __cplusplus
+extern "C"
+#endif
 bool parseArgs( const ARG_DATA* config, const size_t configSize, void* data, int* index, int argc, char* argv[ ] );
 
 #endif

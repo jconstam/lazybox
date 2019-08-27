@@ -8,17 +8,53 @@
 #include <iostream>
 #include <ctime>
 
+#include "parseArgs.h"
+
 using namespace std;
+
+#define PARAM_COUNT     ( 1U )
+
+typedef struct
+{
+    const char* desiredDate;
+} DATE_PARAMS;
+
+static const ARG_DATA argInfo[ PARAM_COUNT ] =
+{
+    { 'd', false, ARG_DATA_TYPE_STRING, offsetof( DATE_PARAMS, desiredDate ) }
+};
 
 int run_date( int argc, char* argv[ ] )
 {
-    time_t currTime = time( 0 );
-    struct tm* timeData = localtime( &( currTime ) );
-    char buffer[ 100 ] = { 0 };
+    int startIndex;
+    DATE_PARAMS params = { "now" };
 
-    strftime( buffer, 100, "%A %B %d %Y, %H:%M:%S (UTC%z)", timeData );
+    if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
+    {
+        return 1;
+    }
 
-    cout << buffer << endl;
+    const char* format = "%a %b %d %T %Z %Y";
+    if( startIndex < argc )
+    {
+        format = argv[ startIndex ];
+    }
 
-    return 0;
+    if( format[ 0 ] != '+' )
+    {
+        cout << "date: invalid date \'" << format << "\'" << endl;
+        return 1;
+    }
+    else
+    {
+        time_t currTime = time( 0 );
+        struct tm* timeData = localtime( &( currTime ) );
+        char buffer[ 100 ] = { 0 };
+
+        strftime( buffer, 100, &( format[ 1 ] ), timeData );
+
+        cout << buffer << endl;
+
+        return 0;
+    }
 }
