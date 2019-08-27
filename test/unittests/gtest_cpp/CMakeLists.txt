@@ -42,24 +42,8 @@ add_test( ${UNITTEST_GTEST_PROJECT_NAME}
           --gtest_output=xml:${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_GTEST_PROJECT_NAME}_results.xml
           )
 add_test( ${UNITTEST_GTEST_PROJECT_NAME}_coverage
-          lcov
-          --capture
-          --directory ${PROJECT_SOURCE_DIR}/..
-          --output-file ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_GTEST_PROJECT_NAME}_coverage_raw.info
-          )
-add_test( ${UNITTEST_GTEST_PROJECT_NAME}_coverage_filter 
-          lcov 
-          --remove ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_GTEST_PROJECT_NAME}_coverage_raw.info "/usr/*" "*googletest*" "*unittests*"
-          --output-file ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_GTEST_PROJECT_NAME}_coverage_filtered.info 
-          )
-add_test( ${UNITTEST_GTEST_PROJECT_NAME}_coverage_html 
-          genhtml
-          ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_GTEST_PROJECT_NAME}_coverage_filtered.info
-          --output-directory ${CMAKE_CURRENT_BINARY_DIR}
-          )
-add_test( ${UNITTEST_GTEST_PROJECT_NAME}_coverage_xml
-          python -m lcov_cobertura
-          ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_GTEST_PROJECT_NAME}_coverage_filtered.info
-          -b ${PROJECT_SOURCE_DIR}
-          -o ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_GTEST_PROJECT_NAME}_coverage.xml
+          bash ${SCRIPT_PATH}/genUnitTestResults.sh
+          "${UNITTEST_GTEST_PROJECT_NAME}"
+          "${PROJECT_SOURCE_DIR}"
+          "${CMAKE_CURRENT_BINARY_DIR}"
           )
