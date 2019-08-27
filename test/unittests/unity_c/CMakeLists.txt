@@ -35,5 +35,8 @@ add_executable( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
 )
 
 add_test( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
-          ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
-          )
+	bash ${SCRIPT_PATH}/runUnityTest.sh 
+	${UNITTEST_UNITY_PROJECT_NAME}
+	parseArgs
+	${CMAKE_CURRENT_BINARY_DIR}
+)
