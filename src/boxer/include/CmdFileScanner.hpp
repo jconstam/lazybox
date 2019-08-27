@@ -23,8 +23,8 @@ class CmdFileScanner
         std::vector<std::string> m_fileList;
         std::map<std::string, LazyBoxCommand> m_commands;
 
-        void writeTestToCmakeTestFile( std::ofstream& fileStream, LazyBoxCommand command, LazyBoxCommandTest test );
-        void addFileHeader( std::ofstream& fileStream, bool cStyle = true );
+        void writeTestToCmakeTestFile( std::stringstream& fileStream, LazyBoxCommand command, LazyBoxCommandTest test );
+        void addFileHeader( std::stringstream& fileStream, bool cStyle = true );
 };
 
 #endif

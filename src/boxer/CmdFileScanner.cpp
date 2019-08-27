@@ -72,124 +72,132 @@ bool CmdFileScanner::parseFiles( )
 
 void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
 {
-    ofstream fileStream;
+    stringstream output;
 
     cout << "Writing to Command Include File \"" << includeFilePath << "\"" << endl;
 
-    fileStream.open( includeFilePath );
-    addFileHeader( fileStream );
+    addFileHeader( output );
 
-    fileStream << "#ifndef COMMANDS_HPP__" << endl << "#define COMMANDS_HPP__" << endl << endl;
+    output << "#ifndef COMMANDS_HPP__" << endl << "#define COMMANDS_HPP__" << endl << endl;
     
     for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
     {
         if( ! it->second.getIsCPP( ) )
         {
-            fileStream << "extern \"C\" ";
+            output << "extern \"C\" ";
         }
-        fileStream << "int " << it->second.getFunction( ) << "( int argc, char* argv[ ] );" << endl;
+        output << "int " << it->second.getFunction( ) << "( int argc, char* argv[ ] );" << endl;
     }
 
-    fileStream << endl << "#endif" << endl;
+    output << endl << "#endif" << endl;
 
+    ofstream fileStream;
+    fileStream.open( includeFilePath );
+    fileStream << output.str( );
     fileStream.close( );
 }
 
 void CmdFileScanner::writeCmdListfile( string listFilePath )
 {
-    ofstream fileStream;
+    stringstream output;
 
     cout << "Writing to Command List File \"" << listFilePath << "\"" << endl;
 
-    fileStream.open( listFilePath );
-    addFileHeader( fileStream );
+    addFileHeader( output );
 
-    fileStream << "#include \"cmdList.hpp\"" << endl << endl;
-    fileStream << "const std::map<std::string, CmdFunc> commandList =" << endl;
-    fileStream << "{" << endl;
+    output << "#include \"cmdList.hpp\"" << endl << endl;
+    output << "const std::map<std::string, CmdFunc> commandList =" << endl;
+    output << "{" << endl;
     
     for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
     {
-        fileStream << "\t{ \"" << it->second.getName( ) << "\", " << it->second.getFunction( ) << " }," << endl;
+        output << "\t{ \"" << it->second.getName( ) << "\", " << it->second.getFunction( ) << " }," << endl;
     }
 
-    fileStream << "};" << endl;
+    output << "};" << endl;
 
+    ofstream fileStream;
+    fileStream.open( listFilePath );
+    fileStream << output.str( );
     fileStream.close( );
 }
 
 void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
 {
-    ofstream fileStream;
+    stringstream output;
 
     cout << "Writing to Symlink Script File \"" << scriptFilePath << "\"" << endl;
 
-    fileStream.open( scriptFilePath );
-    addFileHeader( fileStream, false );
+    addFileHeader( output, false );
 
-    fileStream << "#!/bin/bash" << endl << endl;
-    fileStream << "if [ \"$#\" -ne \"1\" ]; then" << endl;
-    fileStream << "\techo \"Usage: $0 <Main Binary>\"" << endl;
-    fileStream << "\texit -1" << endl;
-    fileStream << "fi" << endl << endl;
-    fileStream << "MAIN_PROJECT_NAME=$1" << endl << endl;
+    output << "#!/bin/bash" << endl << endl;
+    output << "if [ \"$#\" -ne \"1\" ]; then" << endl;
+    output << "\techo \"Usage: $0 <Main Binary>\"" << endl;
+    output << "\texit -1" << endl;
+    output << "fi" << endl << endl;
+    output << "MAIN_PROJECT_NAME=$1" << endl << endl;
 
     for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
     {
-        fileStream << "ln -f -s ${MAIN_PROJECT_NAME} " << it->second.getName( ) << endl;
+        output << "ln -f -s ${MAIN_PROJECT_NAME} " << it->second.getName( ) << endl;
     }
 
+    ofstream fileStream;
+    fileStream.open( scriptFilePath );
+    fileStream << output.str( );
     fileStream.close( );
 
     chmod( scriptFilePath.c_str( ), S_IRWXU );
 }
 void CmdFileScanner::writeCMakeTestfile( string testFilePath )
 {
-    ofstream fileStream;
+    stringstream output;
 
     cout << "Writing to CMake Test file \"" << testFilePath << "\"" << endl;
 
-    fileStream.open( testFilePath );
-    addFileHeader( fileStream, false );
+    addFileHeader( output, false );
 
-    fileStream << "add_test( lazybox ${OUTPUT_PATH}/lazybox )" << endl;
-    fileStream << "set_tests_properties( lazybox PROPERTIES PASS_REGULAR_EXPRESSION \"LazyBox - BusyBox\'s less portable, less functional cousin.\" )" << endl;
-    fileStream << endl;
+    output << "add_test( lazybox ${OUTPUT_PATH}/lazybox )" << endl;
+    output << "set_tests_properties( lazybox PROPERTIES PASS_REGULAR_EXPRESSION \"LazyBox - BusyBox\'s less portable, less functional cousin.\" )" << endl;
+    output << endl;
 
     for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter++ )
     {
         vector<LazyBoxCommandTest> tests = cmdIter->second.getTests( );
         for( vector<LazyBoxCommandTest>::iterator testIter = tests.begin( ); testIter != tests.end( ); testIter++ )
         {
-            writeTestToCmakeTestFile( fileStream, cmdIter->second, *testIter );
+            writeTestToCmakeTestFile( output, cmdIter->second, *testIter );
         }
     }
 
+    ofstream fileStream;
+    fileStream.open( testFilePath );
+    fileStream << output.str( );
     fileStream.close( );
 }
 
-void CmdFileScanner::writeTestToCmakeTestFile( ofstream& fileStream, LazyBoxCommand command, LazyBoxCommandTest test )
+void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, LazyBoxCommand command, LazyBoxCommandTest test )
 {
     string testName = command.getName( ) + "_" + test.getName( );
     string testNameSL = command.getName( ) + "_" + test.getName( ) + "_symlink";
 
-    fileStream << "add_test( " << testName << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
-    fileStream << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
-    fileStream << "add_test( " << testNameSL << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
-    fileStream << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
-    fileStream << endl;
+    output << "add_test( " << testName << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
+    output << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
+    output << "add_test( " << testNameSL << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
+    output << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
+    output << endl;
 }
 
-void CmdFileScanner::addFileHeader( ofstream& fileStream, bool cStyle )
+void CmdFileScanner::addFileHeader( stringstream& output, bool cStyle )
 {
     if( cStyle )
     {
-        fileStream << "//";
+        output << "//";
     }
     else
     {
-        fileStream << "#";
+        output << "#";
     }
 
-    fileStream << " This file was automatically generated.  Do not modify." << endl << endl;
+    output << " This file was automatically generated.  Do not modify." << endl << endl;
 }
