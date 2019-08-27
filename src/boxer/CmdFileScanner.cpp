@@ -40,15 +40,7 @@ bool CmdFileScanner::parseFiles( )
     {
         bool isCPP = file.substr( file.length( ) - 3 ) == "cpp";
 
-        ifstream fileStream( file );
-        string fileContents;
-        
-        fileStream.seekg( 0, ios::end );   
-        fileContents.reserve( fileStream.tellg( ) );
-        fileStream.seekg( 0, ios::beg );
-        
-        fileContents.assign( istreambuf_iterator<char>( fileStream ), istreambuf_iterator<char>( ) );
-
+        string fileContents = readEntireFile( file );
         if( fileContents.find( LAZYBOX_MARKER ) != string::npos )
         {
             cout << "Command File \"" << file << "\" is a valid command!" << endl;
@@ -91,10 +83,7 @@ void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
 
     output << endl << "#endif" << endl;
 
-    ofstream fileStream;
-    fileStream.open( includeFilePath );
-    fileStream << output.str( );
-    fileStream.close( );
+    writeFileIfChanged( includeFilePath, output.str( ) );
 }
 
 void CmdFileScanner::writeCmdListfile( string listFilePath )
@@ -116,10 +105,7 @@ void CmdFileScanner::writeCmdListfile( string listFilePath )
 
     output << "};" << endl;
 
-    ofstream fileStream;
-    fileStream.open( listFilePath );
-    fileStream << output.str( );
-    fileStream.close( );
+    writeFileIfChanged( listFilePath, output.str( ) );
 }
 
 void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
@@ -142,10 +128,7 @@ void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
         output << "ln -f -s ${MAIN_PROJECT_NAME} " << it->second.getName( ) << endl;
     }
 
-    ofstream fileStream;
-    fileStream.open( scriptFilePath );
-    fileStream << output.str( );
-    fileStream.close( );
+    writeFileIfChanged( scriptFilePath, output.str( ) );
 
     chmod( scriptFilePath.c_str( ), S_IRWXU );
 }
@@ -170,10 +153,7 @@ void CmdFileScanner::writeCMakeTestfile( string testFilePath )
         }
     }
 
-    ofstream fileStream;
-    fileStream.open( testFilePath );
-    fileStream << output.str( );
-    fileStream.close( );
+    writeFileIfChanged( testFilePath, output.str( ) );
 }
 
 void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, LazyBoxCommand command, LazyBoxCommandTest test )
@@ -200,4 +180,41 @@ void CmdFileScanner::addFileHeader( stringstream& output, bool cStyle )
     }
 
     output << " This file was automatically generated.  Do not modify." << endl << endl;
+}
+
+string CmdFileScanner::readEntireFile( string filePath )
+{
+    ifstream fileStream( filePath );
+    string fileContents;
+
+    fileStream.seekg( 0, ios::end );   
+    fileContents.reserve( fileStream.tellg( ) );
+    fileStream.seekg( 0, ios::beg );
+
+    fileContents.assign( istreambuf_iterator<char>( fileStream ), istreambuf_iterator<char>( ) );
+
+    return fileContents;
+}
+
+void CmdFileScanner::writeFileIfChanged( string filePath, string contents )
+{
+    bool newContent = true;
+    struct stat buffer;   
+    if( stat( filePath.c_str( ), &( buffer ) ) == 0 )
+    {
+        string oldContent = readEntireFile( filePath );
+        if( contents == oldContent )
+        {
+            cout << "Current and new content of \"" << filePath << "\" are the same." << endl;
+            newContent = false;
+        }
+    }
+
+    if( newContent )
+    {
+        ofstream fileStream;
+        fileStream.open( filePath );
+        fileStream << contents;
+        fileStream.close( );   
+    }
 }
