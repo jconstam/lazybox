@@ -23,10 +23,10 @@ steps:
   condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: 'build/test/unittests/gtest_cpp/lazybox_unittests_results.xml'
+    testResultsFiles: 'build/test/unittests/gtest_cpp/lazybox_unittests_gtest_cpp_results.xml'
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish Test Coverage'
   condition: succeededOrFailed()
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: build/test/unittests/gtest_cpp/lazybox_unittests_coverage.xml
+    summaryFileLocation: build/test/unittests/gtest_cpp/lazybox_unittests_gtest_cpp_coverage.xml
