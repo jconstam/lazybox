@@ -164,17 +164,17 @@ TO BE COMPLETED
 |login|Begin a new session on the system.|Medium|Not Started|
 |logname|Print the name of the current user.|Easy|Not Started|
 |logread|Show messages in syslogd's circular buffer.|Easy|Not Started|
-|losetup| | | |
-|lpd| | | |
+|losetup|Associate loop devices.|Medium|Not Started|
+|lpd|Print file.|Medium|Not Started|
 |lpq| | | |
 |lpr| | | |
-|ls| | | |
-|lsattr| | | |
-|lsmod| | | |
-|lzmacat| | | |
+|ls|List directory contents.|Easy|Not Started|
+|lsattr|List file attributes on an ext2 fs.|Medium|Not Started|
+|lsmod|List the currently loaded kernel modules.|Easy|Not Started|
+|lzmacat|Uncompress to standard out.|Easy|Not Started|
 |lzop| | | |
 |lzopcat| | | |
-|makemime| | | |
+|makemime|Create multipart MIME-encoded message from files.|Medium|Not Started|
 |man| | | |
 |md5sum| | | |
 |mdev| | | |
