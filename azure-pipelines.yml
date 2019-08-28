@@ -8,8 +8,6 @@ steps:
   displayName: 'Set Environment to use Python 3.6'
   inputs:
     versionSpec: 3.6
-- script: 'make -j'
-  displayName: 'Build Main'
 - script: 'sudo apt-get install python-pip cmake lcov -y'
   displayName: 'Install Ubuntu Packages'
 - script: |

@@ -15,5 +15,4 @@ install:
   - pip install --user -r requirements.txt
 
 script:
-  - make -j
   - make -j test
