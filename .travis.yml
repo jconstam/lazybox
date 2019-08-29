@@ -10,6 +10,7 @@ addons:
       cmake
       python-pip
       lcov
+      ruby
 
 install:
   - pip install --user -r requirements.txt
