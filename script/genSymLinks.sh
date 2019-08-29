@@ -9,5 +9,6 @@ fi
 
 MAIN_PROJECT_NAME=$1
 
+ln -f -s ${MAIN_PROJECT_NAME} cat
 ln -f -s ${MAIN_PROJECT_NAME} date
 ln -f -s ${MAIN_PROJECT_NAME} echo

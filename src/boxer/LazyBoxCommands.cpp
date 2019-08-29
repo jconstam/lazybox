@@ -18,9 +18,9 @@ static const string TEST_MARKER = "@test";
 static const string TESTPARAM_MARKER = "@t_param";
 static const string TESTOUTPUT_MARKER = "@t_output";
 
-LazyBoxCommand::LazyBoxCommand( bool isCPP, string fileContents )
+LazyBoxCommand::LazyBoxCommand( string fileName, string fileContents )
 {
-    m_isCPP = isCPP;
+    m_fileName = fileName;
     m_name = "";
     m_descrip = "";
     m_function = "";
@@ -96,7 +96,22 @@ bool LazyBoxCommand::isValid( )
 
 bool LazyBoxCommand::getIsCPP( )
 {
-    return m_isCPP;
+    return ( m_fileName.substr( m_fileName.length( ) - 3 ) == "cpp" );
+}
+string LazyBoxCommand::getFileName( )
+{
+    return m_fileName;
+}
+string LazyBoxCommand::getFileNameShort( )
+{
+    string result = m_fileName;
+    size_t lastIndex = m_fileName.find_last_of( '/' );
+    if( lastIndex != string::npos )
+    {
+        result = m_fileName.substr( lastIndex + 1 );
+    }
+
+    return result;
 }
 string LazyBoxCommand::getName( )
 {

@@ -11,9 +11,11 @@ set( COMMAND_SOURCE_DIR ${PROJECT_SOURCE_DIR}/commands )
 set( BOXER_SOURCE_DIR ${PROJECT_SOURCE_DIR}/boxer )
 set( SCRIPT_DIR ${PROJECT_SOURCE_DIR}/../script )
 
+add_subdirectory( ${COMMAND_SOURCE_DIR} )
+
 set( SOURCES
-    ${COMMAND_SOURCE_DIR}/date.cpp
-    ${COMMAND_SOURCE_DIR}/echo.c
+    ${COMMAND_SOURCES_C}
+    ${COMMAND_SOURCES_CPP}
     
     ${PROJECT_SOURCE_DIR}/cmdList.cpp
     ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
@@ -55,6 +57,7 @@ add_custom_target( RUN_${BOXER_PROJECT_NAME}
         -l "${PROJECT_SOURCE_DIR}/cmdList.cpp"
         -s "${SCRIPT_DIR}/genSymLinks.sh"
         -t "${PROJECT_SOURCE_DIR}/../test/symlinkTests/CMakeLists.txt"
+        -m "${COMMAND_SOURCE_DIR}/CMakeLists.txt"
 )
 add_dependencies( RUN_${BOXER_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
 

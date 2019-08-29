@@ -38,14 +38,12 @@ bool CmdFileScanner::parseFiles( )
     bool found = false;
     for( const string file : m_fileList )
     {
-        bool isCPP = file.substr( file.length( ) - 3 ) == "cpp";
-
         string fileContents = readEntireFile( file );
         if( fileContents.find( LAZYBOX_MARKER ) != string::npos )
         {
             cout << "Command File \"" << file << "\" is a valid command!" << endl;
 
-            LazyBoxCommand command( isCPP, fileContents );
+            LazyBoxCommand command( file, fileContents );
 
             if( command.isValid( ) )
             {
@@ -154,6 +152,41 @@ void CmdFileScanner::writeCMakeTestfile( string testFilePath )
     }
 
     writeFileIfChanged( testFilePath, output.str( ) );
+}
+
+void CmdFileScanner::writeCMakeCommandsFile( string commandsFilePath )
+{
+    stringstream output;
+
+    cout << "Writing to CMake Commands file \"" << commandsFilePath << "\"" << endl;
+
+    addFileHeader( output, false );
+
+    output << "set( COMMAND_SOURCES_C" << endl;
+    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter++ )
+    {
+        if( ! cmdIter->second.getIsCPP( ) )
+        {
+            output << "\t${COMMAND_SOURCE_DIR}/" << cmdIter->second.getFileNameShort( ) << endl;
+        }
+    }
+
+    output << "\tPARENT_SCOPE" << endl;
+    output << ")" << endl;
+
+    output << "set( COMMAND_SOURCES_CPP" << endl;
+    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter++ )
+    {
+        if( cmdIter->second.getIsCPP( ) )
+        {
+            output << "\t${COMMAND_SOURCE_DIR}/" << cmdIter->second.getFileNameShort( ) << endl;
+        }
+    }
+
+    output << "\tPARENT_SCOPE" << endl;
+    output << ")" << endl;
+
+    writeFileIfChanged( commandsFilePath, output.str( ) );
 }
 
 void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, LazyBoxCommand command, LazyBoxCommandTest test )

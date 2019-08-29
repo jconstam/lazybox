@@ -20,8 +20,9 @@ set( UNITTEST_GTEST_SOURCES
   ${SOURCES_ROOT}/cmdRegistry.cpp
   ${SOURCES_ROOT}/parseArgs.c
 
-  ${SOURCES_ROOT}/commands/date.cpp
   ${SOURCES_ROOT}/commands/echo.c
+  ${SOURCES_ROOT}/commands/date.cpp
+  ${SOURCES_ROOT}/commands/cat.cpp
 
   ${UNITTEST_GTEST_ROOT}/commands/date_test.cpp
 )

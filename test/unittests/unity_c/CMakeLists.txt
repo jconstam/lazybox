@@ -32,6 +32,8 @@ add_executable( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
 
 	${SOURCES_ROOT}/parseArgs.c
 	${UNITTEST_UNITY_ROOT}/parseArgs_tests.c
+	
+	${SOURCES_ROOT}/commands/echo.c
 )
 
 add_test( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs

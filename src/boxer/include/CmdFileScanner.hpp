@@ -19,6 +19,7 @@ class CmdFileScanner
         void writeCmdListfile( std::string listFilePath );
         void writeSymlinkScriptfile( std::string scriptFilePath );
         void writeCMakeTestfile( std::string testFilePath );
+        void writeCMakeCommandsFile( std::string commandsFilePath );
     private:
         std::vector<std::string> m_fileList;
         std::map<std::string, LazyBoxCommand> m_commands;

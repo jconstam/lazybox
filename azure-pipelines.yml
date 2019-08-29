@@ -21,7 +21,6 @@ steps:
   condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
-    #testResultsFiles: 'build/test/unittests/gtest_cpp/lazybox_unittests_gtest_cpp_results.xml;build/test/unittests/unity_c/lazybox_unittests_unity_c_*.xml'
     testResultsFiles: 'build/test/unittests/**/*results.xml'
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish Test Coverage'

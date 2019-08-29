@@ -14,6 +14,7 @@ typedef struct
 	string cmdListFile;
 	string symlinkScriptFile;
 	string testCMakeFile;
+	string commandCMakeFile;
 } BOXER_PARAMS;
 
 static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
@@ -21,7 +22,7 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
     int opt = 0;
 	while( opt != -1 )  
     {  
-		opt = getopt( argc, argv, "c:i:l:s:t:" );
+		opt = getopt( argc, argv, "c:i:l:s:t:m:" );
         switch( opt )  
         {  
             case 'c': 
@@ -43,6 +44,10 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 			case 't':
 				params->testCMakeFile = experimental::filesystem::absolute( optarg );
 				cout << "Using CMake Test File \"" << params->testCMakeFile << "\"" << endl;
+				break;
+			case 'm':
+				params->commandCMakeFile = experimental::filesystem::absolute( optarg );
+				cout << "Using Command CMake File \"" << params->commandCMakeFile << "\"" << endl;
 				break;
 			case -1:
 				break;
@@ -78,6 +83,11 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 		cout << "CMake Test File not specified (use -t)" << endl;
 		return false;
 	}
+	if( params->commandCMakeFile == "" )
+	{
+		cout << "COmmand CMake File not specified (use -m)" << endl;
+		return false;
+	}
 
 	return true;
 }
@@ -107,6 +117,7 @@ int main( int argc, char* argv[] )
 	scanner.writeCmdListfile( params.cmdListFile );
 	scanner.writeSymlinkScriptfile( params.symlinkScriptFile );
 	scanner.writeCMakeTestfile( params.testCMakeFile );
+	scanner.writeCMakeCommandsFile( params.commandCMakeFile );
 
 	return 0;
 }
