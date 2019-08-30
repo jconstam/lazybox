@@ -3,6 +3,8 @@ Lazybox is [Busybox](busybox.com)'s less-portable, less-functional cousin.
 
 Really, this is just a pet project to play around with system programming in C/C++ in Linux.
 
+[![Build Status](https://travis-ci.org/jconstam/lazybox.svg?branch=master)](https://travis-ci.org/jconstam/lazybox) [![Build Status](https://dev.azure.com/callmebob0963/GitHub%20Projects/_apis/build/status/jconstam.lazybox?branchName=master&jobName=Job)](https://dev.azure.com/callmebob0963/GitHub%20Projects/_build/latest?definitionId=5&branchName=master)
+
 ## Testing
 In order to test Lazybox, there are 3 components:
 
