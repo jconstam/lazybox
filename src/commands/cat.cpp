@@ -5,56 +5,68 @@
     @function run_cat
     
     @test singleFile1
-    @t_param singleFile1 catTest1
+    @t_param singleFile1 cat/test1
     @t_output singleFile1 First\nSecond\nThird
     
     @test singleFile2
-    @t_param singleFile2 catTest2
+    @t_param singleFile2 cat/test2
     @t_output singleFile2 Fourth\nFifth\n
 
     @test singleFileLineNums
-    @t_param singleFileLineNums -n catTest1
+    @t_param singleFileLineNums -n cat/test1
     @t_output singleFileLineNums "     1  First\n     2  Second\n     3  Third"
 
     @test singleFileLineNumsNonBlank1
-    @t_param singleFileLineNumsNonBlank1 -n catTest3
+    @t_param singleFileLineNumsNonBlank1 -n cat/test3
     @t_output singleFileLineNumsNonBlank1 "     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n"
 
     @test singleFileLineNumsNonBlank2
-    @t_param singleFileLineNumsNonBlank2 -b catTest3
+    @t_param singleFileLineNumsNonBlank2 -b cat/test3
     @t_output singleFileLineNumsNonBlank2 "     1  Sixth\n\n     2  Seventh\n     3  Eighth\n"
     
     @test multiFile1
-    @t_param multiFile1 catTest1 catTest2
+    @t_param multiFile1 cat/test1 cat/test2
     @t_output multiFile1 First\nSecond\nThirdFourth\nFifth\n
 
     @test multiFileLineNums1
-    @t_param multiFileLineNums1 -n catTest1 catTest2
+    @t_param multiFileLineNums1 -n cat/test1 cat/test2
     @t_output multiFileLineNums1 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n"
 
     @test multiFileLineNums2
-    @t_param multiFileLineNums2 -n catTest1 catTest2 catTest3
+    @t_param multiFileLineNums2 -n cat/test1 cat/test2 cat/test3
     @t_output multiFileLineNums2 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n"
 
     @test multiFileLineNums3
-    @t_param multiFileLineNums3 -b catTest1 catTest2 catTest3
+    @t_param multiFileLineNums3 -b cat/test1 cat/test2 cat/test3
     @t_output multiFileLineNums3 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n\n     2  Seventh\n     3  Eighth\n"
     
     @test singleFileShowEnds1
-    @t_param singleFileShowEnds1 -E catTest1
+    @t_param singleFileShowEnds1 -E cat/test1
     @t_output singleFileShowEnds1 First$\nSecond$\nThird
     
     @test singleFileShowEnds2
-    @t_param singleFileShowEnds2 -E catTest2
+    @t_param singleFileShowEnds2 -E cat/test2
     @t_output singleFileShowEnds2 Fourth$\nFifth$\n
     
     @test singleFileSqueeze1
-    @t_param singleFileSqueeze1 -s catTest1
+    @t_param singleFileSqueeze1 -s cat/test1
     @t_output singleFileSqueeze1 First\nSecond\nThird
     
     @test singleFileSqueeze2
-    @t_param singleFileSqueeze2 -s catTest3
+    @t_param singleFileSqueeze2 -s cat/test3
     @t_output singleFileSqueeze2 Sixth\nSeventh\nEighth\n
+    
+    @test singleFileShowTabs1
+    @t_param singleFileShowTabs1 -T cat/test1
+    @t_output singleFileShowTabs1 First\nSecond\nThird
+    
+    @test singleFileShowTabs2
+    @t_param singleFileShowTabs2 cat/test4
+    @t_output singleFileShowTabs2 \tNinth\nTenth\n
+    
+    @test singleFileShowTabs3
+    @t_param singleFileShowTabs3 -T cat/test4
+    @t_output singleFileShowTabs3 ^INinth\nTenth\n
  */
 
 #include <string>
@@ -68,7 +80,7 @@
 
 using namespace std;
 
-#define PARAM_COUNT     ( 4U )
+#define PARAM_COUNT     ( 5U )
 
 typedef struct
 {
@@ -76,6 +88,7 @@ typedef struct
     bool numberNonBlankLines;
     bool showEnds;
     bool squeezeBlank;
+    bool showTabs;
 } CAT_PARAMS;
 
 static const ARG_DATA argInfo[ PARAM_COUNT ] =
@@ -83,7 +96,8 @@ static const ARG_DATA argInfo[ PARAM_COUNT ] =
     { 'n', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberOutputLines ) },
     { 'b', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberNonBlankLines ) },
     { 'E', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showEnds ) },
-    { 's', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, squeezeBlank ) }
+    { 's', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, squeezeBlank ) },
+    { 'T', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showTabs ) }
 };
 
 static string readEntireFile( string filePath )
@@ -109,7 +123,7 @@ static void NumberLine( int lineNumber )
 int run_cat( int argc, char* argv[ ] )
 {
     int startIndex;
-    CAT_PARAMS params = { false, false, false, false };
+    CAT_PARAMS params = { false, false, false, false, false };
 
     if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
     {
@@ -180,7 +194,14 @@ int run_cat( int argc, char* argv[ ] )
                 startOfLine = true;
             }
 
-            cout << fileContents[ fileIndex ];
+            if( ( params.showTabs ) && ( fileContents[ fileIndex ] == '\t' ) )
+            {
+                cout << "^I";
+            }
+            else
+            {
+                cout << fileContents[ fileIndex ];
+            }
         }
     }
 
