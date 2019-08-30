@@ -6,8 +6,14 @@ set_tests_properties( lazybox PROPERTIES PASS_REGULAR_EXPRESSION "LazyBox - Busy
 add_test( NAME cat_multiFile1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat catTest1 catTest2 CMD_OUTPUT_SPLITTER First\nSecond\nThirdFourth\nFifth\n )
 add_test( NAME cat_multiFile1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat catTest1 catTest2 CMD_OUTPUT_SPLITTER First\nSecond\nThirdFourth\nFifth\n )
 
-add_test( NAME cat_multiFileLineNums WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -n catTest1 catTest2 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n" )
-add_test( NAME cat_multiFileLineNums_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -n catTest1 catTest2 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n" )
+add_test( NAME cat_multiFileLineNums1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -n catTest1 catTest2 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n" )
+add_test( NAME cat_multiFileLineNums1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -n catTest1 catTest2 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n" )
+
+add_test( NAME cat_multiFileLineNums2 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -n catTest1 catTest2 catTest3 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n" )
+add_test( NAME cat_multiFileLineNums2_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -n catTest1 catTest2 catTest3 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n" )
+
+add_test( NAME cat_multiFileLineNums3 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -b catTest1 catTest2 catTest3 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n\n     2  Seventh\n     3  Eighth\n" )
+add_test( NAME cat_multiFileLineNums3_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -b catTest1 catTest2 catTest3 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n\n     2  Seventh\n     3  Eighth\n" )
 
 add_test( NAME cat_singleFile1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat catTest1 CMD_OUTPUT_SPLITTER First\nSecond\nThird )
 add_test( NAME cat_singleFile1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat catTest1 CMD_OUTPUT_SPLITTER First\nSecond\nThird )
@@ -17,6 +23,12 @@ add_test( NAME cat_singleFile2_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Docu
 
 add_test( NAME cat_singleFileLineNums WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -n catTest1 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third" )
 add_test( NAME cat_singleFileLineNums_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -n catTest1 CMD_OUTPUT_SPLITTER "     1  First\n     2  Second\n     3  Third" )
+
+add_test( NAME cat_singleFileLineNumsNonBlank1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -n catTest3 CMD_OUTPUT_SPLITTER "     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n" )
+add_test( NAME cat_singleFileLineNumsNonBlank1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -n catTest3 CMD_OUTPUT_SPLITTER "     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n" )
+
+add_test( NAME cat_singleFileLineNumsNonBlank2 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -b catTest3 CMD_OUTPUT_SPLITTER "     1  Sixth\n\n     2  Seventh\n     3  Eighth\n" )
+add_test( NAME cat_singleFileLineNumsNonBlank2_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -b catTest3 CMD_OUTPUT_SPLITTER "     1  Sixth\n\n     2  Seventh\n     3  Eighth\n" )
 
 add_test( NAME echo_escape_newline1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox echo -e testing\n CMD_OUTPUT_SPLITTER testing\n\n )
 add_test( NAME echo_escape_newline1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/echo -e testing\n CMD_OUTPUT_SPLITTER testing\n\n )

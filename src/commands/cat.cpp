@@ -15,14 +15,30 @@
     @test singleFileLineNums
     @t_param singleFileLineNums -n catTest1
     @t_output singleFileLineNums "     1  First\n     2  Second\n     3  Third"
+
+    @test singleFileLineNumsNonBlank1
+    @t_param singleFileLineNumsNonBlank1 -n catTest3
+    @t_output singleFileLineNumsNonBlank1 "     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n"
+
+    @test singleFileLineNumsNonBlank2
+    @t_param singleFileLineNumsNonBlank2 -b catTest3
+    @t_output singleFileLineNumsNonBlank2 "     1  Sixth\n\n     2  Seventh\n     3  Eighth\n"
     
     @test multiFile1
     @t_param multiFile1 catTest1 catTest2
     @t_output multiFile1 First\nSecond\nThirdFourth\nFifth\n
 
-    @test multiFileLineNums
-    @t_param multiFileLineNums -n catTest1 catTest2
-    @t_output multiFileLineNums "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n"
+    @test multiFileLineNums1
+    @t_param multiFileLineNums1 -n catTest1 catTest2
+    @t_output multiFileLineNums1 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n"
+
+    @test multiFileLineNums2
+    @t_param multiFileLineNums2 -n catTest1 catTest2 catTest3
+    @t_output multiFileLineNums2 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n"
+
+    @test multiFileLineNums3
+    @t_param multiFileLineNums3 -b catTest1 catTest2 catTest3
+    @t_output multiFileLineNums3 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n\n     2  Seventh\n     3  Eighth\n"
  */
 
 #include <string>
@@ -98,41 +114,33 @@ int run_cat( int argc, char* argv[ ] )
         }
 
         int lineNumber = 1;
-        string fileContentsString = readEntireFile( filePath );
-        char* fileContents = new char[ fileContentsString.length( ) + 1U ];
-        memset( fileContents, 0, fileContentsString.length( ) + 1U );
-        strncpy( fileContents, fileContentsString.c_str( ), fileContentsString.length( ) );
-
-        bool endsWithNewLine = ( fileContentsString[ fileContentsString.length( ) - 1U ] == '\n' );
-
-        char* currToken = strtok( fileContents, "\n" );
-        while( currToken != nullptr )
+        bool startOfLine = true;
+        string fileContents = readEntireFile( filePath );
+        for( size_t fileIndex = 0U; fileIndex < fileContents.length( ); fileIndex++ )
         {
-            if( params.numberOutputLines )
+            if( startOfLine )
             {
-                NumberLine( lineNumber );
-            }
-            string currLine( currToken );
-
-            currToken = strtok( NULL, "\n" );
-
-            cout << currLine;
-            if( currToken == nullptr )
-            {
-                if( endsWithNewLine )
+                if( params.numberOutputLines )
                 {
-                    cout << endl;
+                    NumberLine( lineNumber++ );
                 }
+                else if( params.numberNonBlankLines )
+                {
+                    if( fileContents[ fileIndex ] != '\n' )
+                    {
+                        NumberLine( lineNumber++ );
+                    }
+                }
+                startOfLine = false;
             }
-            else
+
+            cout << fileContents[ fileIndex ];
+            
+            if( fileContents[ fileIndex ] == '\n' )
             {
-                cout << endl;
+                startOfLine = true;
             }
-
-            lineNumber++;
         }
-
-        delete[ ] fileContents;
     }
 
     return 0;
