@@ -11,6 +11,7 @@ addons:
       python-pip
       lcov
       ruby
+      xsltproc
 
 install:
   - pip install --user -r requirements.txt

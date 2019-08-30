@@ -8,7 +8,7 @@ steps:
   displayName: 'Set Environment to use Python 3.6'
   inputs:
     versionSpec: 3.6
-- script: 'sudo apt-get install python-pip cmake lcov ruby -y'
+- script: 'sudo apt-get install python-pip cmake lcov ruby xsltproc -y'
   displayName: 'Install Ubuntu Packages'
 - script: |
    python -m pip install --upgrade pip 
@@ -21,7 +21,7 @@ steps:
   condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: 'build/test/unittests/**/*results.xml'
+    testResultsFiles: 'build/test/**/*results.xml'
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish Test Coverage'
   condition: succeededOrFailed()
