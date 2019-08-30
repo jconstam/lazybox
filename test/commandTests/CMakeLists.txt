@@ -30,6 +30,18 @@ add_test( NAME cat_singleFileLineNumsNonBlank1_symlink WORKING_DIRECTORY /mnt/c/
 add_test( NAME cat_singleFileLineNumsNonBlank2 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -b catTest3 CMD_OUTPUT_SPLITTER "     1  Sixth\n\n     2  Seventh\n     3  Eighth\n" )
 add_test( NAME cat_singleFileLineNumsNonBlank2_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -b catTest3 CMD_OUTPUT_SPLITTER "     1  Sixth\n\n     2  Seventh\n     3  Eighth\n" )
 
+add_test( NAME cat_singleFileShowEnds1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -E catTest1 CMD_OUTPUT_SPLITTER First$\nSecond$\nThird )
+add_test( NAME cat_singleFileShowEnds1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -E catTest1 CMD_OUTPUT_SPLITTER First$\nSecond$\nThird )
+
+add_test( NAME cat_singleFileShowEnds2 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -E catTest2 CMD_OUTPUT_SPLITTER Fourth$\nFifth$\n )
+add_test( NAME cat_singleFileShowEnds2_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -E catTest2 CMD_OUTPUT_SPLITTER Fourth$\nFifth$\n )
+
+add_test( NAME cat_singleFileSqueeze1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -s catTest1 CMD_OUTPUT_SPLITTER First\nSecond\nThird )
+add_test( NAME cat_singleFileSqueeze1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -s catTest1 CMD_OUTPUT_SPLITTER First\nSecond\nThird )
+
+add_test( NAME cat_singleFileSqueeze2 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat -s catTest3 CMD_OUTPUT_SPLITTER Sixth\nSeventh\nEighth\n )
+add_test( NAME cat_singleFileSqueeze2_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat -s catTest3 CMD_OUTPUT_SPLITTER Sixth\nSeventh\nEighth\n )
+
 add_test( NAME echo_escape_newline1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox echo -e testing\n CMD_OUTPUT_SPLITTER testing\n\n )
 add_test( NAME echo_escape_newline1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/echo -e testing\n CMD_OUTPUT_SPLITTER testing\n\n )
 

@@ -39,6 +39,22 @@
     @test multiFileLineNums3
     @t_param multiFileLineNums3 -b catTest1 catTest2 catTest3
     @t_output multiFileLineNums3 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n\n     2  Seventh\n     3  Eighth\n"
+    
+    @test singleFileShowEnds1
+    @t_param singleFileShowEnds1 -E catTest1
+    @t_output singleFileShowEnds1 First$\nSecond$\nThird
+    
+    @test singleFileShowEnds2
+    @t_param singleFileShowEnds2 -E catTest2
+    @t_output singleFileShowEnds2 Fourth$\nFifth$\n
+    
+    @test singleFileSqueeze1
+    @t_param singleFileSqueeze1 -s catTest1
+    @t_output singleFileSqueeze1 First\nSecond\nThird
+    
+    @test singleFileSqueeze2
+    @t_param singleFileSqueeze2 -s catTest3
+    @t_output singleFileSqueeze2 Sixth\nSeventh\nEighth\n
  */
 
 #include <string>
@@ -52,18 +68,22 @@
 
 using namespace std;
 
-#define PARAM_COUNT     ( 2U )
+#define PARAM_COUNT     ( 4U )
 
 typedef struct
 {
     bool numberOutputLines;
     bool numberNonBlankLines;
+    bool showEnds;
+    bool squeezeBlank;
 } CAT_PARAMS;
 
 static const ARG_DATA argInfo[ PARAM_COUNT ] =
 {
     { 'n', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberOutputLines ) },
-    { 'b', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberNonBlankLines ) }
+    { 'b', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberNonBlankLines ) },
+    { 'E', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showEnds ) },
+    { 's', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, squeezeBlank ) }
 };
 
 static string readEntireFile( string filePath )
@@ -89,7 +109,7 @@ static void NumberLine( int lineNumber )
 int run_cat( int argc, char* argv[ ] )
 {
     int startIndex;
-    CAT_PARAMS params = { false };
+    CAT_PARAMS params = { false, false, false, false };
 
     if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
     {
@@ -120,6 +140,23 @@ int run_cat( int argc, char* argv[ ] )
         {
             if( startOfLine )
             {
+                if( params.squeezeBlank )
+                {
+                    while( fileContents[ fileIndex ] == '\n' )
+                    {
+                        fileIndex++;
+                        if( fileIndex >= fileContents.length( ) )
+                        {
+                            break;
+                        }
+                    }
+
+                    if( fileIndex >= fileContents.length( ) )
+                    {
+                        break;
+                    }
+                }
+
                 if( params.numberOutputLines )
                 {
                     NumberLine( lineNumber++ );
@@ -133,13 +170,17 @@ int run_cat( int argc, char* argv[ ] )
                 }
                 startOfLine = false;
             }
-
-            cout << fileContents[ fileIndex ];
             
             if( fileContents[ fileIndex ] == '\n' )
             {
+                if( params.showEnds )
+                {
+                    cout << "$";
+                }
                 startOfLine = true;
             }
+
+            cout << fileContents[ fileIndex ];
         }
     }
 
