@@ -67,6 +67,10 @@
     @test singleFileShowTabs3
     @t_param singleFileShowTabs3 -T cat/test4
     @t_output singleFileShowTabs3 ^INinth\nTenth\n
+    
+    @test singleFileShowNonPrintable1
+    @t_param singleFileShowNonPrintable1 -v cat/test5
+    @t_output singleFileShowNonPrintable1 "^@^A^B^C^D^E^F^G^H\t\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?\n"
  */
 
 #include <string>
@@ -80,7 +84,9 @@
 
 using namespace std;
 
-#define PARAM_COUNT     ( 5U )
+#define PARAM_COUNT         ( 6U )
+#define MIN_PRINTABLE_CHAR  ( ' ' )
+#define MAX_PRINTABLE_CHAR  ( '~' )
 
 typedef struct
 {
@@ -89,6 +95,7 @@ typedef struct
     bool showEnds;
     bool squeezeBlank;
     bool showTabs;
+    bool showNonPrintable;
 } CAT_PARAMS;
 
 static const ARG_DATA argInfo[ PARAM_COUNT ] =
@@ -97,7 +104,8 @@ static const ARG_DATA argInfo[ PARAM_COUNT ] =
     { 'b', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberNonBlankLines ) },
     { 'E', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showEnds ) },
     { 's', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, squeezeBlank ) },
-    { 'T', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showTabs ) }
+    { 'T', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showTabs ) },
+    { 'v', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showNonPrintable ) }
 };
 
 static string readEntireFile( string filePath )
@@ -120,10 +128,37 @@ static void NumberLine( int lineNumber )
     cout << right << lineNumber << "  ";
 }
 
+static void PrintCharacter( char character, bool showTabs, bool showNonPrintable )
+{
+    if( ( showTabs ) && ( character == '\t' ) )
+    {
+        cout << "^I";
+    }
+    else if( ( showNonPrintable ) && ( ! isprint( character ) ) )
+    {
+        if( ( character == '\t' ) || ( character == '\n' ) )
+        {
+            cout << character;
+        }
+        else if( character < MIN_PRINTABLE_CHAR )
+        {
+            cout << "^" << character + 64;
+        }
+        else if( character > MAX_PRINTABLE_CHAR )
+        {
+            cout << "M-^" << character - 64;
+        }
+    }
+    else
+    {
+        cout << character;
+    }
+}
+
 int run_cat( int argc, char* argv[ ] )
 {
     int startIndex;
-    CAT_PARAMS params = { false, false, false, false, false };
+    CAT_PARAMS params = { false, false, false, false, false, false };
 
     if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
     {
@@ -194,14 +229,7 @@ int run_cat( int argc, char* argv[ ] )
                 startOfLine = true;
             }
 
-            if( ( params.showTabs ) && ( fileContents[ fileIndex ] == '\t' ) )
-            {
-                cout << "^I";
-            }
-            else
-            {
-                cout << fileContents[ fileIndex ];
-            }
+            PrintCharacter( fileContents[ fileIndex ], params.showTabs, params.showNonPrintable );
         }
     }
 
