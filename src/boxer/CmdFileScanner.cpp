@@ -147,7 +147,7 @@ void CmdFileScanner::writeCMakeTestfile( string testFilePath )
         vector<LazyBoxCommandTest> tests = cmdIter->second.getTests( );
         for( vector<LazyBoxCommandTest>::iterator testIter = tests.begin( ); testIter != tests.end( ); testIter++ )
         {
-            writeTestToCmakeTestFile( output, cmdIter->second, *testIter );
+            writeTestToCmakeTestFile( output, cmdIter->second, *testIter, testFilePath );
         }
     }
 
@@ -189,14 +189,21 @@ void CmdFileScanner::writeCMakeCommandsFile( string commandsFilePath )
     writeFileIfChanged( commandsFilePath, output.str( ) );
 }
 
-void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, LazyBoxCommand command, LazyBoxCommandTest test )
+void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, LazyBoxCommand command, LazyBoxCommandTest test, string testFilePath )
 {
+    string execPath = testFilePath;
+    size_t lastIndex = execPath.find_last_of( '/' );
+    if( lastIndex < execPath.length( ) )
+    {
+        execPath = execPath.substr( 0, lastIndex );
+    }
+
     string testName = command.getName( ) + "_" + test.getName( );
     string testNameSL = command.getName( ) + "_" + test.getName( ) + "_symlink";
 
-    output << "add_test( " << testName << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
+    output << "add_test( NAME " << testName << " WORKING_DIRECTORY " << execPath << " COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
     output << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
-    output << "add_test( " << testNameSL << " ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
+    output << "add_test( NAME " << testNameSL << " WORKING_DIRECTORY " << execPath << " COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
     output << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
     output << endl;
 }

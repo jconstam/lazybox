@@ -20,13 +20,17 @@ for arg in sys.argv:
 	else:
 		output.append( arg )
 
-print( 'COMMAND: "' + ' '.join( command ) + '"' );
+if command[ 0 ][ 0 ] == '"':
+	command[ 0 ] = command[ 0 ][ 1: ]
+if command[ -1 ][ -1 ] == '"':
+	command[ -1 ] = command[ -1 ][ : -1 ]
+print( repr( 'COMMAND: "' + ' '.join( command ) + '"' ) )
 
 out = subprocess.Popen( command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT )
 stdout,stderr = out.communicate( )
 
-actualOutput = stdout.decode( 'utf-8' )
-expectedOutput = bytes( ' '.join( output ), 'utf-8' ).decode( 'unicode_escape' )
+actualOutput = repr( stdout.decode( 'utf-8' ) )
+expectedOutput = repr( ' '.join( output ) )
 
 print( 'ACTUAL:   "' + actualOutput + '"' )
 print( 'EXPECTED: "' + expectedOutput + '"' )

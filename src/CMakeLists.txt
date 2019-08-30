@@ -49,15 +49,22 @@ add_custom_command(
 
 add_executable( ${BOXER_PROJECT_NAME} ${BOXER_SOURCES} )
 target_link_libraries( ${BOXER_PROJECT_NAME} stdc++fs )
+
+get_filename_component( COMMAND_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/../include/commands.hpp" REALPATH )
+get_filename_component( COMMAND_LIST_PATH "${PROJECT_SOURCE_DIR}/cmdList.cpp" REALPATH )
+get_filename_component( GENSYMLINK_SCRIPT_PATH "${SCRIPT_DIR}/genSymLinks.sh" REALPATH )
+get_filename_component( TEST_CMAKE_PATH "${PROJECT_SOURCE_DIR}/../test/commandTests/CMakeLists.txt" REALPATH )
+get_filename_component( COMMAND_CMAKE_PATH "${COMMAND_SOURCE_DIR}/CMakeLists.txt" REALPATH )
+
 add_custom_target( RUN_${BOXER_PROJECT_NAME}
     WORKING_DIRECTORY ${BUILD_PATH}
     COMMAND ${BOXER_PROJECT_NAME} 
         -c "${COMMAND_SOURCE_DIR}" 
-        -i "${PROJECT_SOURCE_DIR}/../include/commands.hpp"
-        -l "${PROJECT_SOURCE_DIR}/cmdList.cpp"
-        -s "${SCRIPT_DIR}/genSymLinks.sh"
-        -t "${PROJECT_SOURCE_DIR}/../test/commandTests/CMakeLists.txt"
-        -m "${COMMAND_SOURCE_DIR}/CMakeLists.txt"
+        -i "${COMMAND_INCLUDE_PATH}"
+        -l "${COMMAND_LIST_PATH}"
+        -s "${GENSYMLINK_SCRIPT_PATH}"
+        -t "${TEST_CMAKE_PATH}"
+        -m "${COMMAND_CMAKE_PATH}"
 )
 add_dependencies( RUN_${BOXER_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
 
