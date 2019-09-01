@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 import sys
 import subprocess
 
@@ -32,8 +33,8 @@ stdout,stderr = out.communicate( )
 actualOutput = repr( stdout.decode( 'utf-8' ) )
 expectedOutput = repr( ' '.join( output ) )
 
-print( 'ACTUAL:   "' + actualOutput + '"' )
-print( 'EXPECTED: "' + expectedOutput + '"' )
+print( 'ACTUAL:   "' + repr( actualOutput ) + '"' )
+print( 'EXPECTED: "' + repr( expectedOutput ) + '"' )
 
 if actualOutput == expectedOutput:
 	print( 'GOOD' )

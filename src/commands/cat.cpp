@@ -71,6 +71,31 @@
     @test singleFileShowNonPrintable1
     @t_param singleFileShowNonPrintable1 -v cat/test5
     @t_output singleFileShowNonPrintable1 "^@^A^B^C^D^E^F^G^H\t\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?\n"
+    
+    @test singleFileShowAll1
+    @t_param singleFileShowAll1 -A cat/test4
+    @t_output singleFileShowAll1 ^INinth$\nTenth$\n
+    
+    @test singleFileShowAll2
+    @t_param singleFileShowAll2 -A cat/test5
+    @t_output singleFileShowAll2 "^@^A^B^C^D^E^F^G^H^I$\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?$\n"
+    
+    @test singleFileShowAllNoTabs1
+    @t_param singleFileShowAllNoTabs1 -e cat/test4
+    @t_output singleFileShowAllNoTabs1 \tNinth$\nTenth$\n
+    
+    @test singleFileShowAllNoTabs2
+    @t_param singleFileShowAllNoTabs2 -e cat/test5
+    @t_output singleFileShowAllNoTabs2 "^@^A^B^C^D^E^F^G^H\t$\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?$\n"
+    
+    @test singleFileShowAllNoEnds1
+    @t_param singleFileShowAllNoEnds1 -t cat/test4
+    @t_output singleFileShowAllNoEnds1 ^INinth\nTenth\n
+    
+    @test singleFileShowAllNoEnds2
+    @t_param singleFileShowAllNoEnds2 -t cat/test5
+    @t_output singleFileShowAllNoEnds2 "^@^A^B^C^D^E^F^G^H^I\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?\n"
+    
  */
 
 #include <string>
@@ -84,7 +109,7 @@
 
 using namespace std;
 
-#define PARAM_COUNT         ( 6U )
+#define PARAM_COUNT         ( 9U )
 #define MIN_PRINTABLE_CHAR  ( ' ' )
 #define MAX_PRINTABLE_CHAR  ( '~' )
 
@@ -96,14 +121,20 @@ typedef struct
     bool squeezeBlank;
     bool showTabs;
     bool showNonPrintable;
+    bool showAll;
+    bool showAllNoTabs;
+    bool showAllNoEnds;
 } CAT_PARAMS;
 
 static const ARG_DATA argInfo[ PARAM_COUNT ] =
 {
-    { 'n', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberOutputLines ) },
+    { 'A', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showAll ) },
     { 'b', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberNonBlankLines ) },
+    { 'e', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showAllNoTabs ) },
     { 'E', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showEnds ) },
+    { 'n', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, numberOutputLines ) },
     { 's', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, squeezeBlank ) },
+    { 't', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showAllNoEnds ) },
     { 'T', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showTabs ) },
     { 'v', false, ARG_DATA_TYPE_BOOL, offsetof( CAT_PARAMS, showNonPrintable ) }
 };
@@ -158,7 +189,7 @@ static void PrintCharacter( char character, bool showTabs, bool showNonPrintable
 int run_cat( int argc, char* argv[ ] )
 {
     int startIndex;
-    CAT_PARAMS params = { false, false, false, false, false, false };
+    CAT_PARAMS params = { false, false, false, false, false, false, false, false };
 
     if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
     {
@@ -168,6 +199,22 @@ int run_cat( int argc, char* argv[ ] )
     if( params.numberNonBlankLines )
     {
         params.numberOutputLines = false;
+    }
+    if( params.showAll )
+    {
+        params.showNonPrintable = true;
+        params.showEnds = true;
+        params.showTabs = true;
+    }
+    if( params.showAllNoTabs )
+    {
+        params.showNonPrintable = true;
+        params.showEnds = true;
+    }
+    if( params.showAllNoEnds )
+    {
+        params.showNonPrintable = true;
+        params.showTabs = true;
     }
 
     int fileIndex;
