@@ -1,0 +1,1862 @@
+[
+    {
+        "name": "[",
+        "description": "",
+        "difficulty": "",
+        "status": "Not Started"
+    },
+    {
+        "name": "[[",
+        "description": "",
+        "difficulty": "",
+        "status": "Not Started"
+    },
+    {
+        "name": "acpid",
+        "description": "Listen to ACPI events and spawn specific helpers on event arrival.",
+        "difficulty": "Medium",
+        "status": "Not Started"
+    },
+    {
+        "name": "addgroup",
+        "description": "Add a group or add a user to a group.",
+        "difficulty": "Easy",
+        "status": "Not Started"
+    },
+    {
+        "name": "adduser",
+        "description": "Add a user.",
+        "difficulty": "Easy",
+        "status": "Not Started"
+    },
+    {
+        "name": "adjtimex",
+        "description": "Read and optionally set system timebase parameters.",
+        "difficulty": "Easy",
+        "status": "Not Started"
+    },
+    {
+        "name": "ar",
+        "description": "Extract or list files from an ar archive.",
+        "difficulty": "Easy",
+        "status": "Not Started"
+    },
+    {
+		"name": "arp",
+		"description": "Manipulate ARP cache.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "arping",
+		"description": "Send ARP requests/replies.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "ash",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "awk",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "basename",
+		"description": "Strip directory path and .suffix from file name.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "beep",
+		"description": "Sound the system beep.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "blkid",
+		"description": "Print UUIDs of all filesystems.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "brctl",
+		"description": "Manage Ethernet bridges.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "bunzip2",
+		"description": "Uncompress file (or standard input).",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "bzcat",
+		"description": "Uncompress to stdout.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "bzip2",
+		"description": "Compress file(s) (or standard input) with bzip2 algorithm.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "cal",
+		"description": "Display a calendar.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "cat",
+		"description": "Concatenate file(s) and print them to standard out.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "catv",
+		"description": "Concatenate file(s) and print them to standard out.  Display nonprinting characters.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "chat",
+		"description": "Useful for interacting with a modem connected to stdin/stdout. A script consists of one or more \"expect-send\" pairs of strings, each pair is a pair of arguments.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "chattr",
+		"description": "Change file attributes on an ext2 fs.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "chgrp",
+		"description": "Change the group membership of one or more files to a specified group.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "chmod",
+		"description": "Change the mode of one or more files.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "chown",
+		"description": "Change the owner and/or group of one or more file.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "chpasswd",
+		"description": "Change a user's password in /etc/passwd.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "chpst",
+		"description": "Change the process state and run a program.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "chroot",
+		"description": "Run a program with specified root directory.",
+		"difficulty": "Easy",
+		"status": "Not started"
+	},
+	{
+		"name": "chrt",
+		"description": "Manipulate real-time attributes of a process.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "chvt",
+		"description": "Change the foreground virtual terminal to /dev/ttyN.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "cksum",
+		"description": "Calculate the CRC32 checksums of one or more files.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "clear",
+		"description": "Clear screen.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "cmp",
+		"description": "Compare a file with another file or standard input.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "comm",
+		"description": "Compare a file with another file or standard input.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "cp",
+		"description": "Copies one or more files.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "cpio",
+		"description": "Extract or list files from a cpio archive or create a cpio archive.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "crond",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "crontab",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "cryptpw",
+		"description": "Crypt a password.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "cut",
+		"description": "Prints selected fields from each input file to standard output.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "date",
+		"description": "Display time or set time.",
+		"difficulty": "Easy",
+		"status": "In Progress"
+	},
+	{
+		"name": "dc",
+		"description": "Tiny RPN calculator.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "dd",
+		"description": "Copy a file with converting and formatting.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "deallocvt",
+		"description": "Decallocate unused virtual terminal /dev/ttyN.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "delgroup",
+		"description": "Delete a group or remove a user from a group.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "deluser",
+		"description": "Delete a user from the system.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "depmod",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "devmem",
+		"description": "Read/write from physical address.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "df",
+		"description": "Print filesystem usage statistics.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "dhcprelay",
+		"description": "Relay DHCP requests between clients and server.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "diff",
+		"description": "Compare files line by line and output the differences between them.",
+		"difficulty": "Medium",
+		"status": "NotStarted"
+	},
+	{
+		"name": "dirname",
+		"description": "Strip non-directory suffix from filename.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "dmesg",
+		"description": "Print or control the kernel ring buffer.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "dnsd",
+		"description": "Small static DNS server daemon.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "dnsdomainname",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "dos2unix",
+		"description": "Convert file in-place from DOS to Unix format. Can also use standard in/out.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "dpkg",
+		"description": "Install, remove, and manage Debian packages.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "du",
+		"description": "Summarize disk space used for each file and/or directory.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "dumpkmap",
+		"description": "Print a binary keyboard translation table to standard output.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "dumpleases",
+		"description": "Display DHCP leases granted by udhcpd.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "echo",
+		"description": "Print a string.",
+		"difficulty": "Easy",
+		"status": "In Progress"
+	},
+	{
+		"name": "ed",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "egrep",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "eject",
+		"description": "Eject specified device.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "env",
+		"description": "Print the current environment or run program after setting up the specified environment.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "envdir",
+		"description": "Set various environment variables as specified by files in the specified directory and run program.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "envuidgid",
+		"description": "Set $UID to account's uid and $GID to account's gid and run program.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "expand",
+		"description": "Convert tabs to spaces, write to standard output.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "expr",
+		"description": "Print the value of the specified expression to standard output.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "fakeidentd",
+		"description": "Provide fake ident (auth) service.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "false",
+		"description": "Return an exit code of false (1).",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "fbset",
+		"description": "Show and modify frame buffer settings.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "fbsplash",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "fdflush",
+		"description": "Force floppy disk drive to detect disk change.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "fdformat",
+		"description": "Format floppy disk.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "fdisk",
+		"description": "Change partition table.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "fgrep",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "find",
+		"description": "Search for files.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "findfs",
+		"description": "Find a filesystem device based on a label or UUID.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "flash_lock",
+		"description": "Lock part or all of an MTD device.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "flash_unlock",
+		"description": "Unlock an MTD device.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "fold",
+		"description": "Wrap input lines in each file (or standard input), write to standard output.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "free",
+		"description": "Display the amount of free and used system memory.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "freeramdisk",
+		"description": "Free all memory used by the specified ramdisk.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "fsck",
+		"description": "Check and repair filesystems.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "fsck.minix",
+		"description": "Check MINIX filesystem.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "fsync",
+		"description": "Write files' buffered blocks to disk.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "ftpd",
+		"description": "Anonymus FTP server.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "ftpget",
+		"description": "Retrieve a remote file via FTP.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "ftpput",
+		"description": "Store a local file on a remote machine via FTP.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "fuser",
+		"description": "Find processes which use the specified files or ports.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "getopt",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "getty",
+		"description": "Open a tty, prompt for a login name, then invoke /bin/login.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "grep",
+		"description": "Search for a pattern in each file or standard input.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "gunzip",
+		"description": "Uncompress files or standard input.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "gzip",
+		"description": "Compress files or standard input.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "hd",
+		"description": "An alias for \"hexdump -C\".",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "hdparm",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "head",
+		"description": "Print first N lines of each file (or standard input) to standard output.  If more than one file, precede each with a header giving the file name.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "hexdump",
+		"description": "Dispay file(s) or standard input in a user-specified format.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "hostid",
+		"description": "Print out a unique 32-bit identifier for the machine.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "hostname",
+		"description": "Get or set hostname or DNS domain name.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "httpd",
+		"description": "Listen for incoming HTTP requests.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "hush",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "hwclock",
+		"description": "Query or set hardware clock (RTC).",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "id",
+		"description": "Print information about a user.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "ifconfig",
+		"description": "Configure a network interface.",
+		"difficulty": "Medium",
+		"status": "Not Started."
+	},
+	{
+		"name": "ifdown",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ifenslave",
+		"description": "Configure network interfaces for parallel routing.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "ifplugd",
+		"description": "Network interface plug detection daemon.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "ifup",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "inetd",
+		"description": "Listen for network connections and launch programs.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "init",
+		"description": "The parent of all processes.",
+		"difficulty": "Hard",
+		"status": "Not Started"
+	},
+	{
+		"name": "inotifyd",
+		"description": "Run a program on filesystem changes.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "insmod",
+		"description": "Load the specified kernel modules into the kernel.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "install",
+		"description": "Copy files and set attributes.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "ionice",
+		"description": "Change I/O scheduling class and priority.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "ip",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ipaddr",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ipcalc",
+		"description": "Calculate IP network settings from an IP address.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "ipcrm",
+		"description": "Add or remove an object by shmid value.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "ipcs",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "iplink",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "iproute",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "iprule",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "iptunnel",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "kbd_mode",
+		"description": "Report or set the keyboard mode.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "kill",
+		"description": "Send a signal to given PIDs.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "killall",
+		"description": "Send a signal to given processes.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "killall5",
+		"description": "Send a signal to all processes outside the current session.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "klogd",
+		"description": "Kernel logger.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "last",
+		"description": "Show listing of the last users that logged into the system.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "length",
+		"description": "Print a string's length.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "less",
+		"description": "View a file or list of files. Allows for manipulating the files in various ways.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "linux32",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "linux64",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "linuxrc",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ln",
+		"description": "Create a link to the specified target.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "loadfont",
+		"description": "Load a console font from standard input.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "loadkmap",
+		"description": "Load a binary keyboard translation table from standard input.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "logger",
+		"description": "Write a message to the system log.  Can also log from standard input.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "login",
+		"description": "Begin a new session on the system.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "logname",
+		"description": "Print the name of the current user.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "logread",
+		"description": "Show messages in syslogd's circular buffer.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "losetup",
+		"description": "Associate loop devices.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "lpd",
+		"description": "Print file.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "lpq",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "lpr",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ls",
+		"description": "List directory contents.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "lsattr",
+		"description": "List file attributes on an ext2 fs.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "lsmod",
+		"description": "List the currently loaded kernel modules.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "lzmacat",
+		"description": "Uncompress to standard out.",
+		"difficulty": "Easy",
+		"status": "Not Started"
+	},
+	{
+		"name": "lzop",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "lzopcat",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "makemime",
+		"description": "Create multipart MIME-encoded message from files.",
+		"difficulty": "Medium",
+		"status": "Not Started"
+	},
+	{
+		"name": "man",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "md5sum",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mdev",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mesg",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "microcom",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mkdir",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mkdosfs",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mkfifo",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mkfs.minix",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mkfs.vfat",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mknod",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mkpasswd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mkswap",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mktemp",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "modprobe",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "more",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mount",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mountpoint",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mt",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "mv",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "nameif",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "nc",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "netstat",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "nice",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "nmeter",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "nohup",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "nslookup",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "od",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "openvt",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "passwd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "patch",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "pgrep",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "pidof",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ping",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ping6",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "pipe_progress",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "pivot_root",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "pkill",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "popmaildir",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "printenv",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "printf",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ps",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "pscan",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "pwd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "raidautorun",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rdate",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rdev",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "readlink",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "readprofile",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "realpath",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "reformime",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "renice",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "reset",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "resize",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rm",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rmdir",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rmmod",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "route",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rpm",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rpm2cpio",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rtcwake",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "run-parts",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "runlevel",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "runsv",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "runsvdir",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "rx",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "script",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "scriptreplay",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sed",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sendmail",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "seq",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "setarch",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "setconsole",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "setfont",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "setkeycodes",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "setlogcons",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "setsid",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "setuidgid",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sh",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sha1sum",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sha256sum",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sha512sum",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "showkey",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "slattach",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sleep",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "softlimit",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sort",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "split",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "start-stop-daemon",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "stat",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "strings",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "stty",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "su",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sulogin",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sum",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sv",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "svlogd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "swapoff",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "swapon",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "switch_root",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sync",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "sysctl",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "syslogd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tac",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tail",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tar",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "taskset",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tcpsvd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tee",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "telnet",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "telnetd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "test",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tftp",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tftpd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "time",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "timeout",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "top",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "touch",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tr",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "traceroute",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "true",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "tty",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "ttysize",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "udhcpc",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "udhcpd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "udpsvd",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "umount",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "uname",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "uncompress",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "unexpand",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "uniq",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "unix2dos",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "unlzma",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "unlzop",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "unzip",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "uptime",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "usleep",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "uudecode",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "uuencode",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "vconfig",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "vi",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "vlock",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "volname",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "watch",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "watchdog",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "wc",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "wget",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "which",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "who",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "whoami",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "xargs",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "yes",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "zcat",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	},
+	{
+		"name": "zcip",
+		"description": "",
+		"difficulty": "",
+		"status": ""
+	}
+]

@@ -9,6 +9,9 @@ SOURCE_PATH_BOXER=${ROOT_PATH}/boxer
 INCLUDE_PATH=${ROOT_PATH}/include
 TEST_PATH=${ROOT_PATH}/test
 BUILD_PATH=${ROOT_PATH}/build
+SCRIPT_PATH=${ROOT_PATH}/script
+DOC_PATH=${ROOT_PATH}/doc
+
 DEFAULT_INSTALL_PATH=bin
 INSTALL_PATH?=${DEFAULT_INSTALL_PATH}
 
@@ -51,3 +54,7 @@ build_tests: build
 .PHONY: clean
 clean:
 	rm -rf ${BUILD_PATH}
+
+.PHONY: docs
+docs:
+	python ${SCRIPT_PATH}/genReadme.py -r "${DOC_PATH}/readmeData.json" -m "${DOC_PATH}/moduleData.json" -o "${ROOT_PATH}/README.md"
