@@ -41,6 +41,7 @@ include_directories(
 
 add_executable( ${MAIN_PROJECT_NAME} ${SOURCES} )
 add_dependencies( ${MAIN_PROJECT_NAME} RUN_${BOXER_PROJECT_NAME} )
+add_dependencies( ${MAIN_PROJECT_NAME} GENERATE_DOCS_${MAIN_PROJECT_NAME} )
 add_custom_command( 
     TARGET ${MAIN_PROJECT_NAME} POST_BUILD
     WORKING_DIRECTORY ${BUILD_PATH}/${MAIN_PROJECT_NAME}
@@ -56,7 +57,8 @@ get_filename_component( GENSYMLINK_SCRIPT_PATH "${SCRIPT_DIR}/genSymLinks.sh" RE
 get_filename_component( TEST_CMAKE_PATH "${PROJECT_SOURCE_DIR}/../test/commandTests/CMakeLists.txt" REALPATH )
 get_filename_component( COMMAND_CMAKE_PATH "${COMMAND_SOURCE_DIR}/CMakeLists.txt" REALPATH )
 
-add_custom_target( RUN_${BOXER_PROJECT_NAME}
+add_custom_target( 
+    RUN_${BOXER_PROJECT_NAME}
     WORKING_DIRECTORY ${BUILD_PATH}
     COMMAND ${BOXER_PROJECT_NAME} 
         -c "${COMMAND_SOURCE_DIR}" 
@@ -67,6 +69,16 @@ add_custom_target( RUN_${BOXER_PROJECT_NAME}
         -m "${COMMAND_CMAKE_PATH}"
 )
 add_dependencies( RUN_${BOXER_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
+
+get_filename_component( GENREADME_SCRIPT "${SCRIPT_PATH}/genReadme.py" REALPATH )
+get_filename_component( READMEDATA_JSON "${DOC_PATH}/readmeData.json" REALPATH )
+get_filename_component( MODULEDATA_JSON "${DOC_PATH}/moduleData.json" REALPATH )
+get_filename_component( README_MD "${ROOT_PATH}/README.md" REALPATH )
+add_custom_target( 
+    GENERATE_DOCS_${MAIN_PROJECT_NAME} 
+	COMMAND python ${GENREADME_SCRIPT} -r ${READMEDATA_JSON} -m ${MODULEDATA_JSON} -o ${README_MD}
+)
+add_dependencies( GENERATE_DOCS_${MAIN_PROJECT_NAME} ${BOXER_PROJECT_NAME} )
 
 install( 
     TARGETS ${MAIN_PROJECT_NAME}
