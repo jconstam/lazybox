@@ -3,6 +3,24 @@
 add_test( lazybox ${OUTPUT_PATH}/lazybox )
 set_tests_properties( lazybox PROPERTIES PASS_REGULAR_EXPRESSION "LazyBox - BusyBox's less portable, less functional cousin." )
 
+add_test( NAME basename_noFile WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox basename  CMD_OUTPUT_SPLITTER basename: missing operand\n )
+add_test( NAME basename_noFile_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/basename  CMD_OUTPUT_SPLITTER basename: missing operand\n )
+
+add_test( NAME basename_singleFile WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox basename /path/to/the/file.ext CMD_OUTPUT_SPLITTER file.ext\n )
+add_test( NAME basename_singleFile_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/basename /path/to/the/file.ext CMD_OUTPUT_SPLITTER file.ext\n )
+
+add_test( NAME basename_singleFileWithExt WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox basename /path/to/the/file.ext .ext CMD_OUTPUT_SPLITTER file\n )
+add_test( NAME basename_singleFileWithExt_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/basename /path/to/the/file.ext .ext CMD_OUTPUT_SPLITTER file\n )
+
+add_test( NAME basename_singleFileWithExtWrong WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox basename /path/to/the/file.ext .ext2 CMD_OUTPUT_SPLITTER file.ext\n )
+add_test( NAME basename_singleFileWithExtWrong_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/basename /path/to/the/file.ext .ext2 CMD_OUTPUT_SPLITTER file.ext\n )
+
+add_test( NAME basename_singleFolder WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox basename /path/to/the/folder/ CMD_OUTPUT_SPLITTER folder\n )
+add_test( NAME basename_singleFolder_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/basename /path/to/the/folder/ CMD_OUTPUT_SPLITTER folder\n )
+
+add_test( NAME basename_singleFolderWithExt WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox basename /path/to/the/folder/ .ext CMD_OUTPUT_SPLITTER folder\n )
+add_test( NAME basename_singleFolderWithExt_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/basename /path/to/the/folder/ .ext CMD_OUTPUT_SPLITTER folder\n )
+
 add_test( NAME cat_multiFile1 WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox cat cat/test1 cat/test2 CMD_OUTPUT_SPLITTER First\nSecond\nThirdFourth\nFifth\n )
 add_test( NAME cat_multiFile1_symlink WORKING_DIRECTORY /mnt/c/Users/callm/Documents/dev/lazybox/test/commandTests COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/cat cat/test1 cat/test2 CMD_OUTPUT_SPLITTER First\nSecond\nThirdFourth\nFifth\n )
 

@@ -40,7 +40,7 @@ TO BE COMPLETED
 |bzcat|Uncompress to stdout.|Easy|Not Started|
 |bzip2|Compress file(s) (or standard input) with bzip2 algorithm.|Easy|Not Started|
 |cal|Display a calendar.|Easy|Not Started|
-|cat|Concatenate file(s) and print them to standard out.|Easy|Not Started|
+|cat|Concatenate file(s) and print them to standard out.|Easy|Done|
 |catv|Concatenate file(s) and print them to standard out.  Display nonprinting characters.|Easy|Not Started|
 |chat|Useful for interacting with a modem connected to stdin/stdout. A script consists of one or more "expect-send" pairs of strings, each pair is a pair of arguments.|Hard|Not Started|
 |chattr|Change file attributes on an ext2 fs.|Medium|Not Started|

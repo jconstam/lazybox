@@ -117,7 +117,7 @@
 		"name": "cat",
 		"description": "Concatenate file(s) and print them to standard out.",
 		"difficulty": "Easy",
-		"status": "Not Started"
+		"status": "Done"
 	},
 	{
 		"name": "catv",
