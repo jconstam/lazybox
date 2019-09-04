@@ -8,7 +8,7 @@ Really, this is just a pet project to play around with system programming in C/C
 ## Testing
 In order to test Lazybox, there are 3 components:
 
-1) CTest - Executes the Lazybox binary and the various symlinks to verify that the commands are executed as expected.
+1) CTest - Executes the Lazybox binary and the various symlinks to verify that the commands are executed as expected. In addition, each command is run through [Valgrind](http://www.valgrind.org/) to ensure there are no memory leaks.
 
 2) Unity - Unit testing for code written in C.
 
@@ -16,6 +16,7 @@ In order to test Lazybox, there are 3 components:
 
 ## Code Generation
 There are several files which are automatically generated as a part of the build process.
+
 TO BE COMPLETED
 
 # Modules

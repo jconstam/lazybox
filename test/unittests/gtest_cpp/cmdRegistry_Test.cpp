@@ -97,6 +97,21 @@ TEST_F( RunCommandTest, CustomCommand )
     EXPECT_EQ( 1, customFunctionARGC );
     EXPECT_STREQ( "command", customFunctionARGV[ 0 ].c_str( ) );
 }
+TEST_F( RunCommandTest, CustomCommandWithPath )
+{
+    MockCmdList mockCmdList;
+
+    customFunctionReturnValue = 3;
+
+    ON_CALL( mockCmdList, getFunction( "command" ) ).WillByDefault( Return( customFunction ) );
+    EXPECT_CALL( mockCmdList, getFunction( "command" ) ).Times( 1 );
+    
+    RunCommand( mockCmdList, { "/path/to/the/lazybox", "command" }, 3, "", __LINE__ );
+
+    EXPECT_EQ( true, customFunctionRan );
+    EXPECT_EQ( 1, customFunctionARGC );
+    EXPECT_STREQ( "command", customFunctionARGV[ 0 ].c_str( ) );
+}
 TEST_F( RunCommandTest, CustomCommandManyArgs )
 {
     MockCmdList mockCmdList;
@@ -142,6 +157,21 @@ TEST_F( RunCommandTest, SymlinkCustomCommand )
     EXPECT_EQ( true, customFunctionRan );
     EXPECT_EQ( 1, customFunctionARGC );
     EXPECT_STREQ( "command", customFunctionARGV[ 0 ].c_str( ) );
+}
+TEST_F( RunCommandTest, SymlinkCustomCommandWithPath )
+{
+    MockCmdList mockCmdList;
+
+    customFunctionReturnValue = 3;
+
+    ON_CALL( mockCmdList, getFunction( "command" ) ).WillByDefault( Return( customFunction ) );
+    EXPECT_CALL( mockCmdList, getFunction( "command" ) ).Times( 1 );
+    
+    RunCommand( mockCmdList, { "/path/to/the/command" }, 3, "", __LINE__ );
+
+    EXPECT_EQ( true, customFunctionRan );
+    EXPECT_EQ( 1, customFunctionARGC );
+    EXPECT_STREQ( "/path/to/the/command", customFunctionARGV[ 0 ].c_str( ) );
 }
 TEST_F( RunCommandTest, SymlinkCustomCommandManyArgs )
 {

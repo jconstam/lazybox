@@ -3,6 +3,8 @@
     @name echo
     @descrip Echos a string back  
     @function run_echo
+    @status In Progress
+    @author Jason Constam
 
     @test nothing
     @t_param nothing
