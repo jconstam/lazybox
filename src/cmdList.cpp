@@ -2,7 +2,7 @@
 
 #include "cmdList.hpp"
 
-const std::map<std::string, CmdFunc> commandList =
+const std::map<std::string, CmdFunc> CmdList::commandList =
 {
 	{ "basename", run_basename },
 	{ "cat", run_cat },

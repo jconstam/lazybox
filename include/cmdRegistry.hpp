@@ -4,11 +4,12 @@
 #include <map>
 #include <string>
 
+#include "cmdList.hpp"
 #include "cmdRegistry.hpp"
 
 class CommandRegistry
 {
     public:
-        static int runCommand( int argc, char* argv[] );
+        static int runCommand( CmdListBase& commands, int argc, char* argv[] );
 };
 #endif

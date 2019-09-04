@@ -93,7 +93,7 @@ void CmdFileScanner::writeCmdListfile( string listFilePath )
     addFileHeader( output );
 
     output << "#include \"cmdList.hpp\"" << endl << endl;
-    output << "const std::map<std::string, CmdFunc> commandList =" << endl;
+    output << "const std::map<std::string, CmdFunc> CmdList::commandList =" << endl;
     output << "{" << endl;
     
     for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )

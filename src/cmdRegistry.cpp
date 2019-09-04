@@ -1,11 +1,10 @@
 #include <iostream>
 
 #include "cmdRegistry.hpp"
-#include "cmdList.hpp"
 
 using namespace std;
 
-int CommandRegistry::runCommand( int argc, char* argv[] )
+int CommandRegistry::runCommand( CmdListBase& commands, int argc, char* argv[] )
 {
     string command = string( argv[ 0 ] );
 
@@ -24,16 +23,20 @@ int CommandRegistry::runCommand( int argc, char* argv[] )
         }
         else
         {
-            return runCommand( argc - 1, &( argv[ 1 ] ) );
+            return runCommand( commands, argc - 1, &( argv[ 1 ] ) );
         }
     }
-    else if( commandList.find( command ) != commandList.end( ) )
+    else 
     {
-        return commandList.at( command )( argc, &( argv[ 0 ] ) );
-    }
-    else
-    {
-        cout << "Could not find command \"" << command << "\"" << endl;
-        return -1;
+        CmdFunc commandFunction = commands.getFunction( command );
+        if( commandFunction != nullptr )
+        {
+            return commandFunction( argc, &( argv[ 0 ] ) );
+        }
+        else
+        {
+            cout << "Could not find command \"" << command << "\"" << endl;
+            return -1;
+        }
     }
 }
