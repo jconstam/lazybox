@@ -10,6 +10,7 @@ addons:
       cmake
       python-pip
       lcov
+      ruby
       xsltproc
       valgrind
 

@@ -30,14 +30,17 @@ class RunCommandTest : public ::testing::Test
 
         }
 
-        static int RunCommand( vector<const char*> parameters )
+        static void RunCommand( vector<const char*> parameters, int expectedResult, string expectedOutput, int line )
         {
             MockCmdList cmdList;
-            return CommandRegistry::runCommand( cmdList, parameters.size( ), ( char** ) parameters.data( ) );
+
+            testing::internal::CaptureStdout( );
+            EXPECT_EQ( expectedResult, CommandRegistry::runCommand( cmdList, parameters.size( ), ( char** ) parameters.data( ) ) ) << "Actual error is on line " << line;
+            EXPECT_EQ( expectedOutput, testing::internal::GetCapturedStdout( ) ) << "Actual error is on line " << line;
         }
 };
 
 TEST_F( RunCommandTest, Dummy )
 {
-    RunCommand( { "dummy" } );
+    RunCommand( { "lazybox" }, 0, "LazyBox - BusyBox's less portable, less functional cousin.\n", __LINE__ );
 }
