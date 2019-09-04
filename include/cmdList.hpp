@@ -10,6 +10,7 @@ typedef int ( *CmdFunc )( int, char** );
 class CmdListBase
 {
     public:
+        virtual ~CmdListBase( ) { };
         virtual CmdFunc getFunction( std::string funcName ) = 0;
 };
 

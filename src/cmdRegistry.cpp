@@ -36,7 +36,7 @@ int CommandRegistry::runCommand( CmdListBase& commands, int argc, char* argv[] )
         else
         {
             cout << "Could not find command \"" << command << "\"" << endl;
-            return -1;
+            return 1;
         }
     }
 }
