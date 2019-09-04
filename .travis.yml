@@ -10,8 +10,8 @@ addons:
       cmake
       python-pip
       lcov
-      ruby
       xsltproc
+      valgrind
 
 install:
   - pip install --user -r requirements.txt
