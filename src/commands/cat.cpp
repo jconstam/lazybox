@@ -87,7 +87,7 @@ static string readEntireFile( string filePath )
 static void NumberLine( int lineNumber )
 {
     cout.width( 6 );
-    cout << right << lineNumber << "  ";
+    cout << right << lineNumber << "\t";
 }
 
 static void PrintCharacter( char character, bool showTabs, bool showNonPrintable )
@@ -148,7 +148,9 @@ int run_cat( int argc, char* argv[ ] )
         params.showTabs = true;
     }
 
+    int lineNumber = 1;
     int fileIndex;
+    bool startOfLine = true;
     for( fileIndex = startIndex; fileIndex < argc; fileIndex++ )
     {
         string filePath = argv[ fileIndex ];
@@ -160,8 +162,6 @@ int run_cat( int argc, char* argv[ ] )
             return 1;
         }
 
-        int lineNumber = 1;
-        bool startOfLine = true;
         string fileContents = readEntireFile( filePath );
         for( size_t fileIndex = 0U; fileIndex < fileContents.length( ); fileIndex++ )
         {
