@@ -169,15 +169,21 @@ int run_cat( int argc, char* argv[ ] )
             {
                 if( params.squeezeBlank )
                 {
+                    bool hasNewLine = false;
                     while( fileContents[ fileIndex ] == '\n' )
                     {
+                        hasNewLine = true;
                         fileIndex++;
                         if( fileIndex >= fileContents.length( ) )
                         {
                             break;
                         }
                     }
-
+                    
+                    if( hasNewLine )
+                    {
+                        PrintCharacter( '\n', params.showTabs, params.showNonPrintable );
+                    }
                     if( fileIndex >= fileContents.length( ) )
                     {
                         break;
