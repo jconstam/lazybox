@@ -4,98 +4,29 @@
     @descrip Concatenate file(s) and print them to standard out.
     @function run_cat
     
-    @test singleFile1
-    @t_param singleFile1 cat/test1
-    @t_output singleFile1 First\nSecond\nThird
-    
-    @test singleFile2
-    @t_param singleFile2 cat/test2
-    @t_output singleFile2 Fourth\nFifth\n
-
-    @test singleFileLineNums
-    @t_param singleFileLineNums -n cat/test1
-    @t_output singleFileLineNums "     1  First\n     2  Second\n     3  Third"
-
-    @test singleFileLineNumsNonBlank1
-    @t_param singleFileLineNumsNonBlank1 -n cat/test3
-    @t_output singleFileLineNumsNonBlank1 "     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n"
-
-    @test singleFileLineNumsNonBlank2
-    @t_param singleFileLineNumsNonBlank2 -b cat/test3
-    @t_output singleFileLineNumsNonBlank2 "     1  Sixth\n\n     2  Seventh\n     3  Eighth\n"
-    
-    @test multiFile1
-    @t_param multiFile1 cat/test1 cat/test2
-    @t_output multiFile1 First\nSecond\nThirdFourth\nFifth\n
-
-    @test multiFileLineNums1
-    @t_param multiFileLineNums1 -n cat/test1 cat/test2
-    @t_output multiFileLineNums1 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n"
-
-    @test multiFileLineNums2
-    @t_param multiFileLineNums2 -n cat/test1 cat/test2 cat/test3
-    @t_output multiFileLineNums2 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n     2  \n     3  Seventh\n     4  Eighth\n"
-
-    @test multiFileLineNums3
-    @t_param multiFileLineNums3 -b cat/test1 cat/test2 cat/test3
-    @t_output multiFileLineNums3 "     1  First\n     2  Second\n     3  Third     1  Fourth\n     2  Fifth\n     1  Sixth\n\n     2  Seventh\n     3  Eighth\n"
-    
-    @test singleFileShowEnds1
-    @t_param singleFileShowEnds1 -E cat/test1
-    @t_output singleFileShowEnds1 First$\nSecond$\nThird
-    
-    @test singleFileShowEnds2
-    @t_param singleFileShowEnds2 -E cat/test2
-    @t_output singleFileShowEnds2 Fourth$\nFifth$\n
-    
-    @test singleFileSqueeze1
-    @t_param singleFileSqueeze1 -s cat/test1
-    @t_output singleFileSqueeze1 First\nSecond\nThird
-    
-    @test singleFileSqueeze2
-    @t_param singleFileSqueeze2 -s cat/test3
-    @t_output singleFileSqueeze2 Sixth\nSeventh\nEighth\n
-    
-    @test singleFileShowTabs1
-    @t_param singleFileShowTabs1 -T cat/test1
-    @t_output singleFileShowTabs1 First\nSecond\nThird
-    
-    @test singleFileShowTabs2
-    @t_param singleFileShowTabs2 cat/test4
-    @t_output singleFileShowTabs2 \tNinth\nTenth\n
-    
-    @test singleFileShowTabs3
-    @t_param singleFileShowTabs3 -T cat/test4
-    @t_output singleFileShowTabs3 ^INinth\nTenth\n
-    
-    @test singleFileShowNonPrintable1
-    @t_param singleFileShowNonPrintable1 -v cat/test5
-    @t_output singleFileShowNonPrintable1 "^@^A^B^C^D^E^F^G^H\t\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?\n"
-    
-    @test singleFileShowAll1
-    @t_param singleFileShowAll1 -A cat/test4
-    @t_output singleFileShowAll1 ^INinth$\nTenth$\n
-    
-    @test singleFileShowAll2
-    @t_param singleFileShowAll2 -A cat/test5
-    @t_output singleFileShowAll2 "^@^A^B^C^D^E^F^G^H^I$\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?$\n"
-    
-    @test singleFileShowAllNoTabs1
-    @t_param singleFileShowAllNoTabs1 -e cat/test4
-    @t_output singleFileShowAllNoTabs1 \tNinth$\nTenth$\n
-    
-    @test singleFileShowAllNoTabs2
-    @t_param singleFileShowAllNoTabs2 -e cat/test5
-    @t_output singleFileShowAllNoTabs2 "^@^A^B^C^D^E^F^G^H\t$\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?$\n"
-    
-    @test singleFileShowAllNoEnds1
-    @t_param singleFileShowAllNoEnds1 -t cat/test4
-    @t_output singleFileShowAllNoEnds1 ^INinth\nTenth\n
-    
-    @test singleFileShowAllNoEnds2
-    @t_param singleFileShowAllNoEnds2 -t cat/test5
-    @t_output singleFileShowAllNoEnds2 "^@^A^B^C^D^E^F^G^H^I\n^K^L^M^N^O^P^Q^R^S^T^U^V^W^X^Y^Z^[^\\^]^^^_ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~^?M-^@M-^AM-^BM-^CM-^DM-^EM-^FM-^GM-^HM-^IM-^JM-^KM-^LM-^MM-^NM-^OM-^PM-^QM-^RM-^SM-^TM-^UM-^VM-^WM-^XM-^YM-^ZM-^[M-^\\M-^]M-^^M-^_M- M-!M-\"M-#M-$M-%M-&M-'M-(M-)M-*M-+M-,M--M-.M-/M-0M-1M-2M-3M-4M-5M-6M-7M-8M-9M-:M-;M-<M-=M->M-?M-@M-AM-BM-CM-DM-EM-FM-GM-HM-IM-JM-KM-LM-MM-NM-OM-PM-QM-RM-SM-TM-UM-VM-WM-XM-YM-ZM-[M-\\M-]M-^M-_M-`M-aM-bM-cM-dM-eM-fM-gM-hM-iM-jM-kM-lM-mM-nM-oM-pM-qM-rM-sM-tM-uM-vM-wM-xM-yM-zM-{M-|M-}M-~M-^?\n"
-    
+    @test singleFile1 ${COMMAND_TEST_ROOT}/cat/test1
+    @test singleFile2 ${COMMAND_TEST_ROOT}/cat/test2
+    @test singleFileLineNums -n ${COMMAND_TEST_ROOT}/cat/test1
+    @test singleFileLineNumsNonBlank1 -n ${COMMAND_TEST_ROOT}/cat/test3
+    @test singleFileLineNumsNonBlank2 -b ${COMMAND_TEST_ROOT}/cat/test3
+    @test multiFile1 ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2
+    @test multiFileLineNums1 -n ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2
+    @test multiFileLineNums2 -n ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2 ${COMMAND_TEST_ROOT}/cat/test3
+    @test multiFileLineNums3 -b ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2 ${COMMAND_TEST_ROOT}/cat/test3
+    @test singleFileShowEnds1 -E ${COMMAND_TEST_ROOT}/cat/test1
+    @test singleFileShowEnds2 -E ${COMMAND_TEST_ROOT}/cat/test2
+    @test singleFileSqueeze1 -s ${COMMAND_TEST_ROOT}/cat/test1
+    @test singleFileSqueeze2 -s ${COMMAND_TEST_ROOT}/cat/test3
+    @test singleFileShowTabs1 -T ${COMMAND_TEST_ROOT}/cat/test1
+    @test singleFileShowTabs2 ${COMMAND_TEST_ROOT}/cat/test4
+    @test singleFileShowTabs3 -T ${COMMAND_TEST_ROOT}/cat/test4
+    @test singleFileShowNonPrintable1 -v ${COMMAND_TEST_ROOT}/cat/test5
+    @test singleFileShowAll1 -A ${COMMAND_TEST_ROOT}/cat/test4
+    @test singleFileShowAll2 -A ${COMMAND_TEST_ROOT}/cat/test5
+    @test singleFileShowAllNoTabs1 -e ${COMMAND_TEST_ROOT}/cat/test4
+    @test singleFileShowAllNoTabs2 -e ${COMMAND_TEST_ROOT}/cat/test5
+    @test singleFileShowAllNoEnds1 -t ${COMMAND_TEST_ROOT}/cat/test4
+    @test singleFileShowAllNoEnds2 -t ${COMMAND_TEST_ROOT}/cat/test5
  */
 
 #include <string>

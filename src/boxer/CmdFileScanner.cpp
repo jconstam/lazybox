@@ -202,12 +202,40 @@ void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, LazyBoxComm
     string testNameSL = command.getName( ) + "_" + test.getName( ) + "_symlink";
     string testNameVG = command.getName( ) + "_" + test.getName( ) + "_valgrind";
 
-    output << "add_test( NAME " << testName << " WORKING_DIRECTORY " << execPath << " COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/lazybox " << command.getName( ) << " ";
-    output << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
-    output << "add_test( NAME " << testNameSL << " WORKING_DIRECTORY " << execPath << " COMMAND ${SCRIPT_PATH}/runTest.py ${OUTPUT_PATH}/" << command.getName( ) << " ";
-    output << test.getParameters( ) << " CMD_OUTPUT_SPLITTER " << test.getOutput( ) << " )" << endl;
-    output << "add_test( NAME " << testNameVG << " WORKING_DIRECTORY " << execPath << " COMMAND ${SCRIPT_PATH}/runValgrind.sh ";
-    output << "${OUTPUT_PATH}/" << command.getName( ) << " " << test.getParameters( ) << " )" << endl;
+    output << "add_test(";
+    output << " NAME " << testName;
+    output << " WORKING_DIRECTORY " << execPath;
+    output << " COMMAND ${SCRIPT_PATH}/runTest.py";
+    output << " --command " << command.getName( );
+    output << " --buildPath \"${OUTPUT_PATH}\"";
+    output << " --workingPath \"${BUILD_PATH}\"";
+    if( test.getParameters( ) != "" )
+    {
+        output << " --parameters " << test.getParameters( );
+    }
+    output << " )" << endl;
+
+    output << "add_test(";
+    output << " NAME " << testNameSL;
+    output << " WORKING_DIRECTORY " << execPath;
+    output << " COMMAND ${SCRIPT_PATH}/runTest.py";
+    output << " --useSymlink";
+    output << " --command " << command.getName( );
+    output << " --buildPath \"${OUTPUT_PATH}\"";
+    output << " --workingPath \"${BUILD_PATH}\""; 
+    if( test.getParameters( ) != "" )
+    {
+        output << " --parameters " << test.getParameters( );
+    }
+    output << " )" << endl;
+
+    output << "add_test(";
+    output << " NAME " << testNameVG;
+    output << " WORKING_DIRECTORY " << execPath;
+    output << " COMMAND ${SCRIPT_PATH}/runValgrind.sh";
+    output << " ${OUTPUT_PATH}/" << command.getName( ) << " " << test.getParameters( );
+    output << " )" << endl;
+
     output << endl;
 }
 

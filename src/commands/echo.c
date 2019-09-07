@@ -7,48 +7,16 @@
     @author Jason Constam
 
     @test nothing
-    @t_param nothing
-    @t_output nothing \n
-
-    @test one
-    @t_param one "testing"
-    @t_output one "testing\n"
-
-    @test many
-    @t_param many "this is a lot of parameters and some are numbers 1 2 3"
-    @t_output many "this is a lot of parameters and some are numbers 1 2 3\n"
-
-    @test nonewline_one
-    @t_param nonewline_one -n testing
-    @t_output nonewline_one testing
-
-    @test nonewline_many
-    @t_param nonewline_many -n this is a lot of parameters and some are numbers 1 2 3
-    @t_output nonewline_many this is a lot of parameters and some are numbers 1 2 3
-
-    @test escape_newline1
-    @t_param escape_newline1 -e testing\n
-    @t_output escape_newline1 testing\n\n
-
-    @test escape_newline2
-    @t_param escape_newline2 -e -n testing\n
-    @t_output escape_newline2 testing\n
-
-    @test escape_newline3
-    @t_param escape_newline3 -e testing\n\n\ntesting\ntesting
-    @t_output escape_newline3 testing\n\n\ntesting\ntesting\n
-
-    @test escape_newline4
-    @t_param escape_newline4 testing\\n
-    @t_output escape_newline4 testing\\n\n
-
-    @test escape_tab1
-    @t_param escape_tab1 -e testing\ttesting
-    @t_output escape_tab1 testing\ttesting\n
-
-    @test escape_tab2
-    @t_param escape_tab2 -e testing\t\t\ttesting
-    @t_output escape_tab2 testing\t\t\ttesting\n
+    @test one "testing"
+    @test many "this is a lot of parameters and some are numbers 1 2 3"
+    @test nonewline_one -n testing
+    @test nonewline_many -n this is a lot of parameters and some are numbers 1 2 3
+    @test escape_newline1 -e testing\n
+    @test escape_newline2 -e -n testing\n
+    @test escape_newline3 -e testing\n\n\ntesting\ntesting
+    @test escape_newline4 testing\\n
+    @test escape_tab1 -e testing\ttesting
+    @test escape_tab2 -e testing\t\t\ttesting
  */
 
 #include <stdio.h>

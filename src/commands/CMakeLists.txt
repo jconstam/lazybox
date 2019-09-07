@@ -2,6 +2,7 @@
 
 set( COMMAND_SOURCES_C
 	${COMMAND_SOURCE_DIR}/basename.c
+	${COMMAND_SOURCE_DIR}/cksum.c
 	${COMMAND_SOURCE_DIR}/echo.c
 	PARENT_SCOPE
 )

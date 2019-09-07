@@ -5,28 +5,11 @@
     @function run_basename
     
     @test noFile
-    @t_param noFile
-    @t_output noFile basename: missing operand\n
-
-    @test singleFile
-    @t_param singleFile /path/to/the/file.ext
-    @t_output singleFile file.ext\n
-
-    @test singleFileWithExt
-    @t_param singleFileWithExt /path/to/the/file.ext .ext
-    @t_output singleFileWithExt file\n
-    
-    @test singleFileWithExtWrong
-    @t_param singleFileWithExtWrong /path/to/the/file.ext .ext2
-    @t_output singleFileWithExtWrong file.ext\n
-
-    @test singleFolder
-    @t_param singleFolder /path/to/the/folder/
-    @t_output singleFolder folder\n
-
-    @test singleFolderWithExt
-    @t_param singleFolderWithExt /path/to/the/folder/ .ext
-    @t_output singleFolderWithExt folder\n
+    @test singleFile /path/to/the/file.ext
+    @test singleFileWithExt /path/to/the/file.ext .ext
+    @test singleFileWithExtWrong /path/to/the/file.ext .ext2
+    @test singleFolder /path/to/the/folder/
+    @test singleFolderWithExt /path/to/the/folder/ .ext
 */
 
 #include <stdio.h>

@@ -16,7 +16,6 @@ static const string DESCRIP_MARKER = "@descrip";
 static const string FUNCTION_MARKER = "@function";
 static const string TEST_MARKER = "@test";
 static const string TESTPARAM_MARKER = "@t_param";
-static const string TESTOUTPUT_MARKER = "@t_output";
 
 LazyBoxCommand::LazyBoxCommand( string fileName, string fileContents )
 {
@@ -33,43 +32,17 @@ LazyBoxCommand::LazyBoxCommand( string fileName, string fileContents )
     while( location != string::npos )
     {
         string testName;
-        location = parseField( fileContents, TEST_MARKER, testName, location );
+        string parameters;
+        location = parseDoubleField( fileContents, TEST_MARKER, testName, parameters, location );
         if( location != string::npos )
         {
             map<string,LazyBoxCommandTest>::iterator it = m_tests.find( testName );
             if( it == m_tests.end( ) )
             {
                 LazyBoxCommandTest test( testName );
+                test.setParameters( parameters );
                 m_tests[ testName ] = test;
             }
-        }
-    }
-
-    location = 0;
-    while( location != string::npos )
-    {
-        string name;
-        string data;
-        location = parseDoubleField( fileContents, TESTOUTPUT_MARKER, name, data, location );
-
-        map<string,LazyBoxCommandTest>::iterator it = m_tests.find( name );
-        if( it != m_tests.end( ) )
-        {
-            m_tests[ name ].setOutput( data );
-        }
-    }
-
-    location = 0;
-    while( location != string::npos )
-    {
-        string name;
-        string data;
-        location = parseDoubleField( fileContents, TESTPARAM_MARKER, name, data, location );
-
-        map<string,LazyBoxCommandTest>::iterator it = m_tests.find( name );
-        if( it != m_tests.end( ) )
-        {
-            m_tests[ name ].setParameters( data );
         }
     }
 }
@@ -209,16 +182,8 @@ string LazyBoxCommandTest::getParameters( )
 {
     return m_parameters;
 }
-string LazyBoxCommandTest::getOutput( )
-{
-    return m_output;
-}
 
 void LazyBoxCommandTest::setParameters( string parameters )
 {
     m_parameters = parameters;
-}
-void LazyBoxCommandTest::setOutput( string output )
-{
-    m_output = output;
 }
