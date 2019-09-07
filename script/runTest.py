@@ -15,11 +15,25 @@ def parseArgs( ):
 
     return parser.parse_args( )
 
+def getStdoutFileName( filePath ):
+    return '{}_stdout'.format( filePath )
+def getStderrFileName( filePath ):
+    return '{}_stderr'.format( filePath )
+
 def executeCommand( filePath, command ):
     print( 'Running command {}'.format( ' '.join( command ) ) )
-    with open( filePath, 'w' ) as outputFile:
-        output = subprocess.Popen( command, stdout=outputFile )
-        output.wait( )
+    with open( getStdoutFileName( filePath ), 'w' ) as stdoutFile:
+        with open( getStderrFileName( filePath ), 'w' ) as stderrFile:
+            output = subprocess.Popen( command, stdout=stdoutFile, stderr=stderrFile )
+            output.wait( )
+
+def compareCommands( file1, file2 ):
+    command = [ 'diff', file1, file2 ]
+
+    output = subprocess.Popen( command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT )
+    output.wait( )
+
+    return output.returncode, output.communicate( )[ 0 ].decode( 'utf-8' )
 
 if __name__ == "__main__":
     args = parseArgs( )
@@ -35,23 +49,24 @@ if __name__ == "__main__":
     lazyBoxCommand.extend( args.parameters )
     lazyBoxOutputFilePath = os.path.abspath( os.path.join( args.workingPath, 'lazybox_{}_output'.format( args.command ) ) )
 
-    diffCommand = [ 'diff', systemOutputFilePath, lazyBoxOutputFilePath ]
-
     executeCommand( systemOutputFilePath, systemCommand )
     executeCommand( lazyBoxOutputFilePath, lazyBoxCommand )
 
-    diffOutput = subprocess.Popen( diffCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT )
-    diffOutput.wait( )
-    result = diffOutput.returncode
-    stdout,stderr = diffOutput.communicate( )
+    stdoutReturn, stdoutOutput = compareCommands( getStdoutFileName( systemOutputFilePath ), getStdoutFileName( lazyBoxOutputFilePath ) )
+    stderrReturn, stderrOutput = compareCommands( getStderrFileName( systemOutputFilePath ), getStderrFileName( lazyBoxOutputFilePath ) )
 
-    os.remove( systemOutputFilePath )
-    os.remove( lazyBoxOutputFilePath )
+    os.remove( getStdoutFileName( systemOutputFilePath ) )
+    os.remove( getStdoutFileName( lazyBoxOutputFilePath ) )
+    os.remove( getStderrFileName( systemOutputFilePath ) )
+    os.remove( getStderrFileName( lazyBoxOutputFilePath ) )
 
-    if result == 0:
+    if stdoutReturn == 0 and stderrReturn == 0:
         print( 'GOOD' )
     else:
         print( 'BAD' )
-        print( stdout.decode( 'utf-8' ) )
+        print( 'STDOUT: ', stdoutReturn )
+        print( stdoutOutput )
+        print( 'STDERR: ', stderrReturn )
+        print( stderrOutput )
 
-    sys.exit( result )
+    sys.exit( stdoutReturn + stderrReturn )

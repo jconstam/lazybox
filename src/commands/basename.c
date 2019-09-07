@@ -65,7 +65,8 @@ int run_basename( int argc, char* argv[ ] )
 
     if( startIndex >= argc )
     {
-        printf( "basename: missing operand\n" );
+        fprintf( stderr, "basename: missing operand\n" );
+        fprintf( stderr, "Try \'basename --help\' for more information.\n" );
         return 1;
     }
 
