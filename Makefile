@@ -45,6 +45,11 @@ test: build_tests
 	-cd ${OUTPUT_PATH_MAIN_TEST} && ctest --output-on-failure -T Test -C RelWithDebInfo
 	xsltproc script/ctest2junit.xsl ${BUILD_PATH}/test/Testing/`head -n 1 < ${BUILD_PATH}/test/Testing/TAG`/Test.xml > ${BUILD_PATH}/test/ctestjunittestresults.xml
 
+.PHONY: test_only
+test_only:
+	-cd ${OUTPUT_PATH_MAIN_TEST} && ctest --output-on-failure -T Test -C RelWithDebInfo
+	xsltproc script/ctest2junit.xsl ${BUILD_PATH}/test/Testing/`head -n 1 < ${BUILD_PATH}/test/Testing/TAG`/Test.xml > ${BUILD_PATH}/test/ctestjunittestresults.xml
+
 .PHONY: test_verbose
 test_verbose: build_tests
 	cd ${OUTPUT_PATH_MAIN_TEST} && ctest -V
