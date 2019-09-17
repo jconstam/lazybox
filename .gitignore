@@ -34,3 +34,6 @@
 # Build Directory
 build/
 install/
+
+# Generated Files
+test/commandTests/CMakeLists.txt

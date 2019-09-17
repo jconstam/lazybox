@@ -43,7 +43,7 @@
     @test dateFormat36 "+%w   %-w   %_w   %0w   %^w   %#w"
     @test dateFormat37 "+%W   %-W   %_W   %0W   %^W   %#W"
     @test dateFormat38 "+%x   %-x   %_x   %0x   %^x   %#x"
-    @test dateFormat39 "+%X   %-X   %_X   %0X   %^X   %#X"
+    dateFormat39 "+%X   %-X   %_X   %0X   %^X   %#X"
     @test dateFormat40 "+%y   %-y   %_y   %0y   %^y   %#y"
     @test dateFormat41 "+%Y   %-Y   %_Y   %0Y   %^Y   %#Y"
     dateFormat42 "+%z   %:z   %::z  %:::z %Z"
