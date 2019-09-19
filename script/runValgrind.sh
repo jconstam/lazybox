@@ -5,6 +5,7 @@ VALGRIND_ERR_CODE=7
 valgrind \
     --leak-check=full \
     --show-leak-kinds=all \
+    --error-for-leak-kinds=all \
     --error-exitcode=$VALGRIND_ERR_CODE \
     $@
     
