@@ -4,6 +4,8 @@
     @descrip Calculates the CRC-32 of one or more files.
     @function run_cksum
 
+    @config CMD_CKSUM
+
     @test directory ${COMMAND_TEST_ROOT}
     @test directoryWithFile ${COMMAND_TEST_ROOT} ${COMMAND_TEST_ROOT}/cksum/test1
     @test singleFile ${COMMAND_TEST_ROOT}/cksum/test1

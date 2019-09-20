@@ -3,6 +3,8 @@
     @name basename
     @descrip Strip directory path and .suffix from file name.
     @function run_basename
+
+    @config CMD_BASENAME
     
     @test noFile
     @test singleFile /path/to/the/file.ext

@@ -12,14 +12,11 @@ class LazyBoxCommandTest
 
         std::string getName( );
         std::string getParameters( );
-        std::string getOutput( );
 
         void setParameters( std::string parameters );
-        void setOutput( std::string output );
     private:
         std::string m_name;
         std::string m_parameters;
-        std::string m_output;
 };
 
 class LazyBoxCommand
@@ -35,12 +32,14 @@ class LazyBoxCommand
         std::string getName( );
         std::string getDescrip( );
         std::string getFunction( );
+        std::string getConfig( );
         std::vector<LazyBoxCommandTest> getTests( );
     private:
         std::string m_fileName;
         std::string m_name;
         std::string m_descrip;
         std::string m_function;
+        std::string m_config;
         std::map<std::string,LazyBoxCommandTest> m_tests;
 
         size_t parseField( std::string fileContents, std::string marker, std::string& fieldData, int pos = 0 );

@@ -3,8 +3,8 @@
     @name echo
     @descrip Echos a string back  
     @function run_echo
-    @status In Progress
-    @author Jason Constam
+
+    @config CMD_ECHO
 
     @test nothing
     @test one "testing"

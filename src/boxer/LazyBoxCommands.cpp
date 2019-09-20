@@ -15,7 +15,7 @@ static const string NAME_MARKER = "@name";
 static const string DESCRIP_MARKER = "@descrip";
 static const string FUNCTION_MARKER = "@function";
 static const string TEST_MARKER = "@test";
-static const string TESTPARAM_MARKER = "@t_param";
+static const string CONFIG_MARKER = "@config";
 
 LazyBoxCommand::LazyBoxCommand( string fileName, string fileContents )
 {
@@ -27,6 +27,7 @@ LazyBoxCommand::LazyBoxCommand( string fileName, string fileContents )
     parseField( fileContents, NAME_MARKER, m_name );
     parseField( fileContents, DESCRIP_MARKER, m_descrip );
     parseField( fileContents, FUNCTION_MARKER, m_function );
+    parseField( fileContents, CONFIG_MARKER, m_config );
 
     size_t location = 0;
     while( location != string::npos )
@@ -97,6 +98,10 @@ string LazyBoxCommand::getDescrip( )
 string LazyBoxCommand::getFunction( )
 {
     return m_function;
+}
+string LazyBoxCommand::getConfig( )
+{
+    return m_config;
 }
 vector<LazyBoxCommandTest> LazyBoxCommand::getTests( )
 {
@@ -171,7 +176,6 @@ LazyBoxCommandTest::LazyBoxCommandTest( string name )
 {
     m_name = name;
     m_parameters = "";
-    m_output = "";
 }
 
 string LazyBoxCommandTest::getName( )

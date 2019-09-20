@@ -4,6 +4,8 @@
     @descrip Gets date/time information
     @function run_date
 
+    @config CMD_DATE
+
     @test noparams
     @test dateFormat01 "+%%"
     @test dateFormat02 "+%a   %-a   %_a   %0a   %^a   %#a"

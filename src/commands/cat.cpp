@@ -3,6 +3,8 @@
     @name cat
     @descrip Concatenate file(s) and print them to standard out.
     @function run_cat
+
+    @config CMD_CAT
     
     @test singleFile1 ${COMMAND_TEST_ROOT}/cat/test1
     @test singleFile2 ${COMMAND_TEST_ROOT}/cat/test2
