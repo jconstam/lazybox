@@ -39,5 +39,5 @@ install/
 test/commandTests/CMakeLists.txt
 include/commands.hpp
 script/genSymLinks.sh
-src/CMakeLists.txt
 src/cmdList.cpp
+src/commands/CMakeLists.txt
