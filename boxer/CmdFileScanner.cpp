@@ -8,6 +8,8 @@
 
 #include <sys/stat.h>
 
+#include "FileCommon.hpp"
+
 using namespace std;
 
 static const string LAZYBOX_MARKER = "LAZYBOX_COMMAND";
@@ -38,7 +40,7 @@ bool CmdFileScanner::parseFiles( )
     bool found = false;
     for( const string file : m_fileList )
     {
-        string fileContents = readEntireFile( file );
+        string fileContents = FileCommon::readEntireFile( file );
         if( fileContents.find( LAZYBOX_MARKER ) != string::npos )
         {
             cout << "Command File \"" << file << "\" is a valid command!" << endl;
@@ -253,27 +255,12 @@ void CmdFileScanner::addFileHeader( stringstream& output, bool cStyle )
     output << " This file was automatically generated.  Do not modify." << endl << endl;
 }
 
-string CmdFileScanner::readEntireFile( string filePath )
-{
-    ifstream fileStream( filePath );
-    string fileContents;
-
-    fileStream.seekg( 0, ios::end );   
-    fileContents.reserve( fileStream.tellg( ) );
-    fileStream.seekg( 0, ios::beg );
-
-    fileContents.assign( istreambuf_iterator<char>( fileStream ), istreambuf_iterator<char>( ) );
-
-    return fileContents;
-}
-
 void CmdFileScanner::writeFileIfChanged( string filePath, string contents )
 {
     bool newContent = true;
-    struct stat buffer;   
-    if( stat( filePath.c_str( ), &( buffer ) ) == 0 )
+    if( FileCommon::fileExists( filePath ) )
     {
-        string oldContent = readEntireFile( filePath );
+        string oldContent = FileCommon::readEntireFile( filePath );
         if( contents == oldContent )
         {
             cout << "\tCurrent and new content of \"" << filePath << "\" are the same." << endl;

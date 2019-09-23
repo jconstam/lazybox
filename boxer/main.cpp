@@ -4,6 +4,7 @@
 #include <getopt.h>
 
 #include "CmdFileScanner.hpp"
+#include "ConfigParser.hpp"
 
 using namespace std;
 
@@ -100,6 +101,9 @@ int main( int argc, char* argv[] )
 		cout << "Could not parse command line arguments" << endl;
 		return -1;
 	}
+
+	ConfigParser parser;
+	parser.ParseFile( "/mnt/c/Users/callm/Documents/dev/lazybox/config/default.cfg" );
 	
 	CmdFileScanner scanner;
 	if( ! scanner.scanForFiles( params.cmdFilePath ) )

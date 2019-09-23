@@ -26,7 +26,6 @@ class CmdFileScanner
 
         void writeTestToCmakeTestFile( std::stringstream& fileStream, LazyBoxCommand command, LazyBoxCommandTest test, std::string testFilePath );
         void addFileHeader( std::stringstream& fileStream, bool cStyle = true );
-        std::string readEntireFile( std::string filePath );
         void writeFileIfChanged( std::string filePath, std::string contents );
 };
 

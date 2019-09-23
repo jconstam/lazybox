@@ -9,6 +9,8 @@ project( ${BOXER_PROJECT_NAME} )
 set( BOXER_SOURCES
     ${PROJECT_SOURCE_DIR}/main.cpp
     ${PROJECT_SOURCE_DIR}/CmdFileScanner.cpp
+    ${PROJECT_SOURCE_DIR}/ConfigParser.cpp
+    ${PROJECT_SOURCE_DIR}/FileCommon.cpp
     ${PROJECT_SOURCE_DIR}/LazyBoxCommands.cpp
 )
 
