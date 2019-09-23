@@ -22,7 +22,7 @@ OUTPUT_PATH_MAIN_TEST=${BUILD_PATH}/test
 OUTPUT_PATH_BOXER=${BUILD_PATH}/${PROJ_NAME_BOXER}
 
 .PHONY: build
-build:
+build: config
 	mkdir -p ${OUTPUT_PATH_MAIN}
 	cd ${OUTPUT_PATH_MAIN} && \
 	cmake ${SOURCE_PATH} \
