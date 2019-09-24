@@ -31,7 +31,7 @@ get_filename_component( COMMAND_LIST_PATH "${SOURCE_PATH}/cmdList.cpp" REALPATH 
 get_filename_component( GENSYMLINK_SCRIPT_PATH "${SCRIPT_DIR}/genSymLinks.sh" REALPATH )
 get_filename_component( TEST_CMAKE_PATH "${PROJECT_SOURCE_DIR}/../test/commandTests/CMakeLists.txt" REALPATH )
 get_filename_component( COMMAND_CMAKE_PATH "${COMMAND_SOURCE_DIR}/CMakeLists.txt" REALPATH )
-get_filename_component( DEFAULT_CFG_FILE_PATH "${CONFIG_DIR}/default.cfg" REALPATH )
+get_filename_component( DEFAULT_CFG_FILE_PATH "${CONFIG_DIR}/.config" REALPATH )
 
 add_custom_command( 
     TARGET ${BOXER_PROJECT_NAME} POST_BUILD

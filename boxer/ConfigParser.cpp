@@ -18,6 +18,8 @@ bool ConfigParser::ParseFile( string filePath )
 {
     if( !FileCommon::fileExists( filePath ) )
     {
+        cout << "Could not find config file \"" << filePath << "\"." << endl;
+
         return false;
     }
     
