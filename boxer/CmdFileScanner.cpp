@@ -35,7 +35,7 @@ bool CmdFileScanner::scanForFiles( string path )
     return ( m_fileList.size( ) > 0 );
 }
 
-bool CmdFileScanner::parseFiles( )
+bool CmdFileScanner::parseFiles( ConfigParser& parser )
 {
     bool found = false;
     for( const string file : m_fileList )
@@ -43,12 +43,16 @@ bool CmdFileScanner::parseFiles( )
         string fileContents = FileCommon::readEntireFile( file );
         if( fileContents.find( LAZYBOX_MARKER ) != string::npos )
         {
-            cout << "Command File \"" << file << "\" is a valid command!" << endl;
-
             LazyBoxCommand command( file, fileContents );
 
-            if( command.isValid( ) )
+            if( !parser.IsInConfig( command.getConfig( ) ) )
             {
+                cout << "Command File \"" << file << "\" is not configured." << endl;
+            }
+            else if( command.isValid( ) )
+            {
+                cout << "Command File \"" << file << "\" is a valid command!" << endl;
+
                 map<string,LazyBoxCommand>::iterator it = m_commands.find( command.getName( ) );
                 if( it == m_commands.end( ) )
                 {

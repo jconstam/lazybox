@@ -7,6 +7,7 @@
 #include <fstream>
 
 #include "LazyBoxCommands.hpp"
+#include "ConfigParser.hpp"
 
 class CmdFileScanner
 {
@@ -14,7 +15,7 @@ class CmdFileScanner
         CmdFileScanner( );
 
         bool scanForFiles( std::string path );
-        bool parseFiles( );
+        bool parseFiles( ConfigParser& parser );
         void writeCmdIncludeFile( std::string includeFilePath );
         void writeCmdListfile( std::string listFilePath );
         void writeSymlinkScriptfile( std::string scriptFilePath );

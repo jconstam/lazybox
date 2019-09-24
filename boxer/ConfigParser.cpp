@@ -26,6 +26,11 @@ bool ConfigParser::ParseFile( string filePath )
     return true;
 }
 
+bool ConfigParser::IsInConfig( string configFlag )
+{
+    return ( m_configFlags.find( configFlag ) != m_configFlags.end( ) );
+}
+
 void ConfigParser::readConfigFile( std::string fileContents )
 {
     size_t startIndex = 0U;

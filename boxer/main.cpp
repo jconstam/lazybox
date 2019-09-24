@@ -125,7 +125,7 @@ int main( int argc, char* argv[] )
 		cout << "Could not locate any files in path \"" << params.cmdFilePath << "\"." << endl;
 		return 1;
 	}
-	else if( ! scanner.parseFiles( ) )
+	else if( ! scanner.parseFiles( parser ) )
 	{
 		cout << "Error parsing files in path \"" << params.cmdFilePath << "\"" << endl;
 		return 1;

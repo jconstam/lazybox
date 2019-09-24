@@ -33,7 +33,8 @@ get_filename_component( TEST_CMAKE_PATH "${PROJECT_SOURCE_DIR}/../test/commandTe
 get_filename_component( COMMAND_CMAKE_PATH "${COMMAND_SOURCE_DIR}/CMakeLists.txt" REALPATH )
 get_filename_component( DEFAULT_CFG_FILE_PATH "${CONFIG_DIR}/default.cfg" REALPATH )
 
-add_custom_command( TARGET ${BOXER_PROJECT_NAME} POST_BUILD
+add_custom_command( 
+    TARGET ${BOXER_PROJECT_NAME} POST_BUILD
     WORKING_DIRECTORY ${BUILD_PATH}
     COMMAND ${BOXER_PROJECT_NAME} 
         -c "${COMMAND_SOURCE_DIR}" 

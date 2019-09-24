@@ -10,6 +10,7 @@ class ConfigParser
         ConfigParser( );
 
         bool ParseFile( std::string filePath );
+        bool IsInConfig( std::string configFlag );
 
     private:
         std::unordered_set<std::string> m_configFlags;
