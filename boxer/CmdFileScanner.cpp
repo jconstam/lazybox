@@ -51,7 +51,7 @@ bool CmdFileScanner::parseFiles( ConfigParser& parser )
             }
             else if( command.isValid( ) )
             {
-                cout << "Command File \"" << file << "\" is a valid command!" << endl;
+                cout << "Command File \"" << file << "\" is a valid command and configured." << endl;
 
                 map<string,LazyBoxCommand>::iterator it = m_commands.find( command.getName( ) );
                 if( it == m_commands.end( ) )
