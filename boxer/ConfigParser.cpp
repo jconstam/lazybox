@@ -35,13 +35,23 @@ void ConfigParser::readConfigFile( std::string fileContents )
     {
         endOfLineIndex = fileContents.find( "\n", startIndex );
 
-        string currLine = fileContents.substr( startIndex, endOfLineIndex - startIndex );
-        while( isspace( currLine[ 0 ] ) )
-        {
-            currLine = currLine.substr( 1 );
-        }
+        string currLine = FileCommon::removeWhitespace( fileContents.substr( startIndex, endOfLineIndex - startIndex ) );
 
-        cout << currLine << endl;
+        if( ( currLine != "" ) && ( currLine.compare( 0, 1, "#" ) != 0 ) )
+        {
+            size_t length = currLine.length( );
+            if( currLine.compare( length - 2, 2, "=y" ) == 0 )
+            {
+                if( currLine.compare( 0, 7, "CONFIG_" ) == 0 )
+                {
+                    m_configFlags.insert( currLine.substr( 7, length - 7 - 2 ) );
+                }
+                else
+                {
+                    m_configFlags.insert( currLine.substr( 0, length -2  ) );
+                }
+            }
+        }
 
         startIndex = endOfLineIndex + 1U;
     }

@@ -16,6 +16,7 @@ typedef struct
 	string symlinkScriptFile;
 	string testCMakeFile;
 	string commandCMakeFile;
+	string configFile;
 } BOXER_PARAMS;
 
 static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
@@ -23,7 +24,7 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
     int opt = 0;
 	while( opt != -1 )  
     {  
-		opt = getopt( argc, argv, "c:i:l:s:t:m:" );
+		opt = getopt( argc, argv, "c:i:l:s:t:m:f:" );
         switch( opt )  
         {  
             case 'c': 
@@ -49,6 +50,10 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 			case 'm':
 				params->commandCMakeFile = experimental::filesystem::absolute( optarg );
 				cout << "Using Command CMake File \"" << params->commandCMakeFile << "\"" << endl;
+				break;
+			case 'f':
+				params->configFile = experimental::filesystem::absolute( optarg );
+				cout << "Using Configuration File \"" << params->configFile << "\"" << endl;
 				break;
 			case -1:
 				break;
@@ -86,7 +91,12 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 	}
 	if( params->commandCMakeFile == "" )
 	{
-		cout << "COmmand CMake File not specified (use -m)" << endl;
+		cout << "Command CMake File not specified (use -m)" << endl;
+		return false;
+	}
+	if( params->configFile == "" )
+	{
+		cout << "Configuration File not specified (use -f)" << endl;
 		return false;
 	}
 
@@ -99,22 +109,26 @@ int main( int argc, char* argv[] )
 	if( ! parseParams( argc, argv, &( params ) ) )
 	{
 		cout << "Could not parse command line arguments" << endl;
-		return -1;
+		return 1;
 	}
 
 	ConfigParser parser;
-	parser.ParseFile( "/mnt/c/Users/callm/Documents/dev/lazybox/config/default.cfg" );
+	if( !parser.ParseFile( params.configFile ) )
+	{
+		cout << "Could not parse configuration file \"" << params.configFile << "\"." << endl;
+		return 1;
+	}
 	
 	CmdFileScanner scanner;
 	if( ! scanner.scanForFiles( params.cmdFilePath ) )
 	{
 		cout << "Could not locate any files in path \"" << params.cmdFilePath << "\"." << endl;
-		return false;
+		return 1;
 	}
 	else if( ! scanner.parseFiles( ) )
 	{
 		cout << "Error parsing files in path \"" << params.cmdFilePath << "\"" << endl;
-		return false;
+		return 1;
 	}
 
 	scanner.writeCmdIncludeFile( params.cmdIncludeFile );

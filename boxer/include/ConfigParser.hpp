@@ -12,7 +12,7 @@ class ConfigParser
         bool ParseFile( std::string filePath );
 
     private:
-        std::unordered_set<std::string> configFlags;
+        std::unordered_set<std::string> m_configFlags;
 
         void readConfigFile( std::string fileContents );
 };
