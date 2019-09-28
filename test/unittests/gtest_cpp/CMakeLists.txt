@@ -14,8 +14,10 @@ set( gtest_force_shared_crt ON CACHE BOOL "" FORCE )
 
 # Add googletest directly to our build. This defines the gtest and gtest_main targets.
 add_subdirectory( ${CMAKE_CURRENT_BINARY_DIR}/googletest-src ${CMAKE_CURRENT_BINARY_DIR}/googletest-build EXCLUDE_FROM_ALL )
+add_subdirectory( ${COMMON_PATH} ${BUILD_PATH}/common )
 
 set( UNITTEST_GTEST_SOURCES
+  ${COMMON_SOURCES}
   ${SOURCES_ROOT}/cmdRegistry.cpp
 
   ${UNITTEST_GTEST_ROOT}/cmdRegistry_Test.cpp
@@ -31,10 +33,10 @@ include_directories(
   ${SOURCES_INCLUDE}
   ${gtest_SOURCE_DIR}/include
   ${gmock_SOURCE_DIR}/include
+  ${COMMON_PATH}/include
 )
 add_executable( ${UNITTEST_GTEST_PROJECT_NAME} ${UNITTEST_GTEST_SOURCES} )
-target_link_libraries( ${UNITTEST_GTEST_PROJECT_NAME} gtest_main )
-target_link_libraries( ${UNITTEST_GTEST_PROJECT_NAME} gmock )
+target_link_libraries( ${UNITTEST_GTEST_PROJECT_NAME} gtest_main gmock ${PROJ_NAME_COMMON_LIB} )
 
 add_test( ${UNITTEST_GTEST_PROJECT_NAME} 
           ${UNITTEST_GTEST_PROJECT_NAME} 

@@ -10,10 +10,12 @@ set( COMMAND_SOURCE_DIR ${PROJECT_SOURCE_DIR}/commands )
 set( SCRIPT_DIR ${PROJECT_SOURCE_DIR}/../script )
 
 add_subdirectory( ${COMMAND_SOURCE_DIR} )
+add_subdirectory( ${COMMON_PATH} ${BUILD_PATH}/common )
 
 set( SOURCES
     ${COMMAND_SOURCES_C}
     ${COMMAND_SOURCES_CPP}
+    ${COMMON_SOURCES}
     
     ${PROJECT_SOURCE_DIR}/cmdList.cpp
     ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp
@@ -23,6 +25,7 @@ set( SOURCES
 
 include_directories( 
 	${MAIN_PROJECT_NAME} 
+    ${COMMON_PATH}/include
 	${PROJECT_SOURCE_DIR}/include
 )
 

@@ -6,16 +6,18 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror" )
 
 project( ${BOXER_PROJECT_NAME} )
 
+add_subdirectory( ${COMMON_PATH} ${BUILD_PATH}/common )
+
 set( BOXER_SOURCES
-    ${PROJECT_SOURCE_DIR}/main.cpp
+    ${COMMON_SOURCES}
     ${PROJECT_SOURCE_DIR}/CmdFileScanner.cpp
-    ${PROJECT_SOURCE_DIR}/ConfigParser.cpp
-    ${PROJECT_SOURCE_DIR}/FileCommon.cpp
     ${PROJECT_SOURCE_DIR}/LazyBoxCommands.cpp
+    ${PROJECT_SOURCE_DIR}/main.cpp
 )
 
 include_directories( 
-    ${BOXER_PROJECT_NAME} 
+    ${BOXER_PROJECT_NAME}
+    ${COMMON_PATH}/include
     ${PROJECT_SOURCE_DIR}/include
 )
 

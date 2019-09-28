@@ -35,6 +35,7 @@ add_executable( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
 	
 	${SOURCES_ROOT}/commands/echo.c
 )
+target_link_libraries( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs ${PROJ_NAME_COMMON_LIB} )
 
 add_test( ${UNITTEST_UNITY_PROJECT_NAME}_parseArgs
 	bash ${SCRIPT_PATH}/runUnityTest.sh 
