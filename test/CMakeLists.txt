@@ -10,7 +10,7 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror" )
 
 get_filename_component( SCRIPT_PATH "${PROJECT_SOURCE_DIR}/../script" REALPATH )
 get_filename_component( SOURCES_ROOT "${PROJECT_SOURCE_DIR}/../src" REALPATH )
-get_filename_component( SOURCES_INCLUDE "${PROJECT_SOURCE_DIR}/../include" REALPATH )
+get_filename_component( SOURCES_INCLUDE "${SOURCES_ROOT}/include" REALPATH )
 get_filename_component( UNITTEST_GTEST_ROOT "${PROJECT_SOURCE_DIR}/unittests/gtest_cpp" REALPATH )
 get_filename_component( UNITTEST_UNITY_ROOT "${PROJECT_SOURCE_DIR}/unittests/unity_c" REALPATH )
 get_filename_component( COMMAND_TEST_ROOT "${PROJECT_SOURCE_DIR}/commandTests" REALPATH )

@@ -23,7 +23,7 @@ set( SOURCES
 
 include_directories( 
 	${MAIN_PROJECT_NAME} 
-	${PROJECT_SOURCE_DIR}/../include
+	${PROJECT_SOURCE_DIR}/include
 )
 
 add_executable( ${MAIN_PROJECT_NAME} ${SOURCES} )
