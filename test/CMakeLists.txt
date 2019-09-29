@@ -15,6 +15,7 @@ get_filename_component( UNITTEST_GTEST_ROOT "${PROJECT_SOURCE_DIR}/unittests/gte
 get_filename_component( UNITTEST_UNITY_ROOT "${PROJECT_SOURCE_DIR}/unittests/unity_c" REALPATH )
 get_filename_component( COMMAND_TEST_ROOT "${PROJECT_SOURCE_DIR}/commandTests" REALPATH )
 
+add_subdirectory( ${COMMON_PATH} ${BUILD_PATH}/common )
 add_subdirectory( ${UNITTEST_GTEST_ROOT} )
 add_subdirectory( ${UNITTEST_UNITY_ROOT} )
 add_subdirectory( ${COMMAND_TEST_ROOT} )
