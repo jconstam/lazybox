@@ -15,11 +15,14 @@ set( gtest_force_shared_crt ON CACHE BOOL "" FORCE )
 # Add googletest directly to our build. This defines the gtest and gtest_main targets.
 add_subdirectory( ${CMAKE_CURRENT_BINARY_DIR}/googletest-src ${CMAKE_CURRENT_BINARY_DIR}/googletest-build EXCLUDE_FROM_ALL )
 
+message( "COMMON_SOURCES_CPP: ${COMMON_SOURCES_CPP}" )
+
 set( UNITTEST_GTEST_SOURCES
   ${COMMON_SOURCES_CPP}
   ${SOURCES_ROOT}/cmdRegistry.cpp
 
   ${UNITTEST_GTEST_ROOT}/cmdRegistry_Test.cpp
+  ${UNITTEST_GTEST_ROOT}/fileCommon_Test.cpp
 )
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fno-inline -O0" )

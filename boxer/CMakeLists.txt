@@ -9,7 +9,8 @@ project( ${BOXER_PROJECT_NAME} )
 add_subdirectory( ${COMMON_PATH} ${BUILD_PATH}/common )
 
 set( BOXER_SOURCES
-    ${COMMON_SOURCES}
+    ${COMMON_SOURCES_C}
+    ${COMMON_SOURCES_CPP}
     ${PROJECT_SOURCE_DIR}/CmdFileScanner.cpp
     ${PROJECT_SOURCE_DIR}/LazyBoxCommands.cpp
     ${PROJECT_SOURCE_DIR}/main.cpp

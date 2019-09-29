@@ -15,7 +15,8 @@ add_subdirectory( ${COMMON_PATH} ${BUILD_PATH}/common )
 set( SOURCES
     ${COMMAND_SOURCES_C}
     ${COMMAND_SOURCES_CPP}
-    ${COMMON_SOURCES}
+    ${COMMON_SOURCES_C}
+    ${COMMON_SOURCES_CPP}
     
     ${PROJECT_SOURCE_DIR}/cmdList.cpp
     ${PROJECT_SOURCE_DIR}/cmdRegistry.cpp

@@ -10,16 +10,23 @@ using namespace std;
 
 string FileCommon::readEntireFile( string filePath )
 {
-    ifstream fileStream( filePath );
-    string fileContents;
+    if( !FileCommon::fileExists( filePath ) )
+    {
+        return "";
+    }
+    else
+    {
+        ifstream fileStream( filePath );
+        string fileContents;
 
-    fileStream.seekg( 0, ios::end );   
-    fileContents.reserve( fileStream.tellg( ) );
-    fileStream.seekg( 0, ios::beg );
+        fileStream.seekg( 0, ios::end );   
+        fileContents.reserve( fileStream.tellg( ) );
+        fileStream.seekg( 0, ios::beg );
 
-    fileContents.assign( istreambuf_iterator<char>( fileStream ), istreambuf_iterator<char>( ) );
+        fileContents.assign( istreambuf_iterator<char>( fileStream ), istreambuf_iterator<char>( ) );
 
-    return fileContents;
+        return fileContents;
+    }
 }
 
 bool FileCommon::fileExists( string filePath )
@@ -34,19 +41,24 @@ string FileCommon::trimString( string raw )
     {
         raw = raw.substr( 1 );
     }
+    while( ( raw.length( ) > 0 ) && ( isspace( raw[ raw.length( ) - 1U ] ) ) )
+    {
+        raw = raw.substr( 0, raw.length( ) - 1U );
+    }
 
     return raw;
 }
 
  string FileCommon::removeWhitespace( string raw )
  {
+    string output = "";
     for( size_t i = 0U; i < raw.length( ); i++ )
     {
-        if( isspace( raw[ i ] ) )
+        if( !isspace( raw[ i ] ) )
         {
-            raw.replace( i, 1, "" );
+            output += raw[ i ];
         }
     }
 
-    return raw;
+    return output;
  }

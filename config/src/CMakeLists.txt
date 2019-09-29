@@ -10,7 +10,8 @@ add_subdirectory( ${COMMON_PATH} ${BUILD_PATH}/common )
 
 set( CONFIGURE_SOURCES
     ${CONFIGURE_SOURCES}
-    ${COMMON_SOURCES}
+    ${COMMON_SOURCES_C}
+    ${COMMON_SOURCES_CPP}
     ${PROJECT_SOURCE_DIR}/main.cpp
 )
 
