@@ -20,6 +20,8 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/include
 )
 
+get_filename_component( CONFIG_DIR "${PROJECT_SOURCE_DIR}/.." REALPATH )
+
 add_executable( ${CONFIGURE_PROJECT_NAME} ${CONFIGURE_SOURCES} )
 target_link_libraries( ${CONFIGURE_PROJECT_NAME} )
 
@@ -27,4 +29,5 @@ add_custom_target(
     ${CONFIGURE_PROJECT_NAME}_run ALL
     WORKING_DIRECTORY ${BUILD_PATH}
     COMMAND ${CONFIGURE_PROJECT_NAME}
+        -c ${CONFIG_DIR}
 )

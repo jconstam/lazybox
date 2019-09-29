@@ -105,7 +105,7 @@ static bool parseParams( int argc, char* argv[], BOXER_PARAMS* params )
 
 int main( int argc, char* argv[] )
 {
-	BOXER_PARAMS params = { "", "", "", "", "" };
+	BOXER_PARAMS params = { "", "", "", "", "", "", "" };
 	if( ! parseParams( argc, argv, &( params ) ) )
 	{
 		cout << "Could not parse command line arguments" << endl;

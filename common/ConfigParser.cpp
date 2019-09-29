@@ -3,6 +3,8 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include <fstream>
+
 #include <unistd.h>
 
 #include "FileCommon.hpp"
@@ -31,6 +33,26 @@ bool ConfigParser::ParseFile( string filePath )
 bool ConfigParser::IsInConfig( string configFlag )
 {
     return ( m_configFlags.find( configFlag ) != m_configFlags.end( ) );
+}
+
+void ConfigParser::GenerateFile( string filePath, unordered_set<string> configFlags )
+{
+	ofstream configFile;
+	configFile.open( filePath );
+
+	configFile << "# Generated config file" << endl << endl;
+	for( const auto& flag: configFlags )
+	{
+		configFile << "CONFIG_" << flag << "=y" << endl;
+	}
+	configFile << endl;
+
+	configFile.close( );
+}
+
+unordered_set<string> ConfigParser::GetConfigFlags( )
+{
+    return m_configFlags;
 }
 
 void ConfigParser::readConfigFile( std::string fileContents )
