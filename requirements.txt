@@ -1,1 +1,2 @@
 lcov_cobertura
+cppcheck-junit
