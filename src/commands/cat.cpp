@@ -151,9 +151,8 @@ int run_cat( int argc, char* argv[ ] )
     }
 
     int lineNumber = 1;
-    int fileIndex;
     bool startOfLine = true;
-    for( fileIndex = startIndex; fileIndex < argc; fileIndex++ )
+    for( int fileIndex = startIndex; fileIndex < argc; fileIndex++ )
     {
         string filePath = argv[ fileIndex ];
 
@@ -165,18 +164,18 @@ int run_cat( int argc, char* argv[ ] )
         }
 
         string fileContents = readEntireFile( filePath );
-        for( size_t fileIndex = 0U; fileIndex < fileContents.length( ); fileIndex++ )
+        for( size_t byteIndex = 0U; byteIndex < fileContents.length( ); byteIndex++ )
         {
             if( startOfLine )
             {
                 if( params.squeezeBlank )
                 {
                     bool hasNewLine = false;
-                    while( fileContents[ fileIndex ] == '\n' )
+                    while( fileContents[ byteIndex ] == '\n' )
                     {
                         hasNewLine = true;
-                        fileIndex++;
-                        if( fileIndex >= fileContents.length( ) )
+                        byteIndex++;
+                        if( byteIndex >= fileContents.length( ) )
                         {
                             break;
                         }
@@ -186,7 +185,7 @@ int run_cat( int argc, char* argv[ ] )
                     {
                         PrintCharacter( '\n', params.showTabs, params.showNonPrintable );
                     }
-                    if( fileIndex >= fileContents.length( ) )
+                    if( byteIndex >= fileContents.length( ) )
                     {
                         break;
                     }
@@ -198,7 +197,7 @@ int run_cat( int argc, char* argv[ ] )
                 }
                 else if( params.numberNonBlankLines )
                 {
-                    if( fileContents[ fileIndex ] != '\n' )
+                    if( fileContents[ byteIndex ] != '\n' )
                     {
                         NumberLine( lineNumber++ );
                     }
@@ -206,7 +205,7 @@ int run_cat( int argc, char* argv[ ] )
                 startOfLine = false;
             }
             
-            if( fileContents[ fileIndex ] == '\n' )
+            if( fileContents[ byteIndex ] == '\n' )
             {
                 if( params.showEnds )
                 {
@@ -215,7 +214,7 @@ int run_cat( int argc, char* argv[ ] )
                 startOfLine = true;
             }
 
-            PrintCharacter( fileContents[ fileIndex ], params.showTabs, params.showNonPrintable );
+            PrintCharacter( fileContents[ byteIndex ], params.showTabs, params.showNonPrintable );
         }
     }
 

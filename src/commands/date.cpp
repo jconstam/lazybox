@@ -59,27 +59,28 @@
 
 using namespace std;
 
-#define PARAM_COUNT     ( 1U )
+// #define PARAM_COUNT     ( 1U )
 
-typedef struct
-{
-    const char* desiredDate;
-} DATE_PARAMS;
+// typedef struct
+// {
+//     const char* desiredDate;
+// } DATE_PARAMS;
 
-static const ARG_DATA argInfo[ PARAM_COUNT ] =
-{
-    { 'd', false, ARG_DATA_TYPE_STRING, offsetof( DATE_PARAMS, desiredDate ) }
-};
+// static const ARG_DATA argInfo[ PARAM_COUNT ] =
+// {
+//     { 'd', false, ARG_DATA_TYPE_STRING, offsetof( DATE_PARAMS, desiredDate ) }
+// };
 
 int run_date( int argc, char* argv[ ] )
 {
-    int startIndex;
-    DATE_PARAMS params = { "now" };
+    int startIndex = 1;
+    // int startIndex;
+    // DATE_PARAMS params = { "now" };
 
-    if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
-    {
-        return 1;
-    }
+    // if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
+    // {
+    //     return 1;
+    // }
 
     const char* format = "+%a %b %e %T %Z %Y";
     if( startIndex < argc )

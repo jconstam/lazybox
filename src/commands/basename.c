@@ -19,17 +19,17 @@
 
 #include "parseArgs.h"
 
-#define PARAM_COUNT     ( 1U )
+// #define PARAM_COUNT     ( 1U )
 
-typedef struct
-{
-    bool removeSuffix;
-} BASENAME_PARAMS;
+// typedef struct
+// {
+//     bool removeSuffix;
+// } BASENAME_PARAMS;
 
-static const ARG_DATA argInfo[ PARAM_COUNT ] =
-{
-    { 's', false, ARG_DATA_TYPE_BOOL, offsetof( BASENAME_PARAMS, removeSuffix ) }
-};
+// static const ARG_DATA argInfo[ PARAM_COUNT ] =
+// {
+//     { 's', false, ARG_DATA_TYPE_BOOL, offsetof( BASENAME_PARAMS, removeSuffix ) }
+// };
 
 static void printBaseName( char* path, char* removeSuffix )
 {
@@ -57,14 +57,15 @@ static void printBaseName( char* path, char* removeSuffix )
 
 int run_basename( int argc, char* argv[ ] )
 {
-    int startIndex;
-    BASENAME_PARAMS params = { false };
+    // int startIndex;
+    // BASENAME_PARAMS params = { false };
 
-    if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
-    {
-        return 1;
-    }
+    // if( !parseArgs( argInfo, PARAM_COUNT, &( params ), &( startIndex ), argc, argv ) )
+    // {
+    //     return 1;
+    // }
 
+    int startIndex = 1;
     if( startIndex >= argc )
     {
         fprintf( stderr, "basename: missing operand\n" );

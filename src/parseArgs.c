@@ -51,18 +51,18 @@ bool parseArgs( const ARG_DATA* config, const size_t configSize, void* data, int
 					{
 						case( ARG_DATA_TYPE_BOOL ):
 							{
-								*( ( bool* ) ( data + config[ configIndex ].offset ) ) = true;
+								*( ( bool* ) ( ( uintptr_t ) data + ( uintptr_t ) config[ configIndex ].offset ) ) = true;
 							}
 							break;
 						case( ARG_DATA_TYPE_INT ):
 							{
 								int value = atoi( optarg );
-								memcpy( data + config[ configIndex].offset, &( value ), sizeof( int ) );
+								memcpy( ( void* ) ( ( uintptr_t ) data + ( uintptr_t ) config[ configIndex ].offset ), &( value ), sizeof( int ) );
 							}
 							break;
 						case( ARG_DATA_TYPE_STRING ):
 							{
-								char** string = ( char** )( ( ( char* ) data ) + config[ configIndex ].offset );
+								char** string = ( char** )( ( uintptr_t ) ( ( char* ) data ) + ( uintptr_t ) config[ configIndex ].offset );
 								*string = optarg;
 							}
 							break;

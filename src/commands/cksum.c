@@ -146,7 +146,7 @@ int run_cksum( int argc, char* argv[ ] )
 
             uint32_t checksum = calculateChecksum( fileBuffer, fileSize );
 
-            printf( "%u %d %s\n", checksum, fileSize, filePath );
+            printf( "%u %u %s\n", checksum, fileSize, filePath );
 
             free( fileBuffer );
         }
