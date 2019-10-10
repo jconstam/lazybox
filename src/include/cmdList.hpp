@@ -21,7 +21,7 @@ class CmdList : public CmdListBase
     
     public:
         CmdList( ) { }
-        CmdFunc getFunction( std::string funcName )
+        CmdFunc getFunction( std::string funcName ) override
         {
             if( commandList.find( funcName ) != commandList.end( ) )
             {
