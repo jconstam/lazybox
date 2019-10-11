@@ -8,12 +8,12 @@
 class LazyBoxCommandTest
 {
     public:
-        LazyBoxCommandTest( std::string name = "" );
+        LazyBoxCommandTest( const std::string& name = "" );
 
-        std::string getName( );
-        std::string getParameters( );
+        std::string getName( ) const;
+        std::string getParameters( ) const;
 
-        void setParameters( std::string parameters );
+        void setParameters( const std::string& parameters );
     private:
         std::string m_name;
         std::string m_parameters;
@@ -22,17 +22,15 @@ class LazyBoxCommandTest
 class LazyBoxCommand
 {
     public:
-        LazyBoxCommand( std::string fileName = "", std::string fileContents = "" );
+        LazyBoxCommand( const std::string& fileName = "", const std::string& fileContents = "" );
 
-        bool isValid( );
+        bool isValid( ) const;
 
-        bool getIsCPP( );
-        std::string getFileName( );
-        std::string getFileNameShort( );
-        std::string getName( );
-        std::string getDescrip( );
-        std::string getFunction( );
-        std::string getConfig( );
+        bool getIsCPP( ) const;
+        std::string getFileNameShort( ) const;
+        std::string getName( ) const;
+        std::string getFunction( ) const;
+        std::string getConfig( ) const;
         std::vector<LazyBoxCommandTest> getTests( );
     private:
         std::string m_fileName;
@@ -42,10 +40,8 @@ class LazyBoxCommand
         std::string m_config;
         std::map<std::string,LazyBoxCommandTest> m_tests;
 
-        size_t parseField( std::string fileContents, std::string marker, std::string& fieldData, int pos = 0 );
-        size_t parseDoubleField( std::string fileContents, std::string marker, std::string& fieldName, std::string& fieldData, int pos = 0 );
-
-        std::string trimString( std::string data );
+        static size_t parseField( const std::string& fileContents, const std::string& marker, std::string& fieldData, int pos = 0 );
+        static size_t parseDoubleField( const std::string& fileContents, const std::string& marker, std::string& fieldName, std::string& fieldData, int pos = 0 );
 };
 
 #endif

@@ -24,7 +24,7 @@ CmdFileScanner::CmdFileScanner( )
 {
 }
 
-bool CmdFileScanner::scanForFiles( string path )
+bool CmdFileScanner::scanForFiles( string& path )
 {
     for( const auto & entry : experimental::filesystem::directory_iterator( path ) )
     {
@@ -66,7 +66,7 @@ bool CmdFileScanner::parseFiles( ConfigParser& parser )
     return found;
 }
 
-void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
+void CmdFileScanner::writeCmdIncludeFile( string& includeFilePath )
 {
     stringstream output;
 
@@ -76,7 +76,7 @@ void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
 
     output << "#ifndef COMMANDS_HPP__" << endl << "#define COMMANDS_HPP__" << endl << endl;
     
-    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
+    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it = next( it ) )
     {
         if( ! it->second.getIsCPP( ) )
         {
@@ -87,10 +87,10 @@ void CmdFileScanner::writeCmdIncludeFile( string includeFilePath )
 
     output << endl << "#endif" << endl;
 
-    writeFileIfChanged( includeFilePath, output.str( ) );
+    writeFileIfChanged( includeFilePath, output );
 }
 
-void CmdFileScanner::writeCmdListfile( string listFilePath )
+void CmdFileScanner::writeCmdListfile( string& listFilePath )
 {
     stringstream output;
 
@@ -102,17 +102,17 @@ void CmdFileScanner::writeCmdListfile( string listFilePath )
     output << "const std::map<std::string, CmdFunc> CmdList::commandList =" << endl;
     output << "{" << endl;
     
-    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
+    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it = next( it ) )
     {
         output << "\t{ \"" << it->second.getName( ) << "\", " << it->second.getFunction( ) << " }," << endl;
     }
 
     output << "};" << endl;
 
-    writeFileIfChanged( listFilePath, output.str( ) );
+    writeFileIfChanged( listFilePath, output );
 }
 
-void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
+void CmdFileScanner::writeSymlinkScriptfile( string& scriptFilePath )
 {
     stringstream output;
 
@@ -127,16 +127,16 @@ void CmdFileScanner::writeSymlinkScriptfile( string scriptFilePath )
     output << "fi" << endl << endl;
     output << "MAIN_PROJECT_NAME=$1" << endl << endl;
 
-    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it++ )
+    for( map<string, LazyBoxCommand>::iterator it = m_commands.begin(); it != m_commands.end(); it = next( it ) )
     {
         output << "ln -f -s ${MAIN_PROJECT_NAME} " << it->second.getName( ) << endl;
     }
 
-    writeFileIfChanged( scriptFilePath, output.str( ) );
+    writeFileIfChanged( scriptFilePath, output );
 
     chmod( scriptFilePath.c_str( ), S_IRWXU );
 }
-void CmdFileScanner::writeCMakeTestfile( string testFilePath )
+void CmdFileScanner::writeCMakeTestfile( string& testFilePath )
 {
     stringstream output;
 
@@ -148,19 +148,19 @@ void CmdFileScanner::writeCMakeTestfile( string testFilePath )
     output << "set_tests_properties( lazybox PROPERTIES PASS_REGULAR_EXPRESSION \"LazyBox - BusyBox\'s less portable, less functional cousin.\" )" << endl;
     output << endl;
 
-    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter++ )
+    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter = next( cmdIter ) )
     {
         vector<LazyBoxCommandTest> tests = cmdIter->second.getTests( );
-        for( vector<LazyBoxCommandTest>::iterator testIter = tests.begin( ); testIter != tests.end( ); testIter++ )
+        for( vector<LazyBoxCommandTest>::iterator testIter = tests.begin( ); testIter != tests.end( ); testIter = next( testIter ) )
         {
             writeTestToCmakeTestFile( output, cmdIter->second, *testIter, testFilePath );
         }
     }
 
-    writeFileIfChanged( testFilePath, output.str( ) );
+    writeFileIfChanged( testFilePath, output );
 }
 
-void CmdFileScanner::writeCMakeCommandsFile( string commandsFilePath )
+void CmdFileScanner::writeCMakeCommandsFile( string& commandsFilePath )
 {
     stringstream output;
 
@@ -169,7 +169,7 @@ void CmdFileScanner::writeCMakeCommandsFile( string commandsFilePath )
     addFileHeader( output, false );
 
     output << "set( COMMAND_SOURCES_C" << endl;
-    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter++ )
+    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter = next( cmdIter ) )
     {
         if( ! cmdIter->second.getIsCPP( ) )
         {
@@ -181,7 +181,7 @@ void CmdFileScanner::writeCMakeCommandsFile( string commandsFilePath )
     output << ")" << endl;
 
     output << "set( COMMAND_SOURCES_CPP" << endl;
-    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter++ )
+    for( map<string, LazyBoxCommand>::iterator cmdIter = m_commands.begin( ); cmdIter != m_commands.end( ); cmdIter = next( cmdIter ) )
     {
         if( cmdIter->second.getIsCPP( ) )
         {
@@ -192,10 +192,10 @@ void CmdFileScanner::writeCMakeCommandsFile( string commandsFilePath )
     output << "\tPARENT_SCOPE" << endl;
     output << ")" << endl;
 
-    writeFileIfChanged( commandsFilePath, output.str( ) );
+    writeFileIfChanged( commandsFilePath, output );
 }
 
-void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, LazyBoxCommand command, LazyBoxCommandTest test, string testFilePath )
+void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, const LazyBoxCommand& command, const LazyBoxCommandTest& test, const string& testFilePath )
 {
     string execPath = testFilePath;
     size_t lastIndex = execPath.find_last_of( '/' );
@@ -259,13 +259,13 @@ void CmdFileScanner::addFileHeader( stringstream& output, bool cStyle )
     output << " This file was automatically generated.  Do not modify." << endl << endl;
 }
 
-void CmdFileScanner::writeFileIfChanged( string filePath, string contents )
+void CmdFileScanner::writeFileIfChanged( string& filePath, stringstream& contents )
 {
     bool newContent = true;
     if( FileCommon::fileExists( filePath ) )
     {
         string oldContent = FileCommon::readEntireFile( filePath );
-        if( contents == oldContent )
+        if( contents.str( ) == oldContent )
         {
             cout << "\tCurrent and new content of \"" << filePath << "\" are the same." << endl;
             newContent = false;
@@ -276,7 +276,7 @@ void CmdFileScanner::writeFileIfChanged( string filePath, string contents )
     {
         ofstream fileStream;
         fileStream.open( filePath );
-        fileStream << contents;
+        fileStream << contents.str( );
         fileStream.close( );   
     }
 }

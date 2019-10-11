@@ -8,6 +8,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "FileCommon.hpp"
+
 using namespace std;
 
 static const string LAZYBOX_MARKER = "LAZYBOX_COMMAND";
@@ -17,13 +19,8 @@ static const string FUNCTION_MARKER = "@function";
 static const string TEST_MARKER = "@test";
 static const string CONFIG_MARKER = "@config";
 
-LazyBoxCommand::LazyBoxCommand( string fileName, string fileContents )
+LazyBoxCommand::LazyBoxCommand( const string& fileName, const string& fileContents ): m_fileName( fileName ), m_name( "" ), m_descrip( "" ), m_function( "" )
 {
-    m_fileName = fileName;
-    m_name = "";
-    m_descrip = "";
-    m_function = "";
-
     parseField( fileContents, NAME_MARKER, m_name );
     parseField( fileContents, DESCRIP_MARKER, m_descrip );
     parseField( fileContents, FUNCTION_MARKER, m_function );
@@ -48,7 +45,7 @@ LazyBoxCommand::LazyBoxCommand( string fileName, string fileContents )
     }
 }
 
-bool LazyBoxCommand::isValid( )
+bool LazyBoxCommand::isValid( ) const
 {
     if( m_name == "" )
     {
@@ -68,15 +65,11 @@ bool LazyBoxCommand::isValid( )
     }
 }
 
-bool LazyBoxCommand::getIsCPP( )
+bool LazyBoxCommand::getIsCPP( ) const
 {
     return ( m_fileName.substr( m_fileName.length( ) - 3 ) == "cpp" );
 }
-string LazyBoxCommand::getFileName( )
-{
-    return m_fileName;
-}
-string LazyBoxCommand::getFileNameShort( )
+string LazyBoxCommand::getFileNameShort( ) const
 {
     string result = m_fileName;
     size_t lastIndex = m_fileName.find_last_of( '/' );
@@ -87,26 +80,22 @@ string LazyBoxCommand::getFileNameShort( )
 
     return result;
 }
-string LazyBoxCommand::getName( )
+string LazyBoxCommand::getName( ) const
 {
     return m_name;
 }
-string LazyBoxCommand::getDescrip( )
-{
-    return m_descrip;
-}
-string LazyBoxCommand::getFunction( )
+string LazyBoxCommand::getFunction( ) const
 {
     return m_function;
 }
-string LazyBoxCommand::getConfig( )
+string LazyBoxCommand::getConfig( ) const
 {
     return m_config;
 }
 vector<LazyBoxCommandTest> LazyBoxCommand::getTests( )
 {
     vector<LazyBoxCommandTest> tests;
-    for( map<string, LazyBoxCommandTest>::iterator it = m_tests.begin(); it != m_tests.end(); it++ )
+    for( map<string, LazyBoxCommandTest>::iterator it = m_tests.begin(); it != m_tests.end(); it = next( it ) )
     {
         tests.push_back( it->second );
     }
@@ -114,7 +103,7 @@ vector<LazyBoxCommandTest> LazyBoxCommand::getTests( )
     return tests;
 }
 
-size_t LazyBoxCommand::parseField( string fileContents, string marker, string& fieldData, int pos )
+size_t LazyBoxCommand::parseField( const string& fileContents, const string& marker, string& fieldData, int pos )
 {
     size_t markerLocation = fileContents.find( marker, pos );
     if( markerLocation != string::npos )
@@ -122,7 +111,7 @@ size_t LazyBoxCommand::parseField( string fileContents, string marker, string& f
         size_t endOfLine = fileContents.find( "\n", markerLocation );
         size_t dataStart = markerLocation + marker.length( );
 
-        fieldData = trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
+        fieldData = FileCommon::trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
 
         markerLocation += marker.length( );
     }
@@ -130,7 +119,7 @@ size_t LazyBoxCommand::parseField( string fileContents, string marker, string& f
     return markerLocation;
 }
 
-size_t LazyBoxCommand::parseDoubleField( string fileContents, string marker, string& fieldName, string& fieldData, int pos )
+size_t LazyBoxCommand::parseDoubleField( const string& fileContents, const string& marker, string& fieldName, string& fieldData, int pos )
 {
     size_t markerLocation = fileContents.find( marker, pos );
     if( markerLocation != string::npos )
@@ -138,7 +127,7 @@ size_t LazyBoxCommand::parseDoubleField( string fileContents, string marker, str
         size_t endOfLine = fileContents.find( "\n", markerLocation );
         size_t dataStart = markerLocation + marker.length( );
         
-        string fullLine = trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
+        string fullLine = FileCommon::trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
         
         size_t firstSpace = fullLine.find( " " );
         if( firstSpace != string::npos )
@@ -158,36 +147,21 @@ size_t LazyBoxCommand::parseDoubleField( string fileContents, string marker, str
     return markerLocation;
 }
 
-string LazyBoxCommand::trimString( string data )
+LazyBoxCommandTest::LazyBoxCommandTest( const string& name ): m_name( name ), m_parameters( "" )
 {
-    while( ( data.length( ) > 0 ) && ( iswspace( data[ 0 ] ) ) )
-    {
-        data = data.substr( 1 );
-    }
-    while( ( data.length( ) > 0 ) && ( iswspace( data[ data.length( ) - 1 ] ) ) )
-    {
-        data = data.substr( 0, data.length( ) - 1 );
-    }
-
-    return data;
+    
 }
 
-LazyBoxCommandTest::LazyBoxCommandTest( string name )
-{
-    m_name = name;
-    m_parameters = "";
-}
-
-string LazyBoxCommandTest::getName( )
+string LazyBoxCommandTest::getName( ) const
 {
     return m_name;
 }
-string LazyBoxCommandTest::getParameters( )
+string LazyBoxCommandTest::getParameters( ) const
 {
     return m_parameters;
 }
 
-void LazyBoxCommandTest::setParameters( string parameters )
+void LazyBoxCommandTest::setParameters( const string& parameters )
 {
     m_parameters = parameters;
 }

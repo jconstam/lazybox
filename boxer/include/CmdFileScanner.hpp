@@ -14,20 +14,20 @@ class CmdFileScanner
     public:
         CmdFileScanner( );
 
-        bool scanForFiles( std::string path );
+        bool scanForFiles( std::string& path );
         bool parseFiles( ConfigParser& parser );
-        void writeCmdIncludeFile( std::string includeFilePath );
-        void writeCmdListfile( std::string listFilePath );
-        void writeSymlinkScriptfile( std::string scriptFilePath );
-        void writeCMakeTestfile( std::string testFilePath );
-        void writeCMakeCommandsFile( std::string commandsFilePath );
+        void writeCmdIncludeFile( std::string& includeFilePath );
+        void writeCmdListfile( std::string& listFilePath );
+        void writeSymlinkScriptfile( std::string& scriptFilePath );
+        void writeCMakeTestfile( std::string& testFilePath );
+        void writeCMakeCommandsFile( std::string& commandsFilePath );
     private:
         std::vector<std::string> m_fileList;
         std::map<std::string, LazyBoxCommand> m_commands;
 
-        void writeTestToCmakeTestFile( std::stringstream& fileStream, LazyBoxCommand command, LazyBoxCommandTest test, std::string testFilePath );
-        void addFileHeader( std::stringstream& fileStream, bool cStyle = true );
-        void writeFileIfChanged( std::string filePath, std::string contents );
+        static void writeTestToCmakeTestFile( std::stringstream& output, const LazyBoxCommand& command, const LazyBoxCommandTest& test, const std::string& testFilePath );
+        static void addFileHeader( std::stringstream& output, bool cStyle = true );
+        static void writeFileIfChanged( std::string& filePath, std::stringstream& contents );
 };
 
 #endif
