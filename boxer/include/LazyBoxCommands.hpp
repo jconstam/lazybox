@@ -8,7 +8,7 @@
 class LazyBoxCommandTest
 {
     public:
-        LazyBoxCommandTest( const std::string& name = "" );
+        explicit LazyBoxCommandTest( const std::string& name = "" );
 
         std::string getName( ) const;
         std::string getParameters( ) const;

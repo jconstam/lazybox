@@ -19,6 +19,25 @@ static const string FUNCTION_MARKER = "@function";
 static const string TEST_MARKER = "@test";
 static const string CONFIG_MARKER = "@config";
 
+LazyBoxCommandTest::LazyBoxCommandTest( const string& name ): m_name( name ), m_parameters( "" )
+{
+    
+}
+
+string LazyBoxCommandTest::getName( ) const
+{
+    return m_name;
+}
+string LazyBoxCommandTest::getParameters( ) const
+{
+    return m_parameters;
+}
+
+void LazyBoxCommandTest::setParameters( const string& parameters )
+{
+    m_parameters = parameters;
+}
+
 LazyBoxCommand::LazyBoxCommand( const string& fileName, const string& fileContents ): m_fileName( fileName ), m_name( "" ), m_descrip( "" ), m_function( "" )
 {
     parseField( fileContents, NAME_MARKER, m_name );
@@ -145,23 +164,4 @@ size_t LazyBoxCommand::parseDoubleField( const string& fileContents, const strin
     }
 
     return markerLocation;
-}
-
-LazyBoxCommandTest::LazyBoxCommandTest( const string& name ): m_name( name ), m_parameters( "" )
-{
-    
-}
-
-string LazyBoxCommandTest::getName( ) const
-{
-    return m_name;
-}
-string LazyBoxCommandTest::getParameters( ) const
-{
-    return m_parameters;
-}
-
-void LazyBoxCommandTest::setParameters( const string& parameters )
-{
-    m_parameters = parameters;
 }
