@@ -1,4 +1,4 @@
-SET( COMMON_PARAMS "--enable=all --inconclusive --error-exitcode=7 --suppress=missingIncludeSystem -i build -i doc -i script -i test" )
+SET( COMMON_PARAMS "--enable=all --inconclusive --error-exitcode=7 --suppress=missingIncludeSystem -i build -i doc -i script -i test -I ${SOURCES_INCLUDE} -I ${BOXER_INCLUDE} -I ${COMMON_INCLUDE}" )
 SET( XML_PARAMS "--xml --xml-version=2" )
 
 add_test( cppcheck 
