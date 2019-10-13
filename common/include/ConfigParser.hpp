@@ -14,7 +14,7 @@ class ConfigParser
 
         static void GenerateFile( std::string filePath, std::unordered_set<std::string> configFlags );
 
-        std::unordered_set<std::string> GetConfigFlags( );
+        std::unordered_set<std::string> GetConfigFlags( ) const;
     private:
         std::unordered_set<std::string> m_configFlags;
 

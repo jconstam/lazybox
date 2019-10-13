@@ -16,18 +16,18 @@ class CmdFileScanner
 
         bool scanForFiles( std::string& path );
         bool parseFiles( ConfigParser& parser );
-        void writeCmdIncludeFile( std::string& includeFilePath );
-        void writeCmdListfile( std::string& listFilePath );
-        void writeSymlinkScriptfile( std::string& scriptFilePath );
-        void writeCMakeTestfile( std::string& testFilePath );
-        void writeCMakeCommandsFile( std::string& commandsFilePath );
+        void writeCmdIncludeFile( const std::string& includeFilePath );
+        void writeCmdListfile( const std::string& listFilePath );
+        void writeSymlinkScriptfile( const std::string& scriptFilePath );
+        void writeCMakeTestfile( const std::string& testFilePath );
+        void writeCMakeCommandsFile( const std::string& commandsFilePath );
     private:
         std::vector<std::string> m_fileList;
         std::map<std::string, LazyBoxCommand> m_commands;
 
         static void writeTestToCmakeTestFile( std::stringstream& output, const LazyBoxCommand& command, const LazyBoxCommandTest& test, const std::string& testFilePath );
         static void addFileHeader( std::stringstream& output, bool cStyle = true );
-        static void writeFileIfChanged( std::string& filePath, std::stringstream& contents );
+        static void writeFileIfChanged( const std::string& filePath, std::stringstream& contents );
 };
 
 #endif

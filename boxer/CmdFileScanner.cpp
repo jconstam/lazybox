@@ -66,7 +66,7 @@ bool CmdFileScanner::parseFiles( ConfigParser& parser )
     return found;
 }
 
-void CmdFileScanner::writeCmdIncludeFile( string& includeFilePath )
+void CmdFileScanner::writeCmdIncludeFile( const string& includeFilePath )
 {
     stringstream output;
 
@@ -90,7 +90,7 @@ void CmdFileScanner::writeCmdIncludeFile( string& includeFilePath )
     writeFileIfChanged( includeFilePath, output );
 }
 
-void CmdFileScanner::writeCmdListfile( string& listFilePath )
+void CmdFileScanner::writeCmdListfile( const string& listFilePath )
 {
     stringstream output;
 
@@ -112,7 +112,7 @@ void CmdFileScanner::writeCmdListfile( string& listFilePath )
     writeFileIfChanged( listFilePath, output );
 }
 
-void CmdFileScanner::writeSymlinkScriptfile( string& scriptFilePath )
+void CmdFileScanner::writeSymlinkScriptfile( const string& scriptFilePath )
 {
     stringstream output;
 
@@ -136,7 +136,7 @@ void CmdFileScanner::writeSymlinkScriptfile( string& scriptFilePath )
 
     chmod( scriptFilePath.c_str( ), S_IRWXU );
 }
-void CmdFileScanner::writeCMakeTestfile( string& testFilePath )
+void CmdFileScanner::writeCMakeTestfile( const string& testFilePath )
 {
     stringstream output;
 
@@ -160,7 +160,7 @@ void CmdFileScanner::writeCMakeTestfile( string& testFilePath )
     writeFileIfChanged( testFilePath, output );
 }
 
-void CmdFileScanner::writeCMakeCommandsFile( string& commandsFilePath )
+void CmdFileScanner::writeCMakeCommandsFile( const string& commandsFilePath )
 {
     stringstream output;
 
@@ -259,7 +259,7 @@ void CmdFileScanner::addFileHeader( stringstream& output, bool cStyle )
     output << " This file was automatically generated.  Do not modify." << endl << endl;
 }
 
-void CmdFileScanner::writeFileIfChanged( string& filePath, stringstream& contents )
+void CmdFileScanner::writeFileIfChanged( const string& filePath, stringstream& contents )
 {
     bool newContent = true;
     if( FileCommon::fileExists( filePath ) )

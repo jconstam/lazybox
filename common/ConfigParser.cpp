@@ -50,7 +50,7 @@ void ConfigParser::GenerateFile( string filePath, unordered_set<string> configFl
 	configFile.close( );
 }
 
-unordered_set<string> ConfigParser::GetConfigFlags( )
+unordered_set<string> ConfigParser::GetConfigFlags( ) const
 {
     return m_configFlags;
 }

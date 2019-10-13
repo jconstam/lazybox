@@ -44,7 +44,7 @@ static bool parseParams( int argc, char* argv[], CONFIG_PARAMS* params )
 	return true;
 }
 
-static bool checkOnFlag( string flag )
+static bool checkOnFlag( const string& flag )
 {
 	string input;
 	while( ( input != "y" ) && ( input != "n" ) )
