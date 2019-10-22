@@ -48,11 +48,13 @@ LazyBoxCommand::LazyBoxCommand( const string& fileName, const string& fileConten
     size_t location = 0;
     while( location != string::npos )
     {
-        string testName;
-        string parameters;
-        location = parseDoubleField( fileContents, TEST_MARKER, testName, parameters, location );
+        vector<string> testFields;
+        location = parseFields( fileContents, TEST_MARKER, testFields, 2U, location );
         if( location != string::npos )
         {
+            string testName = testFields[ 0 ];
+            string parameters = testFields[ 1 ];
+
             map<string,LazyBoxCommandTest>::iterator it = m_tests.find( testName );
             if( it == m_tests.end( ) )
             {
@@ -122,42 +124,49 @@ vector<LazyBoxCommandTest> LazyBoxCommand::getTests( )
     return tests;
 }
 
-size_t LazyBoxCommand::parseField( const string& fileContents, const string& marker, string& fieldData, int pos )
+size_t LazyBoxCommand::parseField( const string& fileContents, const string& marker, string& field, int pos )
 {
-    size_t markerLocation = fileContents.find( marker, pos );
-    if( markerLocation != string::npos )
+    vector<string> fields;
+    size_t result = parseFields( fileContents, marker, fields, 1, pos );
+    if( result != string::npos && fields.size( ) > 0 )
     {
-        size_t endOfLine = fileContents.find( "\n", markerLocation );
-        size_t dataStart = markerLocation + marker.length( );
-
-        fieldData = FileCommon::trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
-
-        markerLocation += marker.length( );
+        field = fields[ 0 ];
     }
 
-    return markerLocation;
+    return result;
 }
 
-size_t LazyBoxCommand::parseDoubleField( const string& fileContents, const string& marker, string& fieldName, string& fieldData, int pos )
+size_t LazyBoxCommand::parseFields( const string& fileContents, const string& marker, vector<string>& fields, int fieldCount, int pos )
 {
     size_t markerLocation = fileContents.find( marker, pos );
     if( markerLocation != string::npos )
     {
         size_t endOfLine = fileContents.find( "\n", markerLocation );
         size_t dataStart = markerLocation + marker.length( );
-        
+
         string fullLine = FileCommon::trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
-        
-        size_t firstSpace = fullLine.find( " " );
-        if( firstSpace != string::npos )
+        if( fieldCount == 1 )
         {
-            fieldName = fullLine.substr( 0, firstSpace );
-            fieldData = fullLine.substr( firstSpace + 1 );
-        }  
+            fields.push_back( fullLine );
+        }
         else
         {
-            fieldName = fullLine;
-            fieldData = "";
+            size_t start = 0;
+            for( int i = 0; i < fieldCount - 1; i++ )
+            {
+                size_t nextSpace = fullLine.find( " ", start );
+                if( nextSpace == string::npos )
+                {
+                    fields.push_back( fullLine.substr( start, endOfLine - start ) );
+                }
+                else
+                {
+                    fields.push_back( fullLine.substr( start, nextSpace ) );
+                }
+                start = nextSpace + 1;
+            }
+            
+            fields.push_back( FileCommon::trimString( fullLine.substr( start, endOfLine - start ) ) );
         }
 
         markerLocation += marker.length( );

@@ -40,8 +40,8 @@ class LazyBoxCommand
         std::string m_config;
         std::map<std::string,LazyBoxCommandTest> m_tests;
 
-        static size_t parseField( const std::string& fileContents, const std::string& marker, std::string& fieldData, int pos = 0 );
-        static size_t parseDoubleField( const std::string& fileContents, const std::string& marker, std::string& fieldName, std::string& fieldData, int pos = 0 );
+        static size_t parseField( const std::string& fileContents, const std::string& marker, std::string& field, int pos = 0 );
+        static size_t parseFields( const std::string& fileContents, const std::string& marker, std::vector<std::string>& fields, int fieldCount, int pos = 0 );
 };
 
 #endif

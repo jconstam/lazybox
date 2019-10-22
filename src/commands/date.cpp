@@ -90,7 +90,7 @@ int run_date( int argc, char* argv[ ] )
 
     if( format[ 0 ] != '+' )
     {
-        cerr << "date: invalid date \'" << format << "\'" << endl;
+        cerr << "date: invalid date ‘" << format << "’" << endl;
         return 1;
     }
     else
