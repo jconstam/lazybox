@@ -21,6 +21,7 @@ set( UNITTEST_GTEST_SOURCES
 
   ${UNITTEST_GTEST_ROOT}/cmdRegistry_Test.cpp
   ${UNITTEST_GTEST_ROOT}/fileCommon_Test.cpp
+  ${UNITTEST_GTEST_ROOT}/stringCommon_Test.cpp
 )
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fno-inline -O0" )

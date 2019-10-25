@@ -26,6 +26,7 @@ class CmdFileScanner
         std::map<std::string, LazyBoxCommand> m_commands;
 
         static void writeTestToCmakeTestFile( std::stringstream& output, const LazyBoxCommand& command, const LazyBoxCommandTest& test, const std::string& testFilePath );
+        static void writeDiffTestToCmakeTestFile( std::stringstream& output, const LazyBoxCommand& command, const LazyBoxCommandTest& test, const std::string& execPath );
         static void addFileHeader( std::stringstream& output, bool cStyle = true );
         static void writeFileIfChanged( const std::string& filePath, std::stringstream& contents );
 };

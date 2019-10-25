@@ -6,17 +6,17 @@
 
     @config CMD_ECHO
 
-    @test nothing
-    @test one "testing"
-    @test many "this is a lot of parameters and some are numbers 1 2 3"
-    @test nonewline_one -n testing
-    @test nonewline_many -n this is a lot of parameters and some are numbers 1 2 3
-    @test escape_newline1 -e testing\n
-    @test escape_newline2 -e -n testing\n
-    @test escape_newline3 -e testing\n\n\ntesting\ntesting
-    @test escape_newline4 testing\\n
-    @test escape_tab1 -e testing\ttesting
-    @test escape_tab2 -e testing\t\t\ttesting
+    @test diff nothing
+    @test diff one "testing"
+    @test diff many "this is a lot of parameters and some are numbers 1 2 3"
+    @test diff nonewline_one -n testing
+    @test diff nonewline_many -n this is a lot of parameters and some are numbers 1 2 3
+    @test diff escape_newline1 -e testing\n
+    @test diff escape_newline2 -e -n testing\n
+    @test diff escape_newline3 -e testing\n\n\ntesting\ntesting
+    @test diff escape_newline4 testing\\n
+    @test diff escape_tab1 -e testing\ttesting
+    @test diff escape_tab2 -e testing\t\t\ttesting
  */
 
 #include <stdio.h>

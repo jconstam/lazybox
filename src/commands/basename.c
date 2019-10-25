@@ -6,12 +6,12 @@
 
     @config CMD_BASENAME
     
-    @test noFile
-    @test singleFile /path/to/the/file.ext
-    @test singleFileWithExt /path/to/the/file.ext .ext
-    @test singleFileWithExtWrong /path/to/the/file.ext .ext2
-    @test singleFolder /path/to/the/folder/
-    @test singleFolderWithExt /path/to/the/folder/ .ext
+    @test diff noFile
+    @test diff singleFile /path/to/the/file.ext
+    @test diff singleFileWithExt /path/to/the/file.ext .ext
+    @test diff singleFileWithExtWrong /path/to/the/file.ext .ext2
+    @test diff singleFolder /path/to/the/folder/
+    @test diff singleFolderWithExt /path/to/the/folder/ .ext
 */
 
 #include <stdio.h>

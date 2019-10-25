@@ -8,6 +8,7 @@
 #include <unistd.h>
 
 #include "FileCommon.hpp"
+#include "StringCommon.hpp"
 
 using namespace std;
 
@@ -64,7 +65,7 @@ void ConfigParser::readConfigFile( std::string fileContents )
     {
         endOfLineIndex = fileContents.find( "\n", startIndex );
 
-        string currLine = FileCommon::removeWhitespace( fileContents.substr( startIndex, endOfLineIndex - startIndex ) );
+        string currLine = StringCommon::removeWhitespace( fileContents.substr( startIndex, endOfLineIndex - startIndex ) );
 
         if( ( currLine != "" ) && ( currLine.compare( 0, 1, "#" ) != 0 ) )
         {

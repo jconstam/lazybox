@@ -9,6 +9,7 @@
 #include <unistd.h>
 
 #include "FileCommon.hpp"
+#include "StringCommon.hpp"
 
 using namespace std;
 
@@ -17,11 +18,19 @@ static const string NAME_MARKER = "@name";
 static const string DESCRIP_MARKER = "@descrip";
 static const string FUNCTION_MARKER = "@function";
 static const string TEST_MARKER = "@test";
+static const string TEST_TYPE_DIFF_MARKER = "diff";
 static const string CONFIG_MARKER = "@config";
 
-LazyBoxCommandTest::LazyBoxCommandTest( const string& name ): m_name( name ), m_parameters( "" )
+LazyBoxCommandTest::LazyBoxCommandTest( const string& name, const string& type ): m_name( name ), m_parameters( "" )
 {
-    
+    if( type == TEST_TYPE_DIFF_MARKER )
+    {
+        m_type = LAZYBOX_COMMAND_TEST_TYPE_DIFF;
+    }
+    else
+    {
+        throw "Unknown test type " + type;
+    }
 }
 
 string LazyBoxCommandTest::getName( ) const
@@ -31,6 +40,10 @@ string LazyBoxCommandTest::getName( ) const
 string LazyBoxCommandTest::getParameters( ) const
 {
     return m_parameters;
+}
+LAZYBOX_COMMAND_TEST_TYPE LazyBoxCommandTest::getType( ) const
+{
+    return m_type;
 }
 
 void LazyBoxCommandTest::setParameters( const string& parameters )
@@ -49,18 +62,19 @@ LazyBoxCommand::LazyBoxCommand( const string& fileName, const string& fileConten
     while( location != string::npos )
     {
         vector<string> testFields;
-        location = parseFields( fileContents, TEST_MARKER, testFields, 2U, location );
+        location = parseFields( fileContents, TEST_MARKER, testFields, 3U, location );
         if( location != string::npos )
         {
-            string testName = testFields[ 0 ];
-            string parameters = testFields[ 1 ];
+            string testType = testFields[ 0 ];
+            string testName = testFields[ 1 ];
+            string parameters = testFields[ 2 ];
 
             map<string,LazyBoxCommandTest>::iterator it = m_tests.find( testName );
             if( it == m_tests.end( ) )
             {
-                LazyBoxCommandTest test( testName );
+                LazyBoxCommandTest test( testName, testType );
                 test.setParameters( parameters );
-                m_tests[ testName ] = test;
+                m_tests.insert( { testName, test } );
             }
         }
     }
@@ -144,32 +158,21 @@ size_t LazyBoxCommand::parseFields( const string& fileContents, const string& ma
         size_t endOfLine = fileContents.find( "\n", markerLocation );
         size_t dataStart = markerLocation + marker.length( );
 
-        string fullLine = FileCommon::trimString( fileContents.substr( dataStart, endOfLine - dataStart ) );
-        if( fieldCount == 1 )
-        {
-            fields.push_back( fullLine );
-        }
-        else
-        {
-            size_t start = 0;
-            for( int i = 0; i < fieldCount - 1; i++ )
-            {
-                size_t nextSpace = fullLine.find( " ", start );
-                if( nextSpace == string::npos )
-                {
-                    fields.push_back( fullLine.substr( start, endOfLine - start ) );
-                }
-                else
-                {
-                    fields.push_back( fullLine.substr( start, nextSpace ) );
-                }
-                start = nextSpace + 1;
-            }
-            
-            fields.push_back( FileCommon::trimString( fullLine.substr( start, endOfLine - start ) ) );
-        }
+        string fullLine = StringCommon::trim( fileContents.substr( dataStart, endOfLine - dataStart ) );
 
-        markerLocation += marker.length( );
+        vector<string> lineParts = StringCommon::split( fullLine, ' ' );
+        for( int i = 0; i < fieldCount - 1; i++ )
+        {
+            fields.push_back( lineParts[ i ] );
+        }
+        string lastPart = "";
+        for( uint32_t i = fieldCount - 1U; i < lineParts.size( ); i++ )
+        {
+            lastPart += lineParts[ i ] + " ";
+        }
+        fields.push_back( StringCommon::trim( lastPart ) );
+
+        markerLocation = endOfLine + 1U;
     }
 
     return markerLocation;

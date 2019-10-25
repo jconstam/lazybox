@@ -204,14 +204,32 @@ void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, const LazyB
         execPath = execPath.substr( 0, lastIndex );
     }
 
-    string testName = command.getName( ) + "_" + test.getName( );
-    string testNameSL = command.getName( ) + "_" + test.getName( ) + "_symlink";
-    string testNameVG = command.getName( ) + "_" + test.getName( ) + "_valgrind";
+    output << "add_test(";
+    output << " NAME " << command.getName( ) + "_" + test.getName( ) + "_valgrind";
+    output << " WORKING_DIRECTORY " << execPath;
+    output << " COMMAND ${SCRIPT_PATH}/runValgrind.sh";
+    output << " ${OUTPUT_PATH}/" << command.getName( ) << " " << test.getParameters( );
+    output << " )" << endl;
+
+    switch( test.getType( ) )
+    {
+        case( LAZYBOX_COMMAND_TEST_TYPE_DIFF ):
+            writeDiffTestToCmakeTestFile( output, command, test, execPath );
+            break;
+    }
+
+    output << endl;
+}
+
+void CmdFileScanner::writeDiffTestToCmakeTestFile( stringstream& output, const LazyBoxCommand& command, const LazyBoxCommandTest& test, const string& execPath )
+{
+    string testName = command.getName( ) + "_diff_" + test.getName( );
+    string testNameSL = testName + "_symlink";
 
     output << "add_test(";
     output << " NAME " << testName;
     output << " WORKING_DIRECTORY " << execPath;
-    output << " COMMAND ${SCRIPT_PATH}/runTest.py";
+    output << " COMMAND ${SCRIPT_PATH}/runDiffTest.py";
     output << " --command " << command.getName( );
     output << " --buildPath \"${OUTPUT_PATH}\"";
     output << " --workingPath \"${BUILD_PATH}\"";
@@ -224,7 +242,7 @@ void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, const LazyB
     output << "add_test(";
     output << " NAME " << testNameSL;
     output << " WORKING_DIRECTORY " << execPath;
-    output << " COMMAND ${SCRIPT_PATH}/runTest.py";
+    output << " COMMAND ${SCRIPT_PATH}/runDiffTest.py";
     output << " --useSymlink";
     output << " --command " << command.getName( );
     output << " --buildPath \"${OUTPUT_PATH}\"";
@@ -234,15 +252,6 @@ void CmdFileScanner::writeTestToCmakeTestFile( stringstream& output, const LazyB
         output << " --parameters " << test.getParameters( );
     }
     output << " )" << endl;
-
-    output << "add_test(";
-    output << " NAME " << testNameVG;
-    output << " WORKING_DIRECTORY " << execPath;
-    output << " COMMAND ${SCRIPT_PATH}/runValgrind.sh";
-    output << " ${OUTPUT_PATH}/" << command.getName( ) << " " << test.getParameters( );
-    output << " )" << endl;
-
-    output << endl;
 }
 
 void CmdFileScanner::addFileHeader( stringstream& output, bool cStyle )

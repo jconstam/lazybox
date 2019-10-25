@@ -5,18 +5,25 @@
 #include <vector>
 #include <string>
 
+typedef enum
+{
+    LAZYBOX_COMMAND_TEST_TYPE_DIFF
+} LAZYBOX_COMMAND_TEST_TYPE;
+
 class LazyBoxCommandTest
 {
     public:
-        explicit LazyBoxCommandTest( const std::string& name = "" );
+        explicit LazyBoxCommandTest( const std::string& name = "", const std::string& type = "" );
 
         std::string getName( ) const;
         std::string getParameters( ) const;
+        LAZYBOX_COMMAND_TEST_TYPE getType( ) const;
 
         void setParameters( const std::string& parameters );
     private:
         std::string m_name;
         std::string m_parameters;
+        LAZYBOX_COMMAND_TEST_TYPE m_type;
 };
 
 class LazyBoxCommand

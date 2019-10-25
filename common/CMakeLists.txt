@@ -1,6 +1,7 @@
 set( COMMON_SOURCES_CPP
     ${COMMON_PATH}/ConfigParser.cpp
     ${COMMON_PATH}/FileCommon.cpp
+    ${COMMON_PATH}/StringCommon.cpp
     
     PARENT_SCOPE
 )

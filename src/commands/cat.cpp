@@ -6,29 +6,29 @@
 
     @config CMD_CAT
     
-    @test singleFile1 ${COMMAND_TEST_ROOT}/cat/test1
-    @test singleFile2 ${COMMAND_TEST_ROOT}/cat/test2
-    @test singleFileLineNums -n ${COMMAND_TEST_ROOT}/cat/test1
-    @test singleFileLineNumsNonBlank1 -n ${COMMAND_TEST_ROOT}/cat/test3
-    @test singleFileLineNumsNonBlank2 -b ${COMMAND_TEST_ROOT}/cat/test3
-    @test multiFile1 ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2
-    @test multiFileLineNums1 -n ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2
-    @test multiFileLineNums2 -n ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2 ${COMMAND_TEST_ROOT}/cat/test3
-    @test multiFileLineNums3 -b ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2 ${COMMAND_TEST_ROOT}/cat/test3
-    @test singleFileShowEnds1 -E ${COMMAND_TEST_ROOT}/cat/test1
-    @test singleFileShowEnds2 -E ${COMMAND_TEST_ROOT}/cat/test2
-    @test singleFileSqueeze1 -s ${COMMAND_TEST_ROOT}/cat/test1
-    @test singleFileSqueeze2 -s ${COMMAND_TEST_ROOT}/cat/test3
-    @test singleFileShowTabs1 -T ${COMMAND_TEST_ROOT}/cat/test1
-    @test singleFileShowTabs2 ${COMMAND_TEST_ROOT}/cat/test4
-    @test singleFileShowTabs3 -T ${COMMAND_TEST_ROOT}/cat/test4
-    @test singleFileShowNonPrintable1 -v ${COMMAND_TEST_ROOT}/cat/test5
-    @test singleFileShowAll1 -A ${COMMAND_TEST_ROOT}/cat/test4
-    @test singleFileShowAll2 -A ${COMMAND_TEST_ROOT}/cat/test5
-    @test singleFileShowAllNoTabs1 -e ${COMMAND_TEST_ROOT}/cat/test4
-    @test singleFileShowAllNoTabs2 -e ${COMMAND_TEST_ROOT}/cat/test5
-    @test singleFileShowAllNoEnds1 -t ${COMMAND_TEST_ROOT}/cat/test4
-    @test singleFileShowAllNoEnds2 -t ${COMMAND_TEST_ROOT}/cat/test5
+    @test diff singleFile1 ${COMMAND_TEST_ROOT}/cat/test1
+    @test diff singleFile2 ${COMMAND_TEST_ROOT}/cat/test2
+    @test diff singleFileLineNums -n ${COMMAND_TEST_ROOT}/cat/test1
+    @test diff singleFileLineNumsNonBlank1 -n ${COMMAND_TEST_ROOT}/cat/test3
+    @test diff singleFileLineNumsNonBlank2 -b ${COMMAND_TEST_ROOT}/cat/test3
+    @test diff multiFile1 ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2
+    @test diff multiFileLineNums1 -n ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2
+    @test diff multiFileLineNums2 -n ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2 ${COMMAND_TEST_ROOT}/cat/test3
+    @test diff multiFileLineNums3 -b ${COMMAND_TEST_ROOT}/cat/test1 ${COMMAND_TEST_ROOT}/cat/test2 ${COMMAND_TEST_ROOT}/cat/test3
+    @test diff singleFileShowEnds1 -E ${COMMAND_TEST_ROOT}/cat/test1
+    @test diff singleFileShowEnds2 -E ${COMMAND_TEST_ROOT}/cat/test2
+    @test diff singleFileSqueeze1 -s ${COMMAND_TEST_ROOT}/cat/test1
+    @test diff singleFileSqueeze2 -s ${COMMAND_TEST_ROOT}/cat/test3
+    @test diff singleFileShowTabs1 -T ${COMMAND_TEST_ROOT}/cat/test1
+    @test diff singleFileShowTabs2 ${COMMAND_TEST_ROOT}/cat/test4
+    @test diff singleFileShowTabs3 -T ${COMMAND_TEST_ROOT}/cat/test4
+    @test diff singleFileShowNonPrintable1 -v ${COMMAND_TEST_ROOT}/cat/test5
+    @test diff singleFileShowAll1 -A ${COMMAND_TEST_ROOT}/cat/test4
+    @test diff singleFileShowAll2 -A ${COMMAND_TEST_ROOT}/cat/test5
+    @test diff singleFileShowAllNoTabs1 -e ${COMMAND_TEST_ROOT}/cat/test4
+    @test diff singleFileShowAllNoTabs2 -e ${COMMAND_TEST_ROOT}/cat/test5
+    @test diff singleFileShowAllNoEnds1 -t ${COMMAND_TEST_ROOT}/cat/test4
+    @test diff singleFileShowAllNoEnds2 -t ${COMMAND_TEST_ROOT}/cat/test5
  */
 
 #include <string>

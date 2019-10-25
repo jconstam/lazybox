@@ -6,8 +6,8 @@
 
     @config CMD_CHMOD
     
-    @test noparams
-    @test oneparam 0777
+    @test diff noparams
+    @test diff oneparam 0777
  */
 
 #include <iostream>

@@ -6,13 +6,13 @@
 
     @config CMD_CKSUM
 
-    @test directory ${COMMAND_TEST_ROOT}
-    @test directoryWithFile ${COMMAND_TEST_ROOT} ${COMMAND_TEST_ROOT}/cksum/test1
-    @test singleFile ${COMMAND_TEST_ROOT}/cksum/test1
-    @test singleFileLarge /bin/bash
-    @test singleFileDoesNotExist1 ${COMMAND_TEST_ROOT}/cksum/notAFile
-    @test singleFileDoesNotExist2 ${COMMAND_TEST_ROOT}/cksum/notAFile ${COMMAND_TEST_ROOT}/cksum/test1
-    @test multipleFile1 ${COMMAND_TEST_ROOT}/cksum/test1 ${COMMAND_TEST_ROOT}/cksum/test2
+    @test diff directory ${COMMAND_TEST_ROOT}
+    @test diff directoryWithFile ${COMMAND_TEST_ROOT} ${COMMAND_TEST_ROOT}/cksum/test1
+    @test diff singleFile ${COMMAND_TEST_ROOT}/cksum/test1
+    @test diff singleFileLarge /bin/bash
+    @test diff singleFileDoesNotExist1 ${COMMAND_TEST_ROOT}/cksum/notAFile
+    @test diff singleFileDoesNotExist2 ${COMMAND_TEST_ROOT}/cksum/notAFile ${COMMAND_TEST_ROOT}/cksum/test1
+    @test diff multipleFile1 ${COMMAND_TEST_ROOT}/cksum/test1 ${COMMAND_TEST_ROOT}/cksum/test2
  */
 
 #include <stdio.h>
