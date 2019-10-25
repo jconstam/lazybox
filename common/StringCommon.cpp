@@ -33,8 +33,7 @@ string StringCommon::removeWhitespace( string raw )
 
     return output;
 }
-#include <iostream>
-using namespace std;
+
 vector<string> StringCommon::split( const string& input, const char delimiter )
 {
     string token;
@@ -42,7 +41,10 @@ vector<string> StringCommon::split( const string& input, const char delimiter )
     stringstream stream( input );
     while( getline( stream, token, delimiter ) )
     {
-        output.push_back( token );
+        if( ( token != "" ) && ( token != string( 1, delimiter ) ) )
+        {
+            output.push_back( token );
+        }
     }
 
     return output;
