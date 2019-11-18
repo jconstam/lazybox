@@ -38,6 +38,20 @@ build: config
 		-DCOMMON_PATH=${COMMON_PATH} \
 	&& $(MAKE) $(MAKEFLAGS)
 
+.PHONY: debug
+debug: config
+	mkdir -p ${OUTPUT_PATH_MAIN}
+	cd ${OUTPUT_PATH_MAIN} && \
+	cmake ${SOURCE_PATH} \
+		-DMAIN_PROJECT_NAME:STRING=${PROJ_NAME} \
+		-DBUILD_PATH=${BUILD_PATH} \
+		-DSCRIPT_PATH=${SCRIPT_PATH} \
+		-DDOC_PATH=${DOC_PATH} \
+		-DROOT_PATH=${ROOT_PATH} \
+		-DCOMMON_PATH=${COMMON_PATH} \
+		-DCMAKE_BUILD_TYPE=Debug \
+	&& $(MAKE) $(MAKEFLAGS)
+
 .PHONY: config
 config:
 	mkdir -p ${OUTPUT_PATH_BOXER}
