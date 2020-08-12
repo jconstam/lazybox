@@ -19,7 +19,7 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
-        sudo apt-get install xsltproc -y
+        sudo apt-get install cppcheck xsltproc -y
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: build
