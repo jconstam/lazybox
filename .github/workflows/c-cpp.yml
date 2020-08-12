@@ -24,3 +24,11 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: build
       run: make -j test
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Test Results
+        path: build/test/ctestjunittestresults.xml
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Static Analysis Results
+        path: build/test/staticanalysis/cpptest_results.xml
